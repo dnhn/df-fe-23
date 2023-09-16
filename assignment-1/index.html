@@ -1,14 +1,93 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Bookstore</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
+<html lang="en">
+<head>
 
-  <body>
-    Hello world
-    <script src="script.js"></script>
-  </body>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Bookstore</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<header>
+  <h1>Bookstore</h1>
+  <a href="#">John Doe</a>
+</header>
+
+<input type="text" name="search" id="search" />
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Topic</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>HTML & CSS 101</td>
+      <td>W3C</td>
+      <td>Front-end</td>
+      <td>
+        <button type="button">Delete</button>
+        <button type="button">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Responsive Web Design</td>
+      <td>Ethan Marcotte</td>
+      <td>Front-end</td>
+      <td>
+        <button type="button">Delete</button>
+        <button type="button">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td>JavaScript Patterns</td>
+      <td>Addy Osmani</td>
+      <td>Programming</td>
+      <td>
+        <button type="button">Delete</button>
+        <button type="button">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Git</td>
+      <td>Linus Torvalds</td>
+      <td>Version control</td>
+      <td>
+        <button type="button">Delete</button>
+        <button type="button">Cancel</button>
+      </td>
+    </tr>
+    <tr>
+      <td><input type="text" name="title" form="add-book" placeholder="Title"></td>
+      <td><input type="text" name="author" form="add-book" placeholder="Author"></td>
+      <td>
+        <select name="topic" form="add-book">
+          <option value="backend">Back-end</option>
+          <option value="frontend">Front-end</option>
+          <option value="fullstack">Full stack</option>
+          <option value="programming">Programming</option>
+          <option value="vcs">Version control</option>
+        </select>
+      </td>
+      <td>
+        <button type="button">New book</button>
+        <form id="add-book" onsubmit="addBook">
+          <button type="submit">Save</button>
+          <button type="button">Cancel</button>
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
 </html>
