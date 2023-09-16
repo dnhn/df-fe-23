@@ -3,89 +3,112 @@
 <head>
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Bookstore</title>
+<meta name="description" content="Bookstore" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
 
 <header>
-  <h1>Bookstore</h1>
-  <a href="#">John Doe</a>
+  <a href="index.html" class="logo">
+    <h1>Bookstore</h1>
+  </a>
+  <a href="#" class="user">John Doe</a>
 </header>
 
-<input type="text" name="search" id="search" />
+<main>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Topic</th>
-      <th></th>
-    </tr>
-  </thead>
+<input type="text" name="search" id="search" class="search" placeholder="Search" />
 
-  <tbody>
-    <tr>
-      <td>HTML & CSS 101</td>
-      <td>W3C</td>
-      <td>Front-end</td>
-      <td>
-        <button type="button">Delete</button>
-        <button type="button">Cancel</button>
-      </td>
-    </tr>
-    <tr>
-      <td>Responsive Web Design</td>
-      <td>Ethan Marcotte</td>
-      <td>Front-end</td>
-      <td>
-        <button type="button">Delete</button>
-        <button type="button">Cancel</button>
-      </td>
-    </tr>
-    <tr>
-      <td>JavaScript Patterns</td>
-      <td>Addy Osmani</td>
-      <td>Programming</td>
-      <td>
-        <button type="button">Delete</button>
-        <button type="button">Cancel</button>
-      </td>
-    </tr>
-    <tr>
-      <td>Git</td>
-      <td>Linus Torvalds</td>
-      <td>Version control</td>
-      <td>
-        <button type="button">Delete</button>
-        <button type="button">Cancel</button>
-      </td>
-    </tr>
-    <tr>
-      <td><input type="text" name="title" form="add-book" placeholder="Title"></td>
-      <td><input type="text" name="author" form="add-book" placeholder="Author"></td>
-      <td>
-        <select name="topic" form="add-book">
-          <option value="backend">Back-end</option>
-          <option value="frontend">Front-end</option>
-          <option value="fullstack">Full stack</option>
-          <option value="programming">Programming</option>
-          <option value="vcs">Version control</option>
-        </select>
-      </td>
-      <td>
-        <button type="button">New book</button>
-        <form id="add-book" onsubmit="addBook">
-          <button type="submit">Save</button>
-          <button type="button">Cancel</button>
-        </form>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th class="title">Title</th>
+        <th class="author">Author</th>
+        <th class="topic">Topic</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr class="row book-row">
+        <td>HTML & CSS 101</td>
+        <td>W3C</td>
+        <td>Front-end</td>
+        <td>
+          <button type="button" class="row__action btn btn--warning">Delete</button>
+          <div class="confirm-actions">
+            <button type="button" class="btn">Confirm</button>
+            <button type="button" class="btn btn--error">Cancel</button>
+          </div>
+        </td>
+      </tr>
+      <tr class="row book-row">
+        <td>Responsive Web Design</td>
+        <td>Ethan Marcotte</td>
+        <td>Front-end</td>
+        <td>
+          <button type="button" class="row__action btn btn--warning">Delete</button>
+          <div class="confirm-actions">
+            <button type="button" class="btn">Confirm</button>
+            <button type="button" class="btn btn--error">Cancel</button>
+          </div>
+        </td>
+      </tr>
+      <tr class="row book-row">
+        <td>JavaScript Patterns</td>
+        <td>Addy Osmani</td>
+        <td>Programming</td>
+        <td>
+          <button type="button" class="row__action btn btn--warning">Delete</button>
+          <div class="confirm-actions">
+            <button type="button" class="btn">Confirm</button>
+            <button type="button" class="btn btn--error">Cancel</button>
+          </div>
+        </td>
+      </tr>
+      <tr class="row book-row">
+        <td>Git</td>
+        <td>Linus Torvalds</td>
+        <td>Version control</td>
+        <td>
+          <button type="button" class="row__action btn btn--warning">Delete</button>
+          <div class="confirm-actions">
+            <button type="button" class="btn">Confirm</button>
+            <button type="button" class="btn btn--error">Cancel</button>
+          </div>
+        </td>
+      </tr>
+      <tr class="row add-row">
+        <td><input type="text" name="title" form="add-book-form" placeholder="Title" required /></td>
+        <td><input type="text" name="author" form="add-book-form" placeholder="Author" required /></td>
+        <td>
+          <select name="topic" form="add-book-form">
+            <option value="backend">Back-end</option>
+            <option value="frontend">Front-end</option>
+            <option value="fullstack">Full stack</option>
+            <option value="programming">Programming</option>
+            <option value="vcs">Version control</option>
+          </select>
+        </td>
+        <td>
+          <button type="button" class="row__action btn btn--info">New book</button>
+          <form id="add-book-form" onsubmit="addBook">
+            <div class="confirm-actions">
+              <button type="submit" class="btn btn--primary">Save</button>
+              <button type="button" class="btn">Cancel</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</main>
 
 <script src="script.js"></script>
 
