@@ -15,7 +15,7 @@ const bookTemplate = (title, author, topic) => `<tr class="row book-row">
   <td class="row__actions">
     <button type="button" class="row__action btn btn--warning">Delete</button>
     <div class="row__confirm">
-      <button type="button" class="row__confirm btn">Confirm</button>
+      <button type="button" class="row__confirm-action btn">Confirm</button>
       <button type="button" class="row__cancel btn btn--error">Cancel</button>
     </div>
   </td>
@@ -30,7 +30,7 @@ function addDeleteEventListener(element) {
     }
   });
 
-  element.querySelector('.row__confirm').addEventListener('click', () => {
+  element.querySelector('.row__confirm-action').addEventListener('click', () => {
     if (element.classList.contains('book-row')) {
       element.remove();
     }
