@@ -33,6 +33,11 @@ function addDeleteEventListener(element) {
   });
 }
 
+document.querySelector('.table-header button').addEventListener('click', () => {
+  addRow.classList.toggle('row--confirm');
+  addBookForm[0].focus();
+});
+
 document.querySelectorAll('.book-list .row')
   .forEach(row => addDeleteEventListener(row));
 
