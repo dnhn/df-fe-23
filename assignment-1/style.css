@@ -142,6 +142,17 @@ table thead {
   color: white;
 }
 
+/* table thead .title {}
+table thead .author {}
+table thead .topic {}
+table thead .actions {} */
+
+table thead .actions,
+table .row__actions {
+  position: relative;
+  text-align: right;
+}
+
 table th {
   text-align: left;
 }
@@ -151,26 +162,33 @@ table td {
   padding: 12px 16px;
 }
 
-table .book-row {
+table tbody tr {
   transition: background-color 150ms;
 }
 
-table .book-row:hover {
-  background-color: #ddd !important;
+table tbody tr:nth-child(even) {
+  background-color: #eee;
 }
 
-table .book-row:nth-child(even) {
-  background-color: #eee;
+table tbody tr:hover {
+  background-color: #ddd;
+}
+
+table .row__action {
+  position: absolute;
+  right: 16px;
 }
 
 table .row:not(.row--confirm) input,
 table .row:not(.row--confirm) select,
-table .row:not(.row--confirm) .confirm-actions {
-  display: none;
+table .row:not(.row--confirm) .row__confirm {
+  opacity: 0;
+  visibility: hidden;
 }
 
 table .row--confirm .row__action {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 input,
