@@ -1,3 +1,11 @@
+const topics = {
+  backend: 'Back-end',
+  frontend: 'Front-end',
+  fullstack: 'Full stack',
+  programming: 'Programming',
+  vcs: 'Version control',
+};
+
 const addRow = document.querySelector('.add-row');
 const addBookForm = document.getElementById('add-book-form');
 const bookTemplate = (title, author, topic) => `<tr class="row book-row">
