@@ -60,6 +60,7 @@ function addDeleteEventListener(element) {
 
   element.querySelector('.row__confirm-action').addEventListener('click', () => {
     if (element.classList.contains('book-row')) {
+      books = books.filter(book => book.id.toString() !== element.dataset.id);
       element.remove();
     }
   });
@@ -69,17 +70,21 @@ function addDeleteEventListener(element) {
   });
 }
 
-function renderList() {
+function renderList(data) {
+  const tbody = document.querySelector('.book-list tbody');
   let html = '';
 
-  for (let i = 0; i < books.length; i++) {
-    html += bookTemplate(books[i]);
+  for (let i = 0; i < data.length; i++) {
+    html += bookTemplate(data[i]);
   }
 
-  if (html.length) {
-    document.querySelector('.book-list tbody').textContent = '';
-    document.querySelector('.book-list tbody').insertAdjacentHTML('beforeend', html);
+  if (data.length) {
+    tbody.textContent = '';
+    tbody.insertAdjacentHTML('beforeend', html);
     document.querySelectorAll('.book-list .row').forEach(row => addDeleteEventListener(row));
+  } else {
+    tbody.textContent = '';
+    tbody.insertAdjacentHTML('beforeend', '<tr class="empty"><td colspan="4">No books</td></tr>');
   }
 }
 
@@ -107,4 +112,4 @@ addBookForm.addEventListener('submit', event => {
   addRow.classList.remove('row--confirm');
 });
 
-renderList();
+renderList(books);
