@@ -76,15 +76,13 @@
     });
 
     element.querySelector('.row__confirm-action').addEventListener('click', () => {
-      if (element.classList.contains('book-row')) {
-        books = books.filter(book => book.id.toString() !== element.dataset.id);
-        setBooksData(books);
+      books = books.filter(book => book.id.toString() !== element.dataset.id);
+      setBooksData(books);
 
-        if (!books.length || search.value) {
-          renderList();
-        } else {
-          element.remove();
-        }
+      if (!books.length || search.value) {
+        renderList();
+      } else {
+        element.remove();
       }
     });
 
@@ -109,7 +107,7 @@
       template.innerHTML = html.trim();
 
       tbody.replaceChildren(...template.content.childNodes);
-      document.querySelectorAll('.book-list .row').forEach(row => addDeleteEventListener(row));
+      tbody.querySelectorAll('.book-list .book-row').forEach(row => addDeleteEventListener(row));
     } else {
       const template = document.createElement('template');
       template.innerHTML = '<tr class="empty"><td colspan="4">No books</td></tr>';
@@ -117,6 +115,8 @@
       tbody.replaceChildren(...template.content.childNodes);
     }
   }
+
+  renderList();
 
   let typeTimeout = undefined;
 
@@ -170,6 +170,4 @@
     form.reset();
     addRow.classList.remove('row--confirm');
   });
-
-  renderList(books);
 })();
