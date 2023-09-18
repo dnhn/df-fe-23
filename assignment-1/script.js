@@ -1,3 +1,16 @@
+function getBooksData() {
+  try {
+    return JSON.parse(localStorage.getItem('booksData'));
+  } catch (error) {
+    return null;
+  }
+}
+
+function setBooksData(data) {
+  localStorage.setItem('booksData', JSON.stringify(data));
+}
+
+const storedData = getBooksData();
 const topics = {
   backend: 'Back-end',
   frontend: 'Front-end',
@@ -5,7 +18,7 @@ const topics = {
   programming: 'Programming',
   vcs: 'Version control',
 };
-let books = [
+let books = storedData ? storedData : [
   {
     id: Date.now(),
     title: 'HTML & CSS 101',
@@ -61,8 +74,9 @@ function addDeleteEventListener(element) {
   element.querySelector('.row__confirm-action').addEventListener('click', () => {
     if (element.classList.contains('book-row')) {
       books = books.filter(book => book.id.toString() !== element.dataset.id);
+      setBooksData(books);
 
-      if (search.value) {
+      if (!books.length || search.value) {
         renderList();
       } else {
         element.remove();
@@ -129,6 +143,7 @@ addBookForm.addEventListener('submit', event => {
   };
 
   books.push(book);
+  setBooksData(books);
 
   if (search.value) {
     renderList();
