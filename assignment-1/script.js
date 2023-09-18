@@ -26,25 +26,25 @@
       id: Date.now(),
       title: 'CSS Secrets',
       author: 'Lea Verou',
-      topic: 'Front-end',
+      topic: 'frontend',
     },
     {
       id: Date.now() + 1000,
       title: 'Responsive Web Design',
       author: 'Ethan Marcotte',
-      topic: 'Front-end',
+      topic: 'frontend',
     },
     {
       id: Date.now() + 2000,
       title: 'JavaScript Design Patterns',
       author: 'Addy Osmani',
-      topic: 'Programming',
+      topic: 'programming',
     },
     {
       id: Date.now() + 3000,
       title: 'Git',
       author: 'Linus Torvalds',
-      topic: 'Version Control',
+      topic: 'vcs',
     },
   ];
 
@@ -55,7 +55,7 @@
     `<tr class="row book-row" data-id="${id}">
     <td>${title}</td>
     <td>${author}</td>
-    <td>${topic}</td>
+    <td>${topics[topic]}</td>
     <td class="row__actions">
       <button type="button" class="row__action btn btn--warning">Delete</button>
       <div class="row__confirm">
@@ -151,14 +151,15 @@
     const form = event.target;
     const book = {
       id: Date.now(),
-      title: form[0].value,
-      author: form[1].value,
-      topic: topics[form[2].value],
+      title: form.title.value,
+      author: form.author.value,
+      topic: form.topic.value,
     };
 
     books.push(book);
     setBooksData(books);
 
+    // Equal to 1 indicates that the previous state is empty
     if (books.length === 1 || search.value) {
       renderList();
     } else {
