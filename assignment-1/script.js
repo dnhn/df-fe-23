@@ -9,7 +9,7 @@ let books = [
   {
     id: Date.now(),
     title: 'HTML & CSS 101',
-    author: 'W3C',
+    author: 'World Wide Web Consortium',
     topic: 'Front-end',
   },
   {
@@ -20,7 +20,7 @@ let books = [
   },
   {
     id: Date.now() + 2000,
-    title: 'JavaScript Patterns',
+    title: 'JavaScript Design Patterns',
     author: 'Addy Osmani',
     topic: 'Programming',
   },
@@ -61,7 +61,12 @@ function addDeleteEventListener(element) {
   element.querySelector('.row__confirm-action').addEventListener('click', () => {
     if (element.classList.contains('book-row')) {
       books = books.filter(book => book.id.toString() !== element.dataset.id);
-      element.remove();
+
+      if (search.value) {
+        renderList();
+      } else {
+        element.remove();
+      }
     }
   });
 
@@ -70,23 +75,35 @@ function addDeleteEventListener(element) {
   });
 }
 
-function renderList(data) {
-  const tbody = document.querySelector('.book-list tbody');
+function renderList() {
+  const filtered = books.filter(book => book.title.toLowerCase().includes(search.value.toLowerCase()));
   let html = '';
+  const tbody = document.querySelector('.book-list tbody');
 
-  for (let i = 0; i < data.length; i++) {
-    html += bookTemplate(data[i]);
+  for (let i = 0; i < filtered.length; i++) {
+    html += bookTemplate(filtered[i]);
   }
 
-  if (data.length) {
-    tbody.textContent = '';
-    tbody.insertAdjacentHTML('beforeend', html);
+  if (filtered.length) {
+    const template = document.createElement('template');
+    template.innerHTML = html.trim();
+
+    tbody.replaceChildren(...template.content.childNodes);
     document.querySelectorAll('.book-list .row').forEach(row => addDeleteEventListener(row));
   } else {
-    tbody.textContent = '';
-    tbody.insertAdjacentHTML('beforeend', '<tr class="empty"><td colspan="4">No books</td></tr>');
+    const template = document.createElement('template');
+    template.innerHTML = '<tr class="empty"><td colspan="4">No books</td></tr>';
+
+    tbody.replaceChildren(...template.content.childNodes);
   }
 }
+
+let typeTimeout = undefined;
+
+search.addEventListener('input', () => {
+  clearTimeout(typeTimeout);
+  typeTimeout = setTimeout(renderList, 300);
+});
 
 document.querySelector('.table-header button').addEventListener('click', () => {
   addRow.classList.toggle('row--confirm');
@@ -105,8 +122,13 @@ addBookForm.addEventListener('submit', event => {
   };
 
   books.push(book);
-  document.querySelector('.book-list tbody').insertAdjacentHTML('beforeend', bookTemplate(book));
-  addDeleteEventListener(document.querySelector('.book-list tbody tr:last-child'));
+
+  if (search.value) {
+    renderList();
+  } else {
+    document.querySelector('.book-list tbody').insertAdjacentHTML('beforeend', bookTemplate(book));
+    addDeleteEventListener(document.querySelector('.book-list tbody tr:last-child'));
+  }
 
   form.reset();
   addRow.classList.remove('row--confirm');
