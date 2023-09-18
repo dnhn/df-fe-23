@@ -159,7 +159,7 @@
     books.push(book);
     setBooksData(books);
 
-    if (search.value) {
+    if (books.length === 1 || search.value) {
       renderList();
     } else {
       document.querySelector('.book-list tbody').insertAdjacentHTML('beforeend', bookTemplate(book));
