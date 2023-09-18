@@ -1,14 +1,76 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Bookstore</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
+<html lang="en">
+<head>
 
-  <body>
-    Hello world
-    <script src="script.js"></script>
-  </body>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bookstore</title>
+<meta name="description" content="Bookstore" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <h1>Bookstore</h1>
+  </a>
+  <a href="https://github.com/dnhn/df-fe-23" target="_blank" class="user">GitHub</a>
+</header>
+
+<main>
+
+<div class="table-header">
+  <div class="search">
+    <input type="text" name="search" id="search" placeholder="Search" />
+    <button type="button" class="search__clear">clear</button>
+  </div>
+  <button type="button" class="add-book btn btn--info">New book</button>
+</div>
+
+<div class="table-wrapper">
+  <table class="book-list">
+    <thead>
+      <tr>
+        <th class="title">Title</th>
+        <th class="author">Author</th>
+        <th class="topic">Topic</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody><tr class="empty"><td colspan="4">No books</td></tr></tbody>
+
+    <tfoot>
+      <tr class="row add-row">
+        <td><input type="text" name="title" form="add-book-form" placeholder="Title" required /></td>
+        <td><input type="text" name="author" form="add-book-form" placeholder="Author" required /></td>
+        <td>
+          <select name="topic" form="add-book-form">
+            <option value="backend">Back-end</option>
+            <option value="frontend">Front-end</option>
+            <option value="fullstack">Full stack</option>
+            <option value="programming">Programming</option>
+            <option value="vcs">Version control</option>
+          </select>
+        </td>
+        <td class="row__actions">
+          <button type="button" class="row__action btn btn--info">New book</button>
+          <form id="add-book-form">
+            <div class="row__confirm">
+              <button type="submit" class="row__confirm-action btn btn--primary">Save</button>
+              <button type="button" class="row__cancel btn">Cancel</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
 </html>
