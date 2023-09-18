@@ -122,7 +122,10 @@
 
   search.addEventListener('input', () => {
     clearTimeout(typeTimeout);
-    typeTimeout = setTimeout(renderList, 300);
+
+    if (books.length) {
+      typeTimeout = setTimeout(renderList, 300);
+    }
   });
 
   document.getElementsByClassName('search__clear')[0].addEventListener('click', () => {
