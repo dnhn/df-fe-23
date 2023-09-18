@@ -118,6 +118,7 @@
 
   renderList();
 
+  // Search
   let typeTimeout = undefined;
 
   search.addEventListener('input', () => {
@@ -134,6 +135,21 @@
       renderList();
     }
   });
+
+  // Render topic options
+  (() => {
+    const topicEntries = Object.entries(topics);
+    let topicsHtml = '';
+
+    for (let i = 0; i < topicEntries.length; i++) {
+      topicsHtml += `<option value="${topicEntries[i][0]}">${topicEntries[i][1]}</option>`;
+    }
+
+    const topicsTemplate = document.createElement('template');
+    topicsTemplate.innerHTML = topicsHtml;
+
+    document.querySelector('.add-row select').append(...topicsTemplate.content.childNodes);
+  })();
 
   // Toggle book form
   function addBookConfirm() {
