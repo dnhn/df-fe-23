@@ -1,3 +1,4 @@
+// Local storage processing
 function getBooksData() {
   try {
     return JSON.parse(localStorage.getItem('booksData'));
@@ -18,6 +19,7 @@ const topics = {
   programming: 'Programming',
   vcs: 'Version control',
 };
+// Source of Truth
 let books = storedData ? storedData : [
   {
     id: Date.now(),
@@ -46,7 +48,7 @@ let books = storedData ? storedData : [
 ];
 
 const search = document.getElementById('search');
-const addRow = document.querySelector('.add-row');
+const addRow = document.getElementsByClassName('add-row')[0];
 const addBookForm = document.getElementById('add-book-form');
 const bookTemplate = ({ id, title, author, topic }) =>
   `<tr class="row book-row" data-id="${id}">
@@ -62,6 +64,7 @@ const bookTemplate = ({ id, title, author, topic }) =>
   </td>
 </tr>`;
 
+// Attach event listeners to new elements
 function addDeleteEventListener(element) {
   element.querySelector('.row__action').addEventListener('click', () => {
     element.classList.add('row--confirm');
@@ -90,16 +93,18 @@ function addDeleteEventListener(element) {
 }
 
 function renderList() {
+  // Search keyword filtering
   const filtered = books.filter(book => book.title.toLowerCase().includes(search.value.toLowerCase()));
-  let html = '';
   const tbody = document.querySelector('.book-list tbody');
-
-  for (let i = 0; i < filtered.length; i++) {
-    html += bookTemplate(filtered[i]);
-  }
 
   if (filtered.length) {
     const template = document.createElement('template');
+    let html = '';
+
+    for (let i = 0; i < filtered.length; i++) {
+      html += bookTemplate(filtered[i]);
+    }
+
     template.innerHTML = html.trim();
 
     tbody.replaceChildren(...template.content.childNodes);
@@ -119,13 +124,14 @@ search.addEventListener('input', () => {
   typeTimeout = setTimeout(renderList, 300);
 });
 
-document.querySelector('.search__clear').addEventListener('click', () => {
+document.getElementsByClassName('search__clear')[0].addEventListener('click', () => {
   if (search.value) {
     search.value = '';
     renderList();
   }
 });
 
+// Toggle book form
 function addBookConfirm() {
   addRow.classList.toggle('row--confirm');
   addBookForm[0].focus();
