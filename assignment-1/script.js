@@ -126,10 +126,14 @@ document.querySelector('.search__clear').addEventListener('click', () => {
   }
 });
 
-document.querySelector('.table-header .add-book').addEventListener('click', () => {
+function addBookConfirm() {
   addRow.classList.toggle('row--confirm');
   addBookForm[0].focus();
-});
+}
+
+document.querySelector('.book-list .add-row .row__action').addEventListener('click', addBookConfirm);
+document.querySelector('.book-list .add-row .row__cancel').addEventListener('click', addBookConfirm);
+document.querySelector('.table-header .add-book').addEventListener('click', addBookConfirm);
 
 addBookForm.addEventListener('submit', event => {
   event.preventDefault();
