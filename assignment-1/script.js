@@ -24,8 +24,8 @@
   let books = storedData ? storedData : [
     {
       id: Date.now(),
-      title: 'HTML & CSS 101',
-      author: 'World Wide Web Consortium',
+      title: 'CSS Secrets',
+      author: 'Lea Verou',
       topic: 'Front-end',
     },
     {
