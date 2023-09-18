@@ -105,7 +105,14 @@ search.addEventListener('input', () => {
   typeTimeout = setTimeout(renderList, 300);
 });
 
-document.querySelector('.table-header button').addEventListener('click', () => {
+document.querySelector('.search__clear').addEventListener('click', () => {
+  if (search.value) {
+    search.value = '';
+    renderList();
+  }
+});
+
+document.querySelector('.table-header .add-book').addEventListener('click', () => {
   addRow.classList.toggle('row--confirm');
   addBookForm[0].focus();
 });

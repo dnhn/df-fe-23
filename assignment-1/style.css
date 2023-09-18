@@ -19,8 +19,11 @@ body {
   box-sizing: border-box;
 }
 
-.btn {
+button {
   cursor: pointer;
+}
+
+.btn {
   border: 0;
   border-radius: 4px;
   padding: 8px 12px;
@@ -126,6 +129,25 @@ main {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+}
+
+.search {
+  position: relative;
+}
+
+.search input {
+  padding-right: 48px;
+}
+
+.search__clear {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  padding: 8px;
+  background-color: transparent;
+  font-size: small;
 }
 
 .table-wrapper {
