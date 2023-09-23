@@ -1,5 +1,7 @@
 import topics from '../../data/topics';
 
+import Button from '../Button';
+
 export default function TableRow({ book }) {
   return (
     <tr class="row book-row" data-id={book.id}>
@@ -7,10 +9,10 @@ export default function TableRow({ book }) {
       <td>{book.author}</td>
       <td>{topics[book.topic]}</td>
       <td class="row__actions">
-        <button type="button" class="row__action btn btn--warning">Delete</button>
+        <Button variant="warning">Delete</Button>
         <div class="row__confirm">
-          <button type="button" class="row__confirm-action btn">Confirm</button>
-          <button type="button" class="row__cancel btn btn--error">Cancel</button>
+          <Button>Confirm</Button>
+          <Button variant="error">Cancel</Button>
         </div>
       </td>
     </tr>
