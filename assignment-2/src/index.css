@@ -2,15 +2,13 @@ html {
   height: 100%;
   width: 100%;
   font-family: system-ui, Helvetica Neue, Helvetica, Arial, sans-serif;
-}
-
-html, body {
-  font-size: 16px;
+  font-size: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 *,
@@ -25,8 +23,8 @@ button {
 
 .btn {
   border: 0;
-  border-radius: 4px;
-  padding: 8px 12px;
+  border-radius: .25rem;
+  padding: .5rem .75rem;
   background-color: white;
   font-family: inherit;
   font-size: inherit;
@@ -78,19 +76,19 @@ button {
 }
 
 input, select {
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 8px 12px;
+  border: .0625rem solid #333;
+  border-radius: .25rem;
+  padding: .5rem .75rem;
   font-family: inherit;
   font-size: inherit;
 }
 
 header {
-  border-bottom: 1px solid grey;
+  border-bottom: .0625rem solid grey;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 16px;
+  padding-left: 1rem;
 }
 
 header .logo {
@@ -108,7 +106,7 @@ header h1 {
 
 header .user {
   display: block;
-  padding: 16px;
+  padding: 1rem;
   background-color: #ccc;
   color: black;
   text-decoration: none;
@@ -121,14 +119,14 @@ header .user:hover {
 }
 
 main {
-  padding: 64px 16px;
+  padding: 4rem 1rem;
 }
 
 .table-header {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .search {
@@ -136,16 +134,16 @@ main {
 }
 
 .search input {
-  padding-right: 48px;
+  padding-right: 3rem;
 }
 
 .search__clear {
   position: absolute;
-  right: 4px;
+  right: .25rem;
   top: 50%;
   transform: translateY(-50%);
   border: 0;
-  padding: 8px;
+  padding: .5rem;
   background-color: transparent;
   font-size: small;
 }
@@ -185,7 +183,7 @@ table th {
 
 table th,
 table td {
-  padding: 12px 16px;
+  padding: .75rem 1rem;
 }
 
 table tbody .empty:hover {
@@ -193,10 +191,10 @@ table tbody .empty:hover {
 }
 
 table tbody .empty td {
-  padding-top: 96px;
-  padding-bottom: 96px;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 table tbody tr {
@@ -213,7 +211,7 @@ table tbody tr:hover {
 
 table .row__action {
   position: absolute;
-  right: 16px;
+  right: 1rem;
 }
 
 table .row:not(.row--confirm) input,
@@ -233,21 +231,21 @@ select {
   width: 100%;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 63.9375rem) {
   table td {
     white-space: nowrap;
   }
 }
 
-@media (min-width: 640px) {
+@media (min-width: 40rem) {
   .search {
-    width: 250px;
+    width: 16rem;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 80rem) {
   /* table thead .title {} */
-  table thead .author { width: 300px; }
-  table thead .topic { width: 250px; }
-  table thead .actions { width: 250px; }
+  table thead .author { width: 20rem; }
+  table thead .topic { width: 16rem; }
+  table thead .actions { width: 16rem; }
 }
