@@ -1,0 +1,90 @@
+.table-wrapper {
+  width: 100%;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+table {
+  clear: both;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table thead {
+  background-color: #666;
+  color: white;
+}
+
+/* table thead .title {}
+table thead .author {}
+table thead .topic {}
+table thead .actions {} */
+
+table thead .actions,
+table .row__actions {
+  position: relative;
+  text-align: right;
+}
+
+table th {
+  text-align: left;
+}
+
+table th,
+table td {
+  padding: .75rem 1rem;
+}
+
+table tbody .empty:hover {
+  background-color: white;
+}
+
+table tbody .empty td {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+table tbody tr {
+  transition: background-color 150ms;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tbody tr:hover {
+  background-color: #ddd;
+}
+
+table .row__action {
+  position: absolute;
+  right: 1rem;
+}
+
+table .row:not(.row--confirm) input,
+table .row:not(.row--confirm) select,
+table .row:not(.row--confirm) .row__confirm {
+  opacity: 0;
+  visibility: hidden;
+}
+
+table .row--confirm .row__action {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 63.9375rem) {
+  table td {
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 80rem) {
+  /* table thead .title {} */
+  table thead .author { width: 20rem; }
+  table thead .topic { width: 16rem; }
+  table thead .actions { width: 16rem; }
+}
