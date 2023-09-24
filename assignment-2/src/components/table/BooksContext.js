@@ -61,7 +61,7 @@ export const BooksProvider = ({ children }) => {
   );
 
   const deleteBook = useCallback(
-    id => setBooks({ ...books, list: [...books.list.filter(book => book.id.toString() !== id)] }),
+    id => setBooks({ ...books, list: [...books.list.filter(book => book.id.toString() !== id.toString())] }),
     [books, setBooks],
   );
 

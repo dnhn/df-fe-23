@@ -9,7 +9,7 @@ export default function TableRow({ book }) {
   const { deleteBook } = useBooksContext();
 
   return (
-    <tr className="row book-row" data-id={book.id}>
+    <tr className="row">
       <td>{book.title}</td>
       <td>{book.author}</td>
       <td>{BOOK_TOPICS[book.topic]}</td>
