@@ -65,15 +65,13 @@
 }
 
 .book-list .row:not(.row--confirm) input,
-.book-list .row:not(.row--confirm) select,
-.book-list .row:not(.row--confirm) .row__confirm {
+.book-list .row:not(.row--confirm) select {
   opacity: 0;
   visibility: hidden;
 }
 
-.book-list .row--confirm .row__action {
-  opacity: 0;
-  visibility: hidden;
+.book-list .row__confirm > *:nth-child(n + 1) {
+  margin-left: .5rem;
 }
 
 @media (max-width: 63.9375rem) {
