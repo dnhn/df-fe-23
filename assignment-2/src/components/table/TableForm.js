@@ -48,6 +48,7 @@ export default function TableForm() {
 
   return (
     <tr className={`row add-row ${formOpen ? 'row--confirm' : ''}`}>
+      <td></td>
       <td><input type="text" name="title" form="add-book-form" placeholder="Title" required /></td>
       <td><input type="text" name="author" form="add-book-form" placeholder="Author" required /></td>
       <td>

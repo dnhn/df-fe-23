@@ -1,6 +1,5 @@
 .table-wrapper {
   width: 100%;
-  max-height: 70vh;
   overflow: auto;
 }
 
@@ -16,7 +15,8 @@
   color: white;
 }
 
-/* .book-list thead .title {}
+/* .book-list thead .index {}
+.book-list thead .title {}
 .book-list thead .author {}
 .book-list thead .topic {}
 .book-list thead .actions {} */
@@ -81,6 +81,7 @@
 }
 
 @media (min-width: 80rem) {
+  .book-list thead .index { width: 5rem; }
   /* .book-list thead .title {} */
   .book-list thead .author { width: 20rem; }
   .book-list thead .topic { width: 16rem; }

@@ -4,12 +4,13 @@ import { BOOK_TOPICS } from '../../common/data';
 import Button from '../Button';
 import { useBooksContext } from './BooksContext';
 
-export default function TableRow({ book }) {
+export default function TableRow({ book, index }) {
   const [confirmMode, setConfirmMode] = useState(false);
   const { deleteBook } = useBooksContext();
 
   return (
     <tr className="row">
+      <td>{index + 1}</td>
       <td>{book.title}</td>
       <td>{book.author}</td>
       <td>{BOOK_TOPICS[book.topic]}</td>

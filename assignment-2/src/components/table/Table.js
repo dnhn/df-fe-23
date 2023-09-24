@@ -22,6 +22,7 @@ export default function Table() {
       <table className="book-list">
         <thead>
           <tr>
+            <th className="index">No.</th>
             <th className="title">Title</th>
             <th className="author">Author</th>
             <th className="topic">Topic</th>
@@ -31,9 +32,9 @@ export default function Table() {
 
         <tbody>
           {filtered.length ?
-            filtered.map(book => <TableRow key={book.id} book={book} />)
+            filtered.map((book, index) => <TableRow key={book.id} book={book} index={index} />)
           :
-            <tr className="empty"><td colSpan="4">No books</td></tr>
+            <tr className="empty"><td colSpan="5">No books</td></tr>
           }
         </tbody>
 
