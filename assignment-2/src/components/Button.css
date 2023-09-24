@@ -10,8 +10,8 @@
   transition-duration: 150ms;
 }
 
-.btn:hover,
-.btn:focus {
+.btn:not(:disabled):hover,
+.btn:not(:disabled):focus {
   background-color: #eee;
 }
 
@@ -19,8 +19,8 @@
   background-color: #90caf9;
 }
 
-.btn--primary:hover,
-.btn--primary:focus {
+.btn--primary:not(:disabled):hover,
+.btn--primary:not(:disabled):focus {
   background-color: #42a5f5;
 }
 
@@ -28,8 +28,8 @@
   background-color: #29b6f6;
 }
 
-.btn--info:hover,
-.btn--info:focus {
+.btn--info:not(:disabled):hover,
+.btn--info:not(:disabled):focus {
   background-color: #0288d1;
 }
 
@@ -38,8 +38,8 @@
   color: white;
 }
 
-.btn--error:hover,
-.btn--error:focus {
+.btn--error:not(:disabled):hover,
+.btn--error:not(:disabled):focus {
   background-color: #d32f2f;
 }
 
@@ -47,7 +47,7 @@
   background-color: #ffa726;
 }
 
-.btn--warning:hover,
-.btn--warning:focus {
+.btn--warning:not(:disabled):hover,
+.btn--warning:not(:disabled):focus {
   background-color: #f57c00;
 }

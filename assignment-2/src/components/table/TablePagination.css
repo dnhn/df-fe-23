@@ -1,0 +1,29 @@
+.pagination {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+}
+
+/* .pagination__nav {} */
+
+.pagination__pages {
+  display: flex;
+  gap: .5rem;
+}
+
+.pagination__page {
+  display: none;
+}
+
+.pagination__current,
+.pagination__page.pagination__current + .pagination__page,
+.pagination__page:has(+ .pagination__page.pagination__current) {
+  display: block;
+}
+
+@media (min-width: 40rem) {
+  .pagination__page.pagination__current + .pagination__page + .pagination__page,
+  .pagination__page:has(+ .pagination__page + .pagination__page.pagination__current) {
+    display: block;
+  }
+}

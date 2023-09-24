@@ -26,7 +26,7 @@ export default function TableForm() {
       formRef.current.reset();
       closeForm();
     }
-  }, [bookList]);
+  }, [bookList, closeForm]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();

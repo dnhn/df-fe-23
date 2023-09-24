@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useBooksContext } from "./BooksContext";
+import { BOOKS_PER_PAGE } from "../../common/constants";
 
 import TableRow from './TableRow';
 import TableForm from "./TableForm";
@@ -8,14 +9,18 @@ import TableForm from "./TableForm";
 import './Table.css';
 
 export default function Table() {
-  const { bookList, search } = useBooksContext();
+  const { bookList, page, search, setPage } = useBooksContext();
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
     setFiltered(
-      bookList.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+      bookList
+        .filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+        .slice(page * BOOKS_PER_PAGE, (page * BOOKS_PER_PAGE) + BOOKS_PER_PAGE)
     );
-  }, [bookList, search]);
+  }, [bookList, page, search]);
+
+  useEffect(() => setPage(0), [search]);
 
   return (
     <div className="table-wrapper">
@@ -32,7 +37,7 @@ export default function Table() {
 
         <tbody>
           {filtered.length ?
-            filtered.map((book, index) => <TableRow key={book.id} book={book} index={index} />)
+            filtered.map((book, index) => <TableRow key={book.id} book={book} index={index + (page * BOOKS_PER_PAGE)} />)
           :
             <tr className="empty"><td colSpan="5">No books</td></tr>
           }

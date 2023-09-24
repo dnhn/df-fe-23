@@ -7,6 +7,7 @@ import { BOOKS_DATA_KEY } from "../../common/constants";
 const defaultData = {
   bookList: INITIAL_BOOKS,
   search: '',
+  page: 0,
   formOpen: false,
 };
 
@@ -19,6 +20,7 @@ export const BooksContext = createContext({
   addBook: () => {},
   deleteBook: () => {},
   setSearch: () => {},
+  setPage: () => {},
 });
 
 export const useBooksContext = () => {
@@ -76,10 +78,16 @@ export const BooksProvider = ({ children }) => {
     [books, setBooks]
   );
 
+  const setPage = useCallback(
+    page => setBooks({ ...books, page: page }),
+    [books, setBooks],
+  );
+
   const memo = useMemo(
     () => ({
       bookList: books.bookList,
       search: books.search,
+      page: books.page,
       formOpen: books.formOpen,
 
       openForm,
@@ -88,10 +96,12 @@ export const BooksProvider = ({ children }) => {
       addBook,
       deleteBook,
       setSearch,
+      setPage,
     }),
     [
       books.bookList,
       books.search,
+      books.page,
       books.formOpen,
 
       openForm,
@@ -100,6 +110,7 @@ export const BooksProvider = ({ children }) => {
       addBook,
       deleteBook,
       setSearch,
+      setPage,
     ]
   );
 
