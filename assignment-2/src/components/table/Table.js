@@ -1,8 +1,13 @@
+import { useBooksContext } from "./BooksContext";
+
+import TableRow from './TableRow';
 import TableForm from "./TableForm";
 
 import './Table.css';
 
 export default function Table() {
+  const { list } = useBooksContext();
+
   return (
     <div className="table-wrapper">
       <table className="book-list">
@@ -15,11 +20,15 @@ export default function Table() {
           </tr>
         </thead>
 
-        <tbody><tr className="empty"><td colSpan="4">No books</td></tr></tbody>
+        <tbody>
+          {list.length ?
+            list.map(book => <TableRow key={book.id} book={book} />)
+          :
+            <tr className="empty"><td colSpan="4">No books</td></tr>
+          }
+        </tbody>
 
-        <tfoot>
-          <TableForm />
-        </tfoot>
+        <tfoot><TableForm /></tfoot>
       </table>
     </div>
   );

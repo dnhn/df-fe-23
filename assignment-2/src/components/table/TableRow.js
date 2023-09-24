@@ -10,10 +10,10 @@ export default function TableRow({ book }) {
       <td>{BOOK_TOPICS[book.topic]}</td>
       <td className="row__actions">
         <Button variant="warning">Delete</Button>
-        <div className="row__confirm">
+        {/* <div className="row__confirm">
           <Button>Confirm</Button>
           <Button variant="error">Cancel</Button>
-        </div>
+        </div> */}
       </td>
     </tr>
   );
