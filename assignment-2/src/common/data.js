@@ -1,4 +1,12 @@
-export default [
+export const BOOK_TOPICS = {
+  backend: 'Back-end',
+  frontend: 'Front-end',
+  fullstack: 'Full stack',
+  programming: 'Programming',
+  vcs: 'Version control',
+};
+
+export const INITIAL_BOOKS = [
   {
     id: '0',
     title: 'CSS Secrets',
