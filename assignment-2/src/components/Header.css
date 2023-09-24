@@ -1,4 +1,4 @@
-header {
+.header {
   border-bottom: .0625rem solid grey;
   display: flex;
   justify-content: space-between;
@@ -6,20 +6,20 @@ header {
   padding-left: 1rem;
 }
 
-header .logo {
+.header .logo {
   text-decoration: none;
   color: black;
 }
 
-header .logo:hover {
+.header .logo:hover {
   color: #666;
 }
 
-header h1 {
+.header h1 {
   margin: 0;
 }
 
-header .user {
+.header .user {
   display: block;
   padding: 1rem;
   background-color: #ccc;
@@ -29,6 +29,6 @@ header .user {
   transition: background-color 150ms;
 }
 
-header .user:hover {
+.header .user:hover {
   background-color: #bbb;
 }

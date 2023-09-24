@@ -4,87 +4,87 @@
   overflow: auto;
 }
 
-table {
+.book-list {
   clear: both;
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
 }
 
-table thead {
+.book-list thead {
   background-color: #666;
   color: white;
 }
 
-/* table thead .title {}
-table thead .author {}
-table thead .topic {}
-table thead .actions {} */
+/* .book-list thead .title {}
+.book-list thead .author {}
+.book-list thead .topic {}
+.book-list thead .actions {} */
 
-table thead .actions,
-table .row__actions {
+.book-list thead .actions,
+.book-list .row__actions {
   position: relative;
   text-align: right;
 }
 
-table th {
+.book-list th {
   text-align: left;
 }
 
-table th,
-table td {
+.book-list th,
+.book-list td {
   padding: .75rem 1rem;
 }
 
-table tbody .empty:hover {
+.book-list tbody .empty:hover {
   background-color: white;
 }
 
-table tbody .empty td {
+.book-list tbody .empty td {
   padding-top: 6rem;
   padding-bottom: 6rem;
   text-align: center;
   font-size: 1.5rem;
 }
 
-table tbody tr {
+.book-list tbody tr {
   transition: background-color 150ms;
 }
 
-table tbody tr:nth-child(even) {
+.book-list tbody tr:nth-child(even) {
   background-color: #eee;
 }
 
-table tbody tr:hover {
+.book-list tbody tr:hover {
   background-color: #ddd;
 }
 
-table .row__action {
+.book-list .row__action {
   position: absolute;
   right: 1rem;
 }
 
-table .row:not(.row--confirm) input,
-table .row:not(.row--confirm) select,
-table .row:not(.row--confirm) .row__confirm {
+.book-list .row:not(.row--confirm) input,
+.book-list .row:not(.row--confirm) select,
+.book-list .row:not(.row--confirm) .row__confirm {
   opacity: 0;
   visibility: hidden;
 }
 
-table .row--confirm .row__action {
+.book-list .row--confirm .row__action {
   opacity: 0;
   visibility: hidden;
 }
 
 @media (max-width: 63.9375rem) {
-  table td {
+  .book-list td {
     white-space: nowrap;
   }
 }
 
 @media (min-width: 80rem) {
-  /* table thead .title {} */
-  table thead .author { width: 20rem; }
-  table thead .topic { width: 16rem; }
-  table thead .actions { width: 16rem; }
+  /* .book-list thead .title {} */
+  .book-list thead .author { width: 20rem; }
+  .book-list thead .topic { width: 16rem; }
+  .book-list thead .actions { width: 16rem; }
 }

@@ -2,7 +2,7 @@ import './Header.css';
 
 export default function Header() {
   return (
-    <header>
+    <header className="header">
       <a href="/" className="logo">
         <h1>Bookstore</h1>
       </a>
