@@ -16,6 +16,7 @@ export const BooksContext = createContext({
   closeForm: () => {},
   toggleForm: () => {},
   addBook: () => {},
+  deleteBook: () => {},
 });
 
 export const useBooksContext = () => {
@@ -59,6 +60,11 @@ export const BooksProvider = ({ children }) => {
     [books, setBooks],
   );
 
+  const deleteBook = useCallback(
+    id => setBooks({ ...books, list: [...books.list.filter(book => book.id.toString() !== id)] }),
+    [books, setBooks],
+  );
+
   const memo = useMemo(
     () => ({
       list: books.list,
@@ -68,6 +74,7 @@ export const BooksProvider = ({ children }) => {
       closeForm,
       toggleForm,
       addBook,
+      deleteBook,
     }),
     [
       books.list,
@@ -77,6 +84,7 @@ export const BooksProvider = ({ children }) => {
       closeForm,
       toggleForm,
       addBook,
+      deleteBook,
     ]
   );
 
