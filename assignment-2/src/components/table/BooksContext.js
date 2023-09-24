@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { INITIAL_BOOKS } from "../../common/data";
-import { getLocalStorageItem } from "../../common/utils";
+import { getLocalStorageItem, setLocalStorageItem } from "../../common/utils";
 import { BOOKS_DATA_KEY } from "../../common/constants";
 
 const defaultData = {
@@ -39,6 +39,10 @@ export const BooksProvider = ({ children }) => {
       setBooks(storedData);
     }
   }, []);
+
+  useEffect(() => {
+    setLocalStorageItem(BOOKS_DATA_KEY, books);
+  }, [books]);
 
   const openForm = useCallback(
     () => setBooks({ ...books, formOpen: true }),
