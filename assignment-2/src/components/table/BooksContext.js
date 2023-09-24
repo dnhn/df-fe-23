@@ -5,7 +5,7 @@ import { getLocalStorageItem, setLocalStorageItem } from "../../common/utils";
 import { BOOKS_DATA_KEY } from "../../common/constants";
 
 const defaultData = {
-  list: INITIAL_BOOKS,
+  bookList: INITIAL_BOOKS,
   search: '',
   formOpen: false,
 };
@@ -62,12 +62,12 @@ export const BooksProvider = ({ children }) => {
   );
 
   const addBook = useCallback(
-    book => setBooks({ ...books, list: [...books.list, book] }),
+    book => setBooks({ ...books, bookList: [...books.bookList, book] }),
     [books, setBooks],
   );
 
   const deleteBook = useCallback(
-    id => setBooks({ ...books, list: [...books.list.filter(book => book.id.toString() !== id.toString())] }),
+    id => setBooks({ ...books, bookList: [...books.bookList.filter(book => book.id.toString() !== id.toString())] }),
     [books, setBooks],
   );
 
@@ -78,7 +78,7 @@ export const BooksProvider = ({ children }) => {
 
   const memo = useMemo(
     () => ({
-      list: books.list,
+      bookList: books.bookList,
       search: books.search,
       formOpen: books.formOpen,
 
@@ -90,7 +90,7 @@ export const BooksProvider = ({ children }) => {
       setSearch,
     }),
     [
-      books.list,
+      books.bookList,
       books.search,
       books.formOpen,
 

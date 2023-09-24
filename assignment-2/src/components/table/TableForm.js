@@ -8,7 +8,7 @@ import Button from "../Button";
 export default function TableForm() {
   const formRef = useRef();
   const [topics, setTopics] = useState([]);
-  const { addBook, closeForm, formOpen, list, toggleForm } = useBooksContext();
+  const { addBook, bookList, closeForm, formOpen, toggleForm } = useBooksContext();
 
   useEffect(() => {
     setTopics(Object.entries(BOOK_TOPICS));
@@ -26,7 +26,7 @@ export default function TableForm() {
       formRef.current.reset();
       closeForm();
     }
-  }, [list]);
+  }, [bookList]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();

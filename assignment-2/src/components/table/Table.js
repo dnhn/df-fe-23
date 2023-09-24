@@ -8,14 +8,14 @@ import TableForm from "./TableForm";
 import './Table.css';
 
 export default function Table() {
-  const { list, search } = useBooksContext();
+  const { bookList, search } = useBooksContext();
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
     setFiltered(
-      list.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+      bookList.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
     );
-  }, [list, search]);
+  }, [bookList, search]);
 
   return (
     <div className="table-wrapper">

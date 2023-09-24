@@ -7,20 +7,20 @@ import Button from '../Button';
 import './TableToolbar.css';
 
 export default function TableToolbar() {
-  const { list, setSearch, toggleForm } = useBooksContext();
+  const { bookList, setSearch, toggleForm } = useBooksContext();
   const [keyword, setKeyword] = useState('');
 
   useEffect(() => {
     let typeTimeout = undefined;
 
-    if (list.length) {
+    if (bookList.length) {
       typeTimeout = setTimeout(() => setSearch(keyword), 300);
     }
 
     return () => {
       clearTimeout(typeTimeout);
     };
-  }, [keyword, list, setSearch]);
+  }, [bookList, keyword, setSearch]);
 
   return (
     <div className="table-toolbar">
