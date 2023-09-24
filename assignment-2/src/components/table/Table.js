@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { useBooksContext } from "./BooksContext";
 
 import TableRow from './TableRow';
@@ -6,7 +8,14 @@ import TableForm from "./TableForm";
 import './Table.css';
 
 export default function Table() {
-  const { list } = useBooksContext();
+  const { list, search } = useBooksContext();
+  const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+    setFiltered(
+      list.filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+    );
+  }, [list, search]);
 
   return (
     <div className="table-wrapper">
@@ -21,8 +30,8 @@ export default function Table() {
         </thead>
 
         <tbody>
-          {list.length ?
-            list.map(book => <TableRow key={book.id} book={book} />)
+          {filtered.length ?
+            filtered.map(book => <TableRow key={book.id} book={book} />)
           :
             <tr className="empty"><td colSpan="4">No books</td></tr>
           }

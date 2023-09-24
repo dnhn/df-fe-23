@@ -6,6 +6,7 @@ import { BOOKS_DATA_KEY } from "../../common/constants";
 
 const defaultData = {
   list: INITIAL_BOOKS,
+  search: '',
   formOpen: false,
 };
 
@@ -17,6 +18,7 @@ export const BooksContext = createContext({
   toggleForm: () => {},
   addBook: () => {},
   deleteBook: () => {},
+  setSearch: () => {},
 });
 
 export const useBooksContext = () => {
@@ -69,9 +71,15 @@ export const BooksProvider = ({ children }) => {
     [books, setBooks],
   );
 
+  const setSearch = useCallback(
+    keyword => setBooks({ ...books, search: keyword }),
+    [books, setBooks]
+  );
+
   const memo = useMemo(
     () => ({
       list: books.list,
+      search: books.search,
       formOpen: books.formOpen,
 
       openForm,
@@ -79,9 +87,11 @@ export const BooksProvider = ({ children }) => {
       toggleForm,
       addBook,
       deleteBook,
+      setSearch,
     }),
     [
       books.list,
+      books.search,
       books.formOpen,
 
       openForm,
@@ -89,6 +99,7 @@ export const BooksProvider = ({ children }) => {
       toggleForm,
       addBook,
       deleteBook,
+      setSearch,
     ]
   );
 
