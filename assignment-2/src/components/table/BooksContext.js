@@ -12,7 +12,10 @@ const defaultData = {
 export const BooksContext = createContext({
   ...defaultData,
 
+  openForm: () => {},
+  closeForm: () => {},
   toggleForm: () => {},
+  addBook: () => {},
 });
 
 export const useBooksContext = () => {
@@ -36,8 +39,23 @@ export const BooksProvider = ({ children }) => {
     }
   }, []);
 
+  const openForm = useCallback(
+    () => setBooks({ ...books, formOpen: true }),
+    [books, setBooks],
+  );
+
+  const closeForm = useCallback(
+    () => setBooks({ ...books, formOpen: false }),
+    [books, setBooks],
+  );
+
   const toggleForm = useCallback(
     () => setBooks({ ...books, formOpen: !books.formOpen }),
+    [books, setBooks],
+  );
+
+  const addBook = useCallback(
+    book => setBooks({ ...books, list: [...books.list, book] }),
     [books, setBooks],
   );
 
@@ -46,13 +64,19 @@ export const BooksProvider = ({ children }) => {
       list: books.list,
       formOpen: books.formOpen,
 
+      openForm,
+      closeForm,
       toggleForm,
+      addBook,
     }),
     [
       books.list,
       books.formOpen,
 
+      openForm,
+      closeForm,
       toggleForm,
+      addBook,
     ]
   );
 

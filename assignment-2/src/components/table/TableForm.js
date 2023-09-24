@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useBooksContext } from "./BooksContext";
 import { BOOK_TOPICS } from "../../common/data";
@@ -6,12 +6,45 @@ import { BOOK_TOPICS } from "../../common/data";
 import Button from "../Button";
 
 export default function TableForm() {
+  const formRef = useRef();
   const [topics, setTopics] = useState([]);
-  const { formOpen, toggleForm } = useBooksContext();
+  const { addBook, closeForm, formOpen, list, toggleForm } = useBooksContext();
 
   useEffect(() => {
     setTopics(Object.entries(BOOK_TOPICS));
   }, []);
+
+  useEffect(() => {
+    if (formOpen) {
+      formRef.current.reset();
+      formRef.current[0].focus();
+    }
+  }, [formOpen]);
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.reset();
+      closeForm();
+    }
+  }, [list]);
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    addBook({
+      id: Date.now(),
+      title: form.title.value,
+      author: form.author.value,
+      topic: form.topic.value,
+    });
+  };
+
+  const cancelForm = () => {
+    formRef.current.reset();
+    toggleForm();
+  };
 
   return (
     <tr className={`row add-row ${formOpen ? 'row--confirm' : ''}`}>
@@ -24,13 +57,13 @@ export default function TableForm() {
       </td>
       <td className="row__actions">
         {formOpen ?
-          <form id="add-book-form">
+          <form ref={formRef} id="add-book-form" onSubmit={handleFormSubmit}>
             <div className="row__confirm">
               <Button type="submit" variant="primary">Save</Button>
-              <Button type="reset" onClick={toggleForm}>Cancel</Button>
+              <Button onClick={cancelForm}>Cancel</Button>
             </div>
           </form>
-          :
+        :
           <Button variant="info" onClick={toggleForm}>New book</Button>
         }
       </td>
