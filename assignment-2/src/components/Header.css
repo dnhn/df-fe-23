@@ -6,6 +6,12 @@
   padding-left: 1rem;
 }
 
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .header .logo {
   text-decoration: none;
   color: black;

@@ -1,0 +1,53 @@
+.theme-switch {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 1.5rem;
+  padding: .5rem;
+  background-color: #663;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+}
+
+.theme-switch.theme-switch--dark {
+  background-color: #006;
+}
+
+.theme-switch .light,
+.theme-switch .dark {
+  display: inline-block;
+  transition-property: opacity, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(.5, 1, 0.25, 1.5);
+}
+
+.theme-switch .dark {
+  margin-left: .75rem;
+}
+
+.theme-switch.theme-switch--dark .light {
+  opacity: 0;
+  transform: translateX(50%) scale(.75);
+}
+
+.theme-switch:not(.theme-switch--dark) .dark {
+  opacity: 0;
+  transform: translateX(-50%) scale(.75);
+}
+
+.theme-switch__toggler {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: white;
+  top: calc(50% - .75rem);
+  right: .35rem;
+}
+
+.theme-switch--dark .theme-switch__toggler {
+  right: auto;
+  left: .35rem;
+}
