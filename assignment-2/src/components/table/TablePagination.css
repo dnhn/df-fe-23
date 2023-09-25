@@ -14,6 +14,7 @@
   display: none;
 }
 
+/* Limit the number of page buttons to be displayed */
 .pagination__current,
 .pagination__page.pagination__current + .pagination__page,
 .pagination__page:has(+ .pagination__page.pagination__current) {

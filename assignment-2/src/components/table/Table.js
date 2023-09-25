@@ -47,6 +47,7 @@ export default function Table() {
           :
             <tr className="row row--empty"><td colSpan={5}>No books</td></tr>
           }
+          {/* Add more rows when the filtered list contains fewer items than the specified page size */}
           {filtered.length > 0 && filtered.length < BOOKS_PER_PAGE &&
             Array.from(Array(BOOKS_PER_PAGE - filtered.length).keys()).map((key) =>
               <tr key={key} className="row row--filler"><td colSpan={5}><button type="button" className="btn">button</button></td></tr>

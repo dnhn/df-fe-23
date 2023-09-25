@@ -6,14 +6,16 @@ import { BOOK_TOPICS } from "../../common/data";
 import Button from "../Button";
 
 export default function TableForm() {
+  const { addBook, bookList, closeForm, formOpen, toggleForm } = useBooksContext();
   const formRef = useRef();
   const [topics, setTopics] = useState([]);
-  const { addBook, bookList, closeForm, formOpen, toggleForm } = useBooksContext();
 
+  // Generate topics
   useEffect(() => {
     setTopics(Object.entries(BOOK_TOPICS));
   }, []);
 
+  // Reset form on open
   useEffect(() => {
     if (formOpen && formRef.current) {
       formRef.current.reset();
@@ -21,6 +23,7 @@ export default function TableForm() {
     }
   }, [formOpen]);
 
+  // Reset form on submission
   useEffect(() => {
     if (formRef.current) {
       formRef.current.reset();

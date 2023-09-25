@@ -10,6 +10,7 @@ import './components/Button.css';
 import './App.css';
 
 export default function App() {
+  // Enable CSS transitions after first load
   useEffect(() => {
     setTimeout(() => {
       document.body.classList.remove('no-transition');
