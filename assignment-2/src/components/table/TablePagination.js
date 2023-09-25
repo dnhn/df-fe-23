@@ -11,7 +11,7 @@ export default function TablePagination() {
   const handlePrev = () => setPage(currentPage > 0 ? currentPage - 1 : currentPage);
   const handleNext = () => setPage(currentPage + 1 < totalPages ? currentPage + 1 : currentPage);
 
-  return (
+  return totalPages > 0 && (
     <div className="pagination">
       <button
         type="button"

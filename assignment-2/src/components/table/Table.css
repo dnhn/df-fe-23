@@ -36,27 +36,32 @@
   padding: .75rem 1rem;
 }
 
-.book-list tbody .empty:hover {
+.book-list tbody .row--empty:hover {
   background-color: white;
 }
 
-.book-list tbody .empty td {
+.book-list tbody .row--empty td {
   padding-top: 6rem;
   padding-bottom: 6rem;
   text-align: center;
   font-size: 1.5rem;
 }
 
-.book-list tbody tr {
+.book-list tbody .row {
   transition: background-color 150ms;
 }
 
-.book-list tbody tr:nth-child(even) {
+.book-list tbody .row:nth-child(even) {
   background-color: #eee;
 }
 
-.book-list tbody tr:hover {
+.book-list tbody .row:hover {
   background-color: #ddd;
+}
+
+.book-list .row--filler {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .book-list .row__action {

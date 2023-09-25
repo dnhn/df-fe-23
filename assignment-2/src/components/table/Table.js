@@ -39,7 +39,12 @@ export default function Table() {
           {filtered.length ?
             filtered.map((book, index) => <TableRow key={book.id} book={book} index={index + (page * BOOKS_PER_PAGE)} />)
           :
-            <tr className="empty"><td colSpan="5">No books</td></tr>
+            <tr className="row row--empty"><td colSpan={5}>No books</td></tr>
+          }
+          {0 < filtered.length < BOOKS_PER_PAGE &&
+            Array.from(Array(BOOKS_PER_PAGE - filtered.length).keys()).map((key) =>
+              <tr key={key} className="row row--filler"><td colSpan={5}><button type="button" className="btn">button</button></td></tr>
+            )
           }
         </tbody>
 
