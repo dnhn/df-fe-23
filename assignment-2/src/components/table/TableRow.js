@@ -5,7 +5,7 @@ import Button from '../Button';
 import { useBooksContext } from './BooksContext';
 
 export default function TableRow({ book, index }) {
-  const [confirmMode, setConfirmMode] = useState(false);
+  const [confirmation, setConfirmation] = useState(false);
   const { deleteBook } = useBooksContext();
 
   return (
@@ -15,13 +15,13 @@ export default function TableRow({ book, index }) {
       <td>{book.author}</td>
       <td>{BOOK_TOPICS[book.topic]}</td>
       <td className="row__actions">
-        {confirmMode ?
+        {confirmation ?
           <div className="row__confirm">
             <Button onClick={() => deleteBook(book.id)}>Confirm</Button>
-            <Button variant="error" onClick={() => setConfirmMode(false)}>Cancel</Button>
+            <Button variant="error" onClick={() => setConfirmation(false)}>Cancel</Button>
           </div>
         :
-          <Button variant="warning" onClick={() => setConfirmMode(true)}>Delete</Button>
+          <Button variant="warning" onClick={() => setConfirmation(true)}>Delete</Button>
         }
       </td>
     </tr>

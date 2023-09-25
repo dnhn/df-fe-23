@@ -30,6 +30,7 @@ export default function TableToolbar() {
           placeholder="Search"
           value={keyword}
           onInput={event => setKeyword(event.target.value)}
+          className="search__input"
         />
         <button
           type="button"

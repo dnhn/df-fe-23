@@ -25,9 +25,11 @@
   color: white;
 }
 
-/* .book-list thead .index {}
-.book-list thead .title {}
-.book-list thead .author {}
+/* .book-list thead .index {} */
+.book-list thead .title {
+  min-width: 16rem;
+}
+/* .book-list thead .author {}
 .book-list thead .topic {}
 .book-list thead .actions {} */
 
@@ -46,17 +48,6 @@
   padding: .75rem 1rem;
 }
 
-.book-list tbody .row--empty:hover {
-  background-color: white;
-}
-
-.book-list tbody .row--empty td {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
 .book-list tbody .row {
   transition: background-color 150ms;
 }
@@ -69,14 +60,20 @@
   background-color: var(--table-row-hover-background-color);
 }
 
+.book-list tbody .row.row--empty {
+  background-color: var(--table-background-color);
+}
+
+.book-list tbody .row.row--empty td {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .book-list .row--filler {
   opacity: 0;
   visibility: hidden;
-}
-
-.book-list .row__action {
-  position: absolute;
-  right: 1rem;
 }
 
 .book-list .row:not(.row--confirm) input,
@@ -85,8 +82,10 @@
   visibility: hidden;
 }
 
-.book-list .row__confirm > *:nth-child(n + 1) {
-  margin-left: .5rem;
+.book-list .row__confirm {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
 }
 
 @media (max-width: 63.9375rem) {
@@ -96,7 +95,7 @@
 }
 
 @media (min-width: 80rem) {
-  .book-list thead .index { width: 5rem; }
+  .book-list thead .index { width: 4.5rem; }
   /* .book-list thead .title {} */
   .book-list thead .author { width: 20rem; }
   .book-list thead .topic { width: 16rem; }

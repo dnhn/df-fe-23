@@ -15,7 +15,7 @@ export default function TablePagination() {
     <div className="pagination">
       <button
         type="button"
-        className="btn btn--info pagination__nav"
+        className="btn btn--info"
         disabled={currentPage <= 0}
         onClick={handlePrev}
       >
@@ -35,7 +35,7 @@ export default function TablePagination() {
       </div>
       <button
         type="button"
-        className="btn btn--info pagination__nav"
+        className="btn btn--info"
         disabled={currentPage + 1 >= totalPages}
         onClick={handleNext}
       >

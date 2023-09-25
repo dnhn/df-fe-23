@@ -15,7 +15,7 @@ export default function TableForm() {
   }, []);
 
   useEffect(() => {
-    if (formOpen) {
+    if (formOpen && formRef.current) {
       formRef.current.reset();
       formRef.current[0].focus();
     }

@@ -15,24 +15,25 @@
   gap: 1rem;
 }
 
-.header .logo {
+.header__logo {
   text-decoration: none;
   color: inherit;
 }
 
-.header .logo:hover {
+.header__logo:hover {
   color: #666;
 }
 
-.dark-theme .header .logo:hover {
+.dark-theme .header__logo:hover {
   color: #ccc;
 }
 
-.header h1 {
+.header__logo h1 {
   margin: 0;
+  font-size: 1.5rem;
 }
 
-.header .user {
+.header__user {
   display: block;
   padding: 1rem;
   background-color: #ccc;
@@ -42,14 +43,20 @@
   transition: background-color 150ms;
 }
 
-.header .user:hover {
+.header__user:hover {
   background-color: #bbb;
 }
 
-.dark-theme .header .user {
+.dark-theme .header__user {
   background-color: #667;
 }
 
-.dark-theme .header .user:hover {
+.dark-theme .header__user:hover {
   background-color: #556;
+}
+
+@media (min-width: 40rem) {
+  .header__logo h1 {
+    font-size: 2rem;
+  }
 }

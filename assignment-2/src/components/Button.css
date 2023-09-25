@@ -4,12 +4,20 @@
   padding: .5rem .75rem;
   background-color: white;
   color: black;
+  text-align: center;
   font-family: inherit;
   font-size: inherit;
   white-space: nowrap;
   box-shadow: 0 1px 4px -2px black;
   transition-property: background-color, color;
   transition-duration: 150ms;
+}
+
+.btn:disabled,
+.btn.disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: .5;
 }
 
 .btn:not(:disabled):hover,
