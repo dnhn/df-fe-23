@@ -1,7 +1,33 @@
+import { Fragment, useEffect } from 'react';
+
+import Header from './components/Header';
+import { BooksProvider } from './components/table/BooksContext';
+import TableToolbar from "./components/table/TableToolbar";
+import Table from "./components/table/Table";
+import TablePagination from './components/table/TablePagination';
+
+import './components/Button.css';
 import './App.css';
 
-function App() {
-  return 'React';
-}
+export default function App() {
+  // Enable CSS transitions after first load
+  useEffect(() => {
+    setTimeout(() => {
+      document.body.classList.remove('no-transition');
+    }, 200);
+  }, []);
 
-export default App;
+  return (
+    <Fragment>
+      <Header />
+
+      <main>
+        <BooksProvider>
+          <TableToolbar />
+          <Table />
+          <TablePagination />
+        </BooksProvider>
+      </main>
+    </Fragment>
+  );
+}

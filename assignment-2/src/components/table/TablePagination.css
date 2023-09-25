@@ -1,0 +1,29 @@
+.pagination {
+  margin: 2rem 0;
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+}
+
+.pagination__pages {
+  display: flex;
+  gap: .5rem;
+}
+
+.pagination__page {
+  display: none;
+}
+
+/* Limit the number of page buttons to be displayed */
+.pagination__current,
+.pagination__page.pagination__current + .pagination__page,
+.pagination__page:has(+ .pagination__page.pagination__current) {
+  display: block;
+}
+
+@media (min-width: 40rem) {
+  .pagination__page.pagination__current + .pagination__page + .pagination__page,
+  .pagination__page:has(+ .pagination__page + .pagination__page.pagination__current) {
+    display: block;
+  }
+}

@@ -1,0 +1,31 @@
+.table-toolbar {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.search {
+  position: relative;
+}
+
+.search__input {
+  padding-right: 3rem;
+}
+
+.search__clear {
+  position: absolute;
+  right: .25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  padding: .5rem;
+  background-color: transparent;
+  font-size: small;
+}
+
+@media (min-width: 40rem) {
+  .search {
+    width: 16rem;
+  }
+}
