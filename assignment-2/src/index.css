@@ -1,3 +1,23 @@
+:root {
+  --body-background-color: #eee;
+  --body-text-color: black;
+  --header-background-color: white;
+  --table-background-color: white;
+  --table-header-color: #666;
+  --table-even-row-background-color: #eee;
+  --table-row-hover-background-color: #ddd;
+}
+
+body.dark-theme {
+  --body-background-color: #223;
+  --body-text-color: white;
+  --header-background-color: #445;
+  --table-background-color: #334;
+  --table-header-color: #667;
+  --table-even-row-background-color: #445;
+  --table-row-hover-background-color: #556;
+}
+
 *,
 ::before,
 ::after {
@@ -15,6 +35,15 @@ body {
   margin: 0;
   padding: 0;
   font-size: 1rem;
+  background-color: var(--body-background-color);
+  color: var(--body-text-color);
+  transition-property: background-color, color;
+  transition-duration: 500ms, 150ms;
+}
+
+body.no-transition,
+body.no-transition * {
+  transition: none !important;
 }
 
 button {
@@ -22,7 +51,7 @@ button {
 }
 
 input, select {
-  border: .0625rem solid #333;
+  border: .0625rem solid rgba(51 51 51 / 50%);
   border-radius: .25rem;
   width: 100%;
   padding: .5rem .75rem;

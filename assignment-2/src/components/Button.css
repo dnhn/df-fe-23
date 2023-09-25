@@ -3,9 +3,11 @@
   border-radius: .25rem;
   padding: .5rem .75rem;
   background-color: white;
+  color: black;
   font-family: inherit;
   font-size: inherit;
   white-space: nowrap;
+  box-shadow: 0 1px 4px -2px black;
   transition-property: background-color, color;
   transition-duration: 150ms;
 }

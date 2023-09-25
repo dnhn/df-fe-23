@@ -2,6 +2,14 @@
   border-radius: .5rem;
   width: 100%;
   overflow: auto;
+  box-shadow: 0 4px 8px -8px black;
+}
+
+.book-list,
+.book-list thead,
+.book-list tbody .row {
+  transition-property: background-color, color;
+  transition-duration: 500ms, 150ms;
 }
 
 .book-list {
@@ -9,11 +17,11 @@
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
-  background-color: white;
+  background-color: var(--table-background-color);
 }
 
 .book-list thead {
-  background-color: #666;
+  background-color: var(--table-header-color);
   color: white;
 }
 
@@ -54,11 +62,11 @@
 }
 
 .book-list tbody .row:nth-child(even) {
-  background-color: #eee;
+  background-color: var(--table-even-row-background-color);
 }
 
 .book-list tbody .row:hover {
-  background-color: #ddd;
+  background-color: var(--table-row-hover-background-color);
 }
 
 .book-list .row--filler {
