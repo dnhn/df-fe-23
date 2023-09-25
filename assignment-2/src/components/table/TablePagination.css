@@ -1,4 +1,5 @@
 .pagination {
+  margin: 2rem 0;
   display: flex;
   gap: .5rem;
   justify-content: center;
