@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import Header from './components/Header';
 import { BooksProvider } from './components/table/BooksContext';
@@ -10,6 +10,12 @@ import './components/Button.css';
 import './App.css';
 
 export default function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      document.body.classList.remove('no-transition');
+    }, 200);
+  }, []);
+
   return (
     <Fragment>
       <Header />
