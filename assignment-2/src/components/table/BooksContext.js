@@ -40,7 +40,7 @@ export const BooksProvider = ({ children }) => {
     const storedData = getLocalStorageItem(BOOKS_DATA_KEY);
 
     if (storedData) {
-      setBooks(storedData);
+      setBooks(books => ({ ...books, bookList: [...storedData.bookList] }));
     }
   }, []);
 
@@ -111,7 +111,7 @@ export const BooksProvider = ({ children }) => {
       deleteBook,
       setSearch,
       setPage,
-    ]
+    ],
   );
 
   return (
