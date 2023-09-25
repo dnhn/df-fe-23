@@ -17,6 +17,14 @@ export default function TablePagination() {
         type="button"
         className="btn btn--info"
         disabled={currentPage <= 0}
+        onClick={() => setPage(0)}
+      >
+        First
+      </button>
+      <button
+        type="button"
+        className="btn btn--info"
+        disabled={currentPage <= 0}
         onClick={handlePrev}
       >
         Previous
@@ -40,6 +48,14 @@ export default function TablePagination() {
         onClick={handleNext}
       >
         Next
+      </button>
+      <button
+        type="button"
+        className="btn btn--info"
+        disabled={currentPage + 1 >= totalPages}
+        onClick={() => setPage(totalPages - 1)}
+      >
+        Last
       </button>
     </div>
   );
