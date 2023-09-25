@@ -13,11 +13,17 @@ export default function Table() {
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
-    setFiltered(
-      bookList
-        .filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
-        .slice(page * BOOKS_PER_PAGE, (page * BOOKS_PER_PAGE) + BOOKS_PER_PAGE)
-    );
+    const filteredList = bookList
+      .filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+      .slice(page * BOOKS_PER_PAGE, (page * BOOKS_PER_PAGE) + BOOKS_PER_PAGE);
+
+    setFiltered(filteredList);
+
+    // If the current page is not the first page and the filtered list is empty,
+    // navigate back one page.
+    if (page > 0 && filteredList.length === 0) {
+      setPage(page - 1);
+    }
   }, [bookList, page, search]);
 
   useEffect(() => setPage(0), [search]);
