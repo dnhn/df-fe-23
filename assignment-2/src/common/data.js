@@ -111,4 +111,46 @@ export const INITIAL_BOOKS = [
     author: 'Martin Kleppmann',
     topic: 'programming',
   },
+  {
+    id: '17',
+    title: 'C++ Programming Language',
+    author: 'Bjarne Stroustrup',
+    topic: 'programming',
+  },
+  {
+    id: '18',
+    title: 'Clean Code',
+    author: 'Robert C. Martin',
+    topic: 'programming',
+  },
+  {
+    id: '19',
+    title: 'Refactoring',
+    author: 'Martin Fowler',
+    topic: 'programming',
+  },
+  {
+    id: '20',
+    title: 'The Pragmatic Programmer',
+    author: 'Andy Hunt',
+    topic: 'programming',
+  },
+  {
+    id: '21',
+    title: 'JavaScript: The Good Parts',
+    author: 'Douglas Crockford',
+    topic: 'programming',
+  },
+  {
+    id: '22',
+    title: 'Python',
+    author: 'Guido van Rossum',
+    topic: 'programming',
+  },
+  {
+    id: '23',
+    title: 'Eloquent JavaScript',
+    author: 'Marijn Haverbeke',
+    topic: 'programming',
+  },
 ];
