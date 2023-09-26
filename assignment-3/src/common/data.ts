@@ -1,4 +1,4 @@
-import { IBook } from 'src/@types/book'
+import { IBook } from '../@types/book'
 
 export const BOOK_TOPICS: { [key: string]: string } = {
   backend: 'Back-end',
