@@ -16,6 +16,8 @@
     "@types/node": "^16.18.54",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5"
@@ -27,7 +29,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "cd .. && husky install assignment-3/.husky",
+    "lint-staged": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +50,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --write"
+    ],
+    "*.{css,scss}": "prettier --write",
+    "public/index.html": "prettier --write"
   }
 }
