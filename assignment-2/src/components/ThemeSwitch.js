@@ -22,13 +22,12 @@ export default function ThemeSwitch() {
   return (
     <button
       type="button"
-      aria-label="Theme toggle"
+      aria-label="Toggle theme"
       onClick={toggleTheme}
       className={`theme-switch ${themeMode === 'dark' ? 'theme-switch--dark' : ''}`}
     >
       <div className="light">☀️</div>
       <div className="dark">🌙</div>
-      <div className="theme-switch__toggler"></div>
     </button>
   )
 }

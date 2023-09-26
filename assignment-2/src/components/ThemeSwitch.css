@@ -7,47 +7,42 @@
   background-color: #663;
   font-size: 1.25rem;
   line-height: 1;
+  box-shadow: 0 0 8px -2px black;
   transition-property: background-color, color;
   transition-duration: 150ms;
 }
 
 .theme-switch.theme-switch--dark {
   background-color: #006;
+  box-shadow: 0 0 8px 0 white;
 }
 
 .theme-switch .light,
 .theme-switch .dark {
-  display: inline-block;
+  display: block;
   transition-property: opacity, transform;
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(.5, 1, 0.25, 1.5);
 }
 
+.theme-switch .light {
+  text-shadow: 0 0 2px yellow;
+}
+
 .theme-switch .dark {
-  margin-left: .75rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 4px white;
 }
 
 .theme-switch.theme-switch--dark .light {
   opacity: 0;
-  transform: translateX(50%) scale(.75);
+  transform: translate(-50%, 50%) scale(.5);
 }
 
 .theme-switch:not(.theme-switch--dark) .dark {
   opacity: 0;
-  transform: translateX(-50%) scale(.75);
-}
-
-.theme-switch__toggler {
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background-color: white;
-  top: calc(50% - .75rem);
-  right: .35rem;
-}
-
-.theme-switch--dark .theme-switch__toggler {
-  right: auto;
-  left: .35rem;
+  transform: translate(50%, -100%) scale(.5);
 }
