@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useBooksContext } from './BooksContext';
-
-import Button from '../Button';
+import Button from '../button';
 
 import './TableToolbar.css';
 

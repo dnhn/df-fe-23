@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useBooksContext } from "./BooksContext";
 import { BOOK_TOPICS } from "../../common/data";
-
-import Button from "../Button";
+import Button from "../button";
 
 export default function TableForm() {
   const { addBook, bookList, closeForm, formOpen, toggleForm } = useBooksContext();

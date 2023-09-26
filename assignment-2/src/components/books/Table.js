@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { useBooksContext } from "./BooksContext";
 import { BOOKS_PER_PAGE } from "../../common/constants";
-
 import TableRow from './TableRow';
 import TableForm from "./TableForm";
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { BOOK_TOPICS } from '../../common/data';
 
-import Button from '../Button';
 import { useBooksContext } from './BooksContext';
+import { BOOK_TOPICS } from '../../common/data';
+import Button from '../button';
 
 export default function TableRow({ book, index }) {
   const [confirmation, setConfirmation] = useState(false);

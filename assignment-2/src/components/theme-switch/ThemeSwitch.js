@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getLocalStorageItem, setLocalStorageItem } from '../common/utils';
+
+import { getLocalStorageItem, setLocalStorageItem } from '../../common/utils';
 
 import './ThemeSwitch.css';
 

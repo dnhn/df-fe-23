@@ -1,4 +1,4 @@
-import ThemeSwitch from './ThemeSwitch';
+import ThemeSwitch from '../theme-switch';
 
 import './Header.css';
 
