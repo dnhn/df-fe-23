@@ -24,7 +24,10 @@
     "skipLibCheck": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "src/*": ["./src/*"],
+    },
   },
   "include": [
     "**/*.ts",
