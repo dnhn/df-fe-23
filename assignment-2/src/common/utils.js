@@ -9,3 +9,7 @@ export function getLocalStorageItem(key) {
 export function setLocalStorageItem(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+export function trimTrim(text) {
+  return text.replace(/\s+/g, ' ').trim();
+}

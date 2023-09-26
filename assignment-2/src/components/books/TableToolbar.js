@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useBooksContext } from './BooksContext';
+import { trimTrim } from '../../common/utils';
 import Button from '../button';
 
 import './TableToolbar.css';
@@ -13,7 +14,7 @@ export default function TableToolbar() {
     let typeTimeout = undefined;
 
     if (bookList.length) {
-      typeTimeout = setTimeout(() => setSearch(keyword), 300);
+      typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300);
     }
 
     return () => {

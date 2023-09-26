@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useBooksContext } from "./BooksContext";
 import { BOOK_TOPICS } from "../../common/data";
+import { trimTrim } from "../../common/utils";
 import Button from "../button";
 
 export default function TableForm() {
@@ -37,8 +38,8 @@ export default function TableForm() {
 
     addBook({
       id: Date.now(),
-      title: form.title.value,
-      author: form.author.value,
+      title: trimTrim(form.title.value),
+      author: trimTrim(form.author.value),
       topic: form.topic.value,
     });
   };
