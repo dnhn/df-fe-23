@@ -1,7 +1,12 @@
 import { useEffect } from 'react'
 
 import { Header } from './components/header'
-import { BooksProvider, Table } from './components/books'
+import {
+  BooksProvider,
+  Table,
+  TablePagination,
+  TableToolbar,
+} from './components/books'
 
 import './components/button/Button.css'
 import './App.css'
@@ -20,7 +25,9 @@ export default function App() {
 
       <main>
         <BooksProvider>
+          <TableToolbar />
           <Table />
+          <TablePagination />
         </BooksProvider>
       </main>
     </>
