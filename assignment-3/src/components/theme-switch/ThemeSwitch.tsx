@@ -4,11 +4,11 @@ import { getLocalStorageItem, setLocalStorageItem } from '../../common/utils'
 
 import './ThemeSwitch.css'
 
-type IThemeMode = string | 'light' | 'dark'
+type IThemeMode = string | 'dark' | 'light'
 
 enum THEME_MODE {
-  LIGHT = 'light',
   DARK = 'dark',
+  LIGHT = 'light',
 }
 
 export function ThemeSwitch() {

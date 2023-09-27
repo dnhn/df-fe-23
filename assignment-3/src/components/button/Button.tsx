@@ -1,8 +1,6 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes } from 'react'
 
-interface IButton {
-  children: ReactNode
-  type?: 'submit' | 'reset' | 'button' | undefined
+interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: string
   classes?: string
 }
