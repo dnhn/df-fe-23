@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 
 import { Header } from './components/header'
+import { BooksProvider, Table } from './components/books'
 
+import './components/button/Button.css'
 import './App.css'
 
 export default function App() {
@@ -12,5 +14,15 @@ export default function App() {
     }, 200)
   }, [])
 
-  return <Header />
+  return (
+    <>
+      <Header />
+
+      <main>
+        <BooksProvider>
+          <Table />
+        </BooksProvider>
+      </main>
+    </>
+  )
 }
