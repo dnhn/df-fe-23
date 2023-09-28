@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-slate-200 !transition-none">
+      <body className="bg-slate-200 !transition-none transition-colors duration-500">
         <Header />
 
-        <main>
+        <main className="px-4 py-16">
           <div className="container mx-auto">{children}</div>
         </main>
       </body>
