@@ -49,6 +49,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.30
     version: 8.4.30
+  postcss-import:
+    specifier: ^15.1.0
+    version: 15.1.0(postcss@8.4.30)
   postcss-nested:
     specifier: ^6.0.1
     version: 6.0.1(postcss@8.4.30)
