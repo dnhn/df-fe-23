@@ -1,0 +1,87 @@
+@layer components {
+  .button {
+    @apply whitespace-nowrap rounded-[.25rem] border-0 bg-white px-3 py-2 text-center text-black transition-colors;
+    box-shadow: 0 1px 4px -2px black;
+
+    &:disabled,
+    &.disabled {
+      @apply pointer-events-none select-none opacity-50;
+    }
+
+    &:not(:disabled):hover,
+    &:not(.disabled):hover,
+    &:not(:disabled):focus,
+    &:not(.disabled):focus {
+      @apply bg-stone-100;
+    }
+
+    &:not(:disabled):active,
+    &:not(.disabled):active {
+      @apply bg-stone-200;
+    }
+
+    &.button--error {
+      @apply bg-red-500;
+
+      &:not(:disabled):hover,
+      &:not(.disabled):hover,
+      &:not(:disabled):focus,
+      &:not(.disabled):focus {
+        @apply bg-red-600;
+      }
+
+      &:not(:disabled):active,
+      &:not(.disabled):active {
+        @apply bg-red-700;
+      }
+    }
+
+    &.button--info {
+      @apply bg-sky-300;
+
+      &:not(:disabled):hover,
+      &:not(.disabled):hover,
+      &:not(:disabled):focus,
+      &:not(.disabled):focus {
+        @apply bg-sky-400;
+      }
+
+      &:not(:disabled):active,
+      &:not(.disabled):active {
+        @apply bg-sky-500;
+      }
+    }
+
+    &.button--primary {
+      @apply bg-blue-400;
+
+      &:not(:disabled):hover,
+      &:not(.disabled):hover,
+      &:not(:disabled):focus,
+      &:not(.disabled):focus {
+        @apply bg-blue-500;
+      }
+
+      &:not(:disabled):active,
+      &:not(.disabled):active {
+        @apply bg-blue-600;
+      }
+    }
+
+    &.button--warning {
+      @apply bg-orange-400;
+
+      &:not(:disabled):hover,
+      &:not(.disabled):hover,
+      &:not(:disabled):focus,
+      &:not(.disabled):focus {
+        @apply bg-orange-500;
+      }
+
+      &:not(:disabled):active,
+      &:not(.disabled):active {
+        @apply bg-orange-600;
+      }
+    }
+  }
+}
