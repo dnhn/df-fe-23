@@ -1,0 +1,31 @@
+.Toolbar {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.Search {
+  position: relative;
+}
+
+.SearchInput {
+  padding-right: 3rem;
+}
+
+.SearchClear {
+  position: absolute;
+  right: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  padding: 0.5rem;
+  background-color: transparent;
+  font-size: small;
+}
+
+@media (min-width: 40rem) {
+  .Search {
+    width: 16rem;
+  }
+}

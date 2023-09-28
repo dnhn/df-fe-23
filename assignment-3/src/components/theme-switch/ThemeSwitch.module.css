@@ -1,0 +1,48 @@
+.ThemeSwitch {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 1.5rem;
+  padding: 0.5rem;
+  background-color: #663;
+  font-size: 1.25rem;
+  line-height: 1;
+  box-shadow: 0 0 8px -2px black;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+}
+
+.ThemeSwitch.ThemeSwitchDark {
+  background-color: #006;
+  box-shadow: 0 0 8px 0 white;
+}
+
+.Light,
+.Dark {
+  display: block;
+  transition-property: opacity, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.5, 1, 0.25, 1.5);
+}
+
+.Light {
+  text-shadow: 0 0 2px yellow;
+}
+
+.Dark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 4px white;
+}
+
+.ThemeSwitch.ThemeSwitchDark .Light {
+  opacity: 0;
+  transform: translate(-50%, 50%) scale(0.5);
+}
+
+.ThemeSwitch:not(.ThemeSwitchDark) .Dark {
+  opacity: 0;
+  transform: translate(50%, -100%) scale(0.5);
+}

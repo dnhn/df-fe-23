@@ -1,0 +1,22 @@
+.Row {
+  transition: background-color 150ms;
+}
+
+.Row:nth-child(even) {
+  background-color: var(--table-even-row-background-color);
+}
+
+.Row:hover {
+  background-color: var(--table-row-hover-background-color);
+}
+
+.Actions {
+  position: relative;
+  text-align: right;
+}
+
+.ConfirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

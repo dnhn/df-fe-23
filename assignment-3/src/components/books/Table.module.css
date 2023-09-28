@@ -1,0 +1,86 @@
+.Wrapper {
+  border-radius: 0.5rem;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0 4px 8px -8px black;
+}
+
+.Table,
+.Table thead,
+.Table tbody .Row {
+  transition-property: background-color, color;
+  transition-duration: 500ms, 150ms;
+}
+
+.Table {
+  clear: both;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: var(--table-background-color);
+}
+
+.Table thead {
+  background-color: var(--table-header-color);
+  color: white;
+}
+
+.Table th {
+  text-align: left;
+}
+
+/* th.HeadIndex {} */
+th.HeadTitle {
+  min-width: 16rem;
+}
+/* th.HeadAuthor {}
+th.HeadTopic {}
+th.HeadActions {} */
+
+th.HeadActions {
+  position: relative;
+  text-align: right;
+}
+
+.Table th,
+.Table td {
+  padding: 0.75rem 1rem;
+}
+
+.RowEmpty {
+  background-color: var(--table-background-color);
+}
+
+.RowEmpty td {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.RowFiller {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 63.9375rem) {
+  .Table td {
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 80rem) {
+  th.HeadIndex {
+    width: 4.5rem;
+  }
+  /* th.HeadTitle {} */
+  th.HeadAuthor {
+    width: 20rem;
+  }
+  th.HeadTopic {
+    width: 16rem;
+  }
+  th.HeadActions {
+    width: 16rem;
+  }
+}

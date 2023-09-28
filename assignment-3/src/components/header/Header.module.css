@@ -1,0 +1,62 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1rem;
+  background-color: var(--header-background-color);
+  box-shadow: 0 0 4px rgba(0 0 0 / 30%);
+  transition-property: background-color;
+  transition-duration: 500ms;
+}
+
+.HeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.Logo {
+  text-decoration: none;
+  color: inherit;
+}
+
+.Logo:hover {
+  color: #666;
+}
+
+:global(.dark-theme) .Logo:hover {
+  color: #ccc;
+}
+
+.Logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.User {
+  display: block;
+  padding: 1rem;
+  background-color: #ccc;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 150ms;
+}
+
+.User:hover {
+  background-color: #bbb;
+}
+
+:global(.dark-theme) .User {
+  background-color: #667;
+}
+
+:global(.dark-theme) .User:hover {
+  background-color: #556;
+}
+
+@media (min-width: 40rem) {
+  .Logo h1 {
+    font-size: 2rem;
+  }
+}

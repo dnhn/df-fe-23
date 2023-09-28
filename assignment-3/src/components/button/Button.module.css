@@ -1,0 +1,63 @@
+.Button {
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px -2px black;
+  transition-property: background-color, color;
+  transition-duration: 150ms;
+}
+
+.Button:disabled,
+.Button.disabled {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+}
+
+.Button:not(:disabled):hover,
+.Button:not(:disabled):focus {
+  background-color: #eee;
+}
+
+.ButtonPrimary {
+  background-color: #90caf9;
+}
+
+.ButtonPrimary:not(:disabled):hover,
+.ButtonPrimary:not(:disabled):focus {
+  background-color: #42a5f5;
+}
+
+.ButtonInfo {
+  background-color: #29b6f6;
+}
+
+.ButtonInfo:not(:disabled):hover,
+.ButtonInfo:not(:disabled):focus {
+  background-color: #0288d1;
+}
+
+.ButtonError {
+  background-color: #f44336;
+  color: white;
+}
+
+.ButtonError:not(:disabled):hover,
+.ButtonError:not(:disabled):focus {
+  background-color: #d32f2f;
+}
+
+.ButtonWarning {
+  background-color: #ffa726;
+}
+
+.ButtonWarning:not(:disabled):hover,
+.ButtonWarning:not(:disabled):focus {
+  background-color: #f57c00;
+}

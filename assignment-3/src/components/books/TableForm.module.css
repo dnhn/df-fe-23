@@ -1,0 +1,16 @@
+.Row:not(.RowConfirmMode) input,
+.Row:not(.RowConfirmMode) select {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.Actions {
+  position: relative;
+  text-align: right;
+}
+
+.ConfirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
