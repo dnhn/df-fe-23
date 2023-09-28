@@ -1,16 +1,29 @@
+import { ChangeEvent } from 'react'
+
 import { useBooksContext } from './BooksContext'
-import { BOOKS_PER_PAGE } from '../../common/constants'
+import { Button } from '../button'
 
 import './TablePagination.css'
 
 export function TablePagination() {
-  const { bookList, page: currentPage, search, setPage } = useBooksContext()
+  const {
+    bookList,
+    page: currentPage,
+    pageSize,
+    search,
+    setPage,
+    setPageSize,
+  } = useBooksContext()
   const filtered = bookList.filter((book) =>
     book.title.toLowerCase().includes(search.toLowerCase()),
   )
-  const totalPages = Math.ceil(filtered.length / BOOKS_PER_PAGE)
-  const currentFirstItem = currentPage * BOOKS_PER_PAGE + 1
-  const currentLastItem = currentPage * BOOKS_PER_PAGE + BOOKS_PER_PAGE
+  const totalPages = Math.ceil(filtered.length / pageSize)
+  const currentFirstItem = currentPage * pageSize + 1
+  const currentLastItem = currentPage * pageSize + pageSize
+
+  const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setPageSize(parseInt(event.target.value, 10))
+  }
 
   const handlePrev = () =>
     setPage(currentPage > 0 ? currentPage - 1 : currentPage)
@@ -19,30 +32,43 @@ export function TablePagination() {
 
   return (
     <div className="pagination">
+      <label htmlFor="page-size" className="pagination__size">
+        <span>Page size:</span>
+        <select
+          name="page-size"
+          id="page-size"
+          value={pageSize}
+          onChange={handlePageSizeChange}
+        >
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </label>
       <span>
         {currentFirstItem}–
         {currentLastItem > filtered.length ? filtered.length : currentLastItem}{' '}
         of {filtered.length}
       </span>
       <div>
-        <button
-          type="button"
-          className="btn btn--info pagination__nav"
+        <Button
+          variant="info"
+          classes="pagination__nav"
           aria-label="Previous page"
           disabled={currentPage <= 0}
           onClick={handlePrev}
         >
           ⬅️
-        </button>
-        <button
-          type="button"
-          className="btn btn--info pagination__nav"
+        </Button>
+        <Button
+          variant="info"
+          classes="pagination__nav"
           aria-label="Next page"
           disabled={currentPage + 1 >= totalPages}
           onClick={handleNext}
         >
           ➡️
-        </button>
+        </Button>
       </div>
     </div>
   )

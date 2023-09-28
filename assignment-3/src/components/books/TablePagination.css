@@ -1,9 +1,22 @@
 .pagination {
   margin: 2rem 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+
+.pagination__size {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pagination__size select {
+  border: 0;
+  width: auto;
+  padding: 0;
+  background-color: transparent;
 }
 
 .pagination__nav.btn {
@@ -18,4 +31,11 @@
 
 .pagination__nav.btn:last-child {
   border-radius: 0 0.75rem 0.75rem 0;
+}
+
+@media (min-width: 30rem) {
+  .pagination {
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
 }
