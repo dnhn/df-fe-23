@@ -1,31 +1,21 @@
 .pagination {
   margin: 2rem 0;
   display: flex;
-  gap: 0.5rem;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
 }
 
-.pagination__pages {
-  display: flex;
-  gap: 0.5rem;
+.pagination__nav.btn {
+  font-size: 1.25rem;
+  line-height: 1;
+  box-shadow: none;
 }
 
-.pagination__page {
-  display: none;
+.pagination__nav.btn:first-child {
+  border-radius: 0.75rem 0 0 0.75rem;
 }
 
-/* Limit the number of page buttons to be displayed */
-.pagination__current,
-.pagination__page.pagination__current + .pagination__page,
-.pagination__page:has(+ .pagination__page.pagination__current) {
-  display: block;
-}
-
-@media (min-width: 40rem) {
-  .pagination__page.pagination__current + .pagination__page + .pagination__page,
-  .pagination__page:has(
-      + .pagination__page + .pagination__page.pagination__current
-    ) {
-    display: block;
-  }
+.pagination__nav.btn:last-child {
+  border-radius: 0 0.75rem 0.75rem 0;
 }

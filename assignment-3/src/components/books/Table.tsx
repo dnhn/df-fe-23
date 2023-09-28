@@ -29,7 +29,7 @@ export function Table() {
   useEffect(() => setPage(0), [search]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="table-wrapper">
+    <section className="table-wrapper">
       <table className="book-list">
         <thead>
           <tr>
@@ -75,6 +75,6 @@ export function Table() {
           <TableForm />
         </tfoot>
       </table>
-    </div>
+    </section>
   )
 }
