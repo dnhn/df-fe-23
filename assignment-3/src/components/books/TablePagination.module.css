@@ -1,4 +1,4 @@
-.pagination {
+.Pagination {
   margin: 2rem 0;
   display: flex;
   justify-content: space-between;
@@ -6,35 +6,36 @@
   gap: 1rem;
 }
 
-.pagination__size {
+.PageSize {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.pagination__size select {
+.PageSize select {
   border: 0;
   width: auto;
   padding: 0;
   background-color: transparent;
+  color: currentColor;
 }
 
-.pagination__nav.btn {
+.Nav {
   font-size: 1.25rem;
   line-height: 1;
   box-shadow: none;
 }
 
-.pagination__nav.btn:first-child {
-  border-radius: 0.75rem 0 0 0.75rem;
+.Nav:first-child {
+  border-radius: 1rem 0 0 1rem;
 }
 
-.pagination__nav.btn:last-child {
-  border-radius: 0 0.75rem 0.75rem 0;
+.Nav:last-child {
+  border-radius: 0 1rem 1rem 0;
 }
 
 @media (min-width: 30rem) {
-  .pagination {
+  .Pagination {
     justify-content: flex-end;
     gap: 1.5rem;
   }

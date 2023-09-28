@@ -4,7 +4,7 @@ import { useBooksContext } from './BooksContext'
 import { trimTrim } from '../../common/utils'
 import { Button } from '../button'
 
-import './TableToolbar.css'
+import styles from './TableToolbar.module.css'
 
 export function TableToolbar() {
   const { bookList, setSearch, toggleForm } = useBooksContext()
@@ -23,8 +23,8 @@ export function TableToolbar() {
   }, [bookList, keyword, setSearch])
 
   return (
-    <div className="table-toolbar">
-      <div className="search">
+    <div className={styles.Toolbar}>
+      <div className={styles.Search}>
         <input
           type="text"
           placeholder="Search"
@@ -32,11 +32,11 @@ export function TableToolbar() {
           onInput={(event) =>
             setKeyword((event.target as HTMLInputElement).value)
           }
-          className="search__input"
+          className={styles.SearchInput}
         />
         <button
           type="button"
-          className="search__clear"
+          className={styles.SearchClear}
           onClick={() => setKeyword('')}
         >
           clear

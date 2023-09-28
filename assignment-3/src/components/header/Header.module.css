@@ -1,4 +1,4 @@
-.header {
+.Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,31 +9,31 @@
   transition-duration: 500ms;
 }
 
-.header__right {
+.HeaderRight {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.header__logo {
+.Logo {
   text-decoration: none;
   color: inherit;
 }
 
-.header__logo:hover {
+.Logo:hover {
   color: #666;
 }
 
-.dark-theme .header__logo:hover {
+:global(.dark-theme) .Logo:hover {
   color: #ccc;
 }
 
-.header__logo h1 {
+.Logo h1 {
   margin: 0;
   font-size: 1.5rem;
 }
 
-.header__user {
+.User {
   display: block;
   padding: 1rem;
   background-color: #ccc;
@@ -43,20 +43,20 @@
   transition: background-color 150ms;
 }
 
-.header__user:hover {
+.User:hover {
   background-color: #bbb;
 }
 
-.dark-theme .header__user {
+:global(.dark-theme) .User {
   background-color: #667;
 }
 
-.dark-theme .header__user:hover {
+:global(.dark-theme) .User:hover {
   background-color: #556;
 }
 
 @media (min-width: 40rem) {
-  .header__logo h1 {
+  .Logo h1 {
     font-size: 2rem;
   }
 }

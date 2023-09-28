@@ -5,6 +5,8 @@ import { BOOK_TOPICS } from '../../common/data'
 import { trimTrim } from '../../common/utils'
 import { Button } from '../button'
 
+import styles from './TableForm.module.css'
+
 interface IFormSubmit {
   title: { value: string }
   author: { value: string }
@@ -61,7 +63,9 @@ export default function TableForm() {
   }
 
   return (
-    <tr className={`row add-row ${formOpen ? 'row--confirm' : ''}`}>
+    <tr
+      className={`${styles.Row} ${formOpen ? `${styles.RowConfirmMode}` : ''}`}
+    >
       <td>&nbsp;</td>
       <td>
         <input
@@ -93,10 +97,10 @@ export default function TableForm() {
           ))}
         </select>
       </td>
-      <td className="row__actions">
+      <td className={styles.Actions}>
         {formOpen ? (
           <form ref={formRef} id="add-book-form" onSubmit={handleFormSubmit}>
-            <div className="row__confirm">
+            <div className={styles.ConfirmActions}>
               <Button type="submit" variant="primary">
                 Save
               </Button>

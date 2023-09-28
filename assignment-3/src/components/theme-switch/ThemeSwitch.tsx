@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { getLocalStorageItem, setLocalStorageItem } from '../../common/utils'
 
-import './ThemeSwitch.css'
+import styles from './ThemeSwitch.module.css'
 
 type IThemeMode = string | 'dark' | 'light'
 
@@ -37,12 +37,12 @@ export function ThemeSwitch() {
       type="button"
       aria-label="Toggle theme"
       onClick={toggleTheme}
-      className={`theme-switch ${
-        themeMode === 'dark' ? 'theme-switch--dark' : ''
+      className={`${styles.ThemeSwitch} ${
+        themeMode === 'dark' ? `${styles.ThemeSwitchDark}` : ''
       }`}
     >
-      <div className="light">☀️</div>
-      <div className="dark">🌙</div>
+      <div className={styles.Light}>☀️</div>
+      <div className={styles.Dark}>🌙</div>
     </button>
   )
 }

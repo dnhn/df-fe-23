@@ -6,7 +6,7 @@ import TableRow from './TableRow'
 import TableForm from './TableForm'
 import { Button } from '../button'
 
-import './Table.css'
+import styles from './Table.module.css'
 
 export function Table() {
   const { bookList, page, pageSize, search, setPage } = useBooksContext()
@@ -29,15 +29,15 @@ export function Table() {
   useEffect(() => setPage(0), [search]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className="table-wrapper">
-      <table className="book-list">
+    <section className={styles.Wrapper}>
+      <table className={styles.Table}>
         <thead>
           <tr>
-            <th className="index">No.</th>
-            <th className="title">Title</th>
-            <th className="author">Author</th>
-            <th className="topic">Topic</th>
-            <th className="actions">Actions</th>
+            <th className={styles.HeadIndex}>No.</th>
+            <th className={styles.HeadTitle}>Title</th>
+            <th className={styles.HeadAuthor}>Author</th>
+            <th className={styles.HeadTopic}>Topic</th>
+            <th className={styles.HeadActions}>Actions</th>
           </tr>
         </thead>
 
@@ -51,7 +51,7 @@ export function Table() {
               />
             ))
           ) : (
-            <tr className="row row--empty">
+            <tr className={styles.RowEmpty}>
               <td colSpan={5}>No books</td>
             </tr>
           )}
@@ -59,7 +59,7 @@ export function Table() {
           {filtered.length > 0 &&
             filtered.length < pageSize &&
             Array.from(Array(pageSize - filtered.length).keys()).map((key) => (
-              <tr key={key} className="row row--filler">
+              <tr key={key} className={styles.RowFiller}>
                 <td colSpan={5}>
                   <Button>button</Button>
                 </td>

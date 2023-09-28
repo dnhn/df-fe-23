@@ -1,7 +1,9 @@
 import { ButtonHTMLAttributes } from 'react'
 
+import styles from './Button.module.css'
+
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: string
+  variant?: 'error' | 'info' | 'primary' | 'warning'
   classes?: string
 }
 
@@ -12,10 +14,19 @@ export function Button({
   classes = '',
   ...other
 }: IButton) {
+  const ButtonVariantMap: { [key: string]: string } = {
+    error: styles.ButtonError,
+    info: styles.ButtonInfo,
+    primary: styles.ButtonPrimary,
+    warning: styles.ButtonWarning,
+  }
+
   return (
     <button
       type={type}
-      className={`btn ${variant ? `btn--${variant}` : ''} ${classes}`}
+      className={`${styles.Button} ${
+        variant ? `${ButtonVariantMap[variant]}` : ''
+      } ${classes}`}
       {...other}
     >
       {children}

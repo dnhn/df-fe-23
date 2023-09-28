@@ -8,7 +8,6 @@ import {
   TableToolbar,
 } from './components/books'
 
-import './components/button/Button.css'
 import './App.css'
 
 export default function App() {

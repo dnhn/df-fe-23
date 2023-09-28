@@ -1,4 +1,4 @@
-.btn {
+.Button {
   border: 0;
   border-radius: 0.25rem;
   padding: 0.5rem 0.75rem;
@@ -13,51 +13,51 @@
   transition-duration: 150ms;
 }
 
-.btn:disabled,
-.btn.disabled {
+.Button:disabled,
+.Button.disabled {
   pointer-events: none;
   user-select: none;
   opacity: 0.5;
 }
 
-.btn:not(:disabled):hover,
-.btn:not(:disabled):focus {
+.Button:not(:disabled):hover,
+.Button:not(:disabled):focus {
   background-color: #eee;
 }
 
-.btn--primary {
+.ButtonPrimary {
   background-color: #90caf9;
 }
 
-.btn--primary:not(:disabled):hover,
-.btn--primary:not(:disabled):focus {
+.ButtonPrimary:not(:disabled):hover,
+.ButtonPrimary:not(:disabled):focus {
   background-color: #42a5f5;
 }
 
-.btn--info {
+.ButtonInfo {
   background-color: #29b6f6;
 }
 
-.btn--info:not(:disabled):hover,
-.btn--info:not(:disabled):focus {
+.ButtonInfo:not(:disabled):hover,
+.ButtonInfo:not(:disabled):focus {
   background-color: #0288d1;
 }
 
-.btn--error {
+.ButtonError {
   background-color: #f44336;
   color: white;
 }
 
-.btn--error:not(:disabled):hover,
-.btn--error:not(:disabled):focus {
+.ButtonError:not(:disabled):hover,
+.ButtonError:not(:disabled):focus {
   background-color: #d32f2f;
 }
 
-.btn--warning {
+.ButtonWarning {
   background-color: #ffa726;
 }
 
-.btn--warning:not(:disabled):hover,
-.btn--warning:not(:disabled):focus {
+.ButtonWarning:not(:disabled):hover,
+.ButtonWarning:not(:disabled):focus {
   background-color: #f57c00;
 }
