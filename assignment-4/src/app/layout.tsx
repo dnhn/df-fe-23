@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
 import { Header } from '@/src/components/Header'
+import { Footer } from '@/src/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Bookstore',
@@ -19,6 +20,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="px-4 py-16">
           <div className="container mx-auto">{children}</div>
         </main>
+
+        <Footer />
       </body>
     </html>
   )
