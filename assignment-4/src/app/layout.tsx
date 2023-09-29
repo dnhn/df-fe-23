@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-slate-200 !transition-none transition-colors duration-500">
         <Header />
 
-        <main className="px-4 py-16">
+        <main className="overflow-hidden px-4 py-16">
           <div className="container mx-auto">{children}</div>
         </main>
 
