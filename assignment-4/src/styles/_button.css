@@ -1,7 +1,7 @@
 @layer components {
   .button {
     @apply whitespace-nowrap rounded-[.25rem] border-0 bg-white px-3 py-2 text-center text-black transition-colors;
-    box-shadow: 0 1px 4px -2px black;
+    box-shadow: 0 0.0625rem 0.25rem -0.125rem black;
 
     &:disabled,
     &.disabled {
