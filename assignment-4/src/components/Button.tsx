@@ -4,7 +4,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'error' | 'info' | 'primary' | 'warning'
 }
 
-export function Button({
+export default function Button({
   children,
   type = 'button',
   variant,

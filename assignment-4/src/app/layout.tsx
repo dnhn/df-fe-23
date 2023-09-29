@@ -3,8 +3,8 @@ import '@/src/styles/globals.css'
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 
-import { Header } from '@/src/components/Header'
-import { Footer } from '@/src/components/Footer'
+import Header from '@/src/components/Header'
+import Footer from '@/src/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Bookstore',

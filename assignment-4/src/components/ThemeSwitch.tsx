@@ -10,7 +10,7 @@ enum THEME_MODE {
   LIGHT = 'light',
 }
 
-export function ThemeSwitch() {
+export default function ThemeSwitch() {
   const storedTheme = getLocalStorageItem('themeMode')
   const [themeMode, setThemeMode] = useState<IThemeMode>(storedTheme)
 
