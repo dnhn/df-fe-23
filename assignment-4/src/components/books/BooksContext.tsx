@@ -1,4 +1,5 @@
 import {
+  ReactNode,
   createContext,
   useCallback,
   useContext,
@@ -62,7 +63,7 @@ export const useBooksContext = () => {
   return context
 }
 
-export const BooksProvider = ({ children }) => {
+export const BooksProvider = ({ children }: { children: ReactNode }) => {
   const [books, setBooks] = useState<IBooksValues>(initialState)
 
   useEffect(() => {

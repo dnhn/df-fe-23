@@ -1,3 +1,11 @@
+'use client'
+
+import Table, { BooksProvider } from '@/src/components/books'
+
 export default function Home() {
-  return <>Next</>
+  return (
+    <BooksProvider>
+      <Table />
+    </BooksProvider>
+  )
 }

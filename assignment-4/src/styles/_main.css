@@ -1,3 +1,8 @@
-body.\!transition-none * {
-  transition: none !important;
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.\!transition-none * {
+    transition: none !important;
+  }
 }
