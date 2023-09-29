@@ -4,7 +4,11 @@ const config: Config = {
   darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '30rem',
+      },
+    },
   },
   plugins: [require('@tailwindcss/forms')],
 }
