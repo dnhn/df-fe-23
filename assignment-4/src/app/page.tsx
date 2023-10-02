@@ -1,11 +1,5 @@
-import Table, { TablePagination, TableToolbar } from '@/src/components/books'
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return (
-    <>
-      <TableToolbar />
-      <Table />
-      <TablePagination />
-    </>
-  )
+  redirect('/book')
 }

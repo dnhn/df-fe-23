@@ -6,7 +6,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        xs: '30rem',
+        xs: '480px',
       },
     },
   },

@@ -4,10 +4,10 @@ export const BOOK_TOPICS: { [key: string]: string } = {
   backend: 'Back-end',
   design: 'Design',
   frontend: 'Front-end',
-  fullstack: 'Full stack',
+  fullstack: 'Full-stack',
   ml: 'Machine Learning',
   programming: 'Programming',
-  vcs: 'Version control',
+  vcs: 'Version Control',
 }
 
 /* eslint-disable no-script-url */

@@ -15,7 +15,7 @@ export default function Button({
       {...other}
       type={type}
       className={`button ${variant ? `button--${variant}` : ''} ${
-        other.className
+        other.className ? other.className : ''
       }`}
     >
       {children}
