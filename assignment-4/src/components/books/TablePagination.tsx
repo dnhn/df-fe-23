@@ -1,3 +1,5 @@
+'use client'
+
 import { ChangeEvent } from 'react'
 
 import Button from '@/src/components/button'
@@ -36,7 +38,7 @@ export default function TablePagination() {
           id="page-size"
           value={pageSize}
           onChange={handlePageSizeChange}
-          className="w-auto border-0 border-b-2 border-gray-200 bg-transparent pe-8 text-current focus:border-black focus:ring-0"
+          className="w-auto border-0 border-b-2 border-gray-200 bg-transparent pr-8 text-current focus:border-black focus:ring-0"
         >
           <option value="4">4</option>
           <option value="5">5</option>

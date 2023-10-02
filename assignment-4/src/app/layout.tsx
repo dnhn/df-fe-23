@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 
 import Header from '@/src/components/Header'
 import Footer from '@/src/components/Footer'
+import { BooksProvider } from '@/src/components/books'
 
 export const metadata: Metadata = {
   title: 'Bookstore',
@@ -17,9 +18,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-slate-200 !transition-none transition-colors duration-500">
         <Header />
 
-        <main className="overflow-hidden px-4 py-16">
-          <div className="container mx-auto">{children}</div>
-        </main>
+        <BooksProvider>
+          <main className="overflow-hidden px-4 py-16">
+            <div className="container mx-auto">{children}</div>
+          </main>
+        </BooksProvider>
 
         <Footer />
       </body>

@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ReactNode,
   createContext,
@@ -107,11 +109,7 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     (id: string) =>
       setBooks((books) => ({
         ...books,
-        bookList: [
-          ...books.bookList.filter(
-            (book) => book.id.toString() !== id.toString(),
-          ),
-        ],
+        bookList: [...books.bookList.filter((book) => book.id !== id)],
       })),
     [setBooks],
   )
