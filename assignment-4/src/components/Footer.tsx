@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="pb-8">
-      <hr className="border-t-gray-400 pb-4" />
+      <hr className="border-t-gray-400 pb-4 dark:border-t-gray-600" />
       <div className="px-4">
         <div className="container mx-auto">
           <a

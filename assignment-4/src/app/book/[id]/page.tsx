@@ -43,11 +43,11 @@ export default function ViewBook({
         <div className="right-0 top-0 text-right max-md:mt-8 md:absolute">
           {confirmation ? (
             <>
-              <Button variant="error" onClick={() => setConfirmation(false)}>
-                Cancel
-              </Button>
               <Button onClick={() => deleteBook(result[0].id)} className="ml-2">
                 Confirm
+              </Button>
+              <Button variant="error" onClick={() => setConfirmation(false)}>
+                Cancel
               </Button>
             </>
           ) : (

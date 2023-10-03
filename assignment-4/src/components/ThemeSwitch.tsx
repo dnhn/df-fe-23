@@ -15,17 +15,13 @@ export default function ThemeSwitch() {
   const [themeMode, setThemeMode] = useState<IThemeMode>(storedTheme)
 
   useEffect(() => {
-    setTimeout(() => {
-      document.body.classList.remove('!transition-none')
-    }, 200)
-  }, [])
-
-  useEffect(() => {
     setLocalStorageItem('themeMode', themeMode)
 
     if (themeMode === THEME_MODE.DARK) {
+      document.cookie = `themeMode=${THEME_MODE.DARK};path=/;`
       document.documentElement.classList.add(THEME_MODE.DARK)
     } else {
+      document.cookie = `themeMode=${THEME_MODE.LIGHT};path=/;`
       document.documentElement.classList.remove(THEME_MODE.DARK)
     }
   }, [themeMode])

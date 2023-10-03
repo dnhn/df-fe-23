@@ -50,7 +50,7 @@ export default function Table() {
               />
             ))
           ) : (
-            <tr className="bg-white">
+            <tr className="bg-white dark:bg-slate-700">
               <td
                 colSpan={5}
                 className="py-24 text-center text-2xl font-medium"

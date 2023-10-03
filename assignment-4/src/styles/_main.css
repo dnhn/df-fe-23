@@ -1,8 +1,4 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  &.\!transition-none * {
-    transition: none !important;
-  }
 }

@@ -32,7 +32,7 @@ export default function TableToolbar() {
           onInput={(event) =>
             setKeyword((event.target as HTMLInputElement).value)
           }
-          className="rounded-md border-gray-300 pe-12 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
+          className="rounded-md border-gray-300 pe-12 text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
         />
         <button
           type="button"
