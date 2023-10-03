@@ -20,6 +20,14 @@
       @apply bg-stone-200;
     }
 
+    &.button--small {
+      @apply px-2 py-1 text-sm;
+    }
+
+    &.button--large {
+      @apply px-4 py-3 text-lg;
+    }
+
     &.button--error {
       @apply bg-red-500;
 

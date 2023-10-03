@@ -34,8 +34,14 @@ export default function TableRow({
         <div className="flex items-center justify-end gap-2">
           {confirmation ? (
             <>
-              <Button onClick={() => deleteBook(book.id)}>Confirm</Button>
-              <Button variant="error" onClick={() => setConfirmation(false)}>
+              <Button size="small" onClick={() => deleteBook(book.id)}>
+                Confirm
+              </Button>
+              <Button
+                variant="error"
+                size="small"
+                onClick={() => setConfirmation(false)}
+              >
                 Cancel
               </Button>
             </>
@@ -43,11 +49,15 @@ export default function TableRow({
             <>
               <Link
                 href={`/book/${book.id}`}
-                className="button button--primary"
+                className="button button--primary button--small"
               >
                 View
               </Link>
-              <Button variant="warning" onClick={() => setConfirmation(true)}>
+              <Button
+                size="small"
+                variant="warning"
+                onClick={() => setConfirmation(true)}
+              >
                 Delete
               </Button>
             </>

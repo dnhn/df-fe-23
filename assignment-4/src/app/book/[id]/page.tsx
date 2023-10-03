@@ -31,7 +31,7 @@ export default function ViewBook({
         </span>
       </div>
       <div className="relative">
-        <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-50 md:mr-48 md:text-5xl md:leading-tight">
+        <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-50 md:mr-56 md:text-5xl md:leading-tight">
           {result[0].title}
         </h2>
         <div className="mt-2 text-xl font-medium text-gray-600 dark:text-gray-200 md:mt-4 md:text-3xl">
@@ -43,15 +43,24 @@ export default function ViewBook({
         <div className="right-0 top-0 text-right max-md:mt-8 md:absolute">
           {confirmation ? (
             <>
-              <Button onClick={() => deleteBook(result[0].id)} className="ml-2">
+              <Button size="large" onClick={() => deleteBook(result[0].id)}>
                 Confirm
               </Button>
-              <Button variant="error" onClick={() => setConfirmation(false)}>
+              <Button
+                variant="error"
+                size="large"
+                onClick={() => setConfirmation(false)}
+                className="ml-2"
+              >
                 Cancel
               </Button>
             </>
           ) : (
-            <Button variant="warning" onClick={() => setConfirmation(true)}>
+            <Button
+              variant="warning"
+              size="large"
+              onClick={() => setConfirmation(true)}
+            >
               Delete
             </Button>
           )}
