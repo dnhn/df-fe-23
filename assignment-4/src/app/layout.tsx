@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-slate-200 !transition-none transition-colors duration-500">
+      <body className="bg-slate-200 !transition-none transition-[background-color] duration-500 dark:bg-slate-800 dark:text-gray-50">
         <Header />
 
         <BooksProvider>

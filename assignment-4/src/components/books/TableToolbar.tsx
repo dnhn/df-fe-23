@@ -36,7 +36,7 @@ export default function TableToolbar() {
         />
         <button
           type="button"
-          className="absolute right-1 top-1/2 -translate-y-1/2 border-0 bg-transparent p-2 text-xs"
+          className="absolute right-1 top-1/2 -translate-y-1/2 border-0 bg-transparent p-2 text-xs text-black"
           onClick={() => setKeyword('')}
         >
           clear

@@ -26,16 +26,18 @@ export default function ViewBook({
       <div className="mb-8 font-medium">
         <Link href="/book">Books</Link>
         <span className="px-4">/</span>
-        <span className="text-gray-500">{result[0].title}</span>
+        <span className="text-gray-500 dark:text-gray-400">
+          {result[0].title}
+        </span>
       </div>
       <div className="relative">
-        <h2 className="text-3xl font-bold text-gray-700 md:mr-48 md:text-5xl md:leading-tight">
+        <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-50 md:mr-48 md:text-5xl md:leading-tight">
           {result[0].title}
         </h2>
-        <div className="mt-2 text-xl font-medium text-gray-600 md:mt-4 md:text-3xl">
+        <div className="mt-2 text-xl font-medium text-gray-600 dark:text-gray-200 md:mt-4 md:text-3xl">
           by {result[0].author}
         </div>
-        <div className="mt-8 inline-block rounded-2xl bg-stone-300 px-3 py-1">
+        <div className="mt-8 inline-block rounded-2xl bg-stone-300 px-3 py-1 text-black">
           {BOOK_TOPICS[result[0].topic]}
         </div>
         <div className="right-0 top-0 text-right max-md:mt-8 md:absolute">

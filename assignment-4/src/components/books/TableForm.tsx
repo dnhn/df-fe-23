@@ -76,7 +76,7 @@ export default function TableForm() {
           aria-label="Title"
           placeholder="Title"
           required
-          className="w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+          className="w-full rounded-md border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
         />
       </td>
       <td className="px-4 py-3">
@@ -87,14 +87,14 @@ export default function TableForm() {
           aria-label="Author"
           placeholder="Author"
           required
-          className="w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+          className="w-full rounded-md border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
         />
       </td>
       <td className="px-4 py-3">
         <select
           name="topic"
           form="add-book-form"
-          className="w-full rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0"
+          className="w-full rounded-md border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
         >
           {topics.map((topic, index) => (
             <option key={index} value={topic[0]}>

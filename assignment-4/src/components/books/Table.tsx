@@ -29,8 +29,8 @@ export default function Table() {
 
   return (
     <section className="w-full overflow-auto rounded-lg shadow-[0_.25rem_.5rem_-.5rem] shadow-black">
-      <table className="w-full border-collapse border-spacing-0 bg-white transition-colors">
-        <thead className="bg-slate-400 transition-colors">
+      <table className="w-full border-collapse border-spacing-0 bg-white transition-colors ease-linear dark:bg-slate-700">
+        <thead className="bg-slate-400 transition-colors ease-linear dark:bg-slate-600">
           <tr>
             <th className="px-4 py-3 text-left xl:w-[4.5rem]">No.</th>
             <th className="min-w-[16rem] px-4 py-3 text-left">Title</th>
