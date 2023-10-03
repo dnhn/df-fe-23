@@ -50,10 +50,10 @@ export default function Table() {
               />
             ))
           ) : (
-            <tr className="bg-white dark:bg-slate-700">
+            <tr className="pointer-events-none select-none bg-white dark:bg-slate-700">
               <td
                 colSpan={5}
-                className="py-24 text-center text-2xl font-medium"
+                className={`px-4 py-3 text-center text-2xl font-medium leading-none empty-row--${pageSize}`}
               >
                 No books
               </td>

@@ -23,7 +23,7 @@ export default function TableToolbar() {
   }, [bookList, keyword, setSearch])
 
   return (
-    <div className="mb-4 flex justify-between gap-4">
+    <div className="mb-4 flex items-center justify-between gap-4">
       <div className="relative">
         <input
           type="text"

@@ -18,8 +18,8 @@ export default function TableRow({
 
   return (
     <tr className="group transition-colors ease-linear even:bg-slate-200 dark:even:bg-slate-600 md:hover:bg-slate-300 dark:md:hover:bg-slate-500">
-      <td className="whitespace-nowrap px-4 py-3">{index + 1}</td>
-      <td className="whitespace-nowrap px-4 py-3">
+      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">{index + 1}</td>
+      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
         <span className="max-md:hidden">{book.title}</span>
         <Link
           href={`/book/${book.id}`}
@@ -28,9 +28,13 @@ export default function TableRow({
           {book.title}
         </Link>
       </td>
-      <td className="whitespace-nowrap px-4 py-3">{book.author}</td>
-      <td className="whitespace-nowrap px-4 py-3">{BOOK_TOPICS[book.topic]}</td>
-      <td className="whitespace-nowrap px-4 py-3 text-right">
+      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
+        {book.author}
+      </td>
+      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
+        {BOOK_TOPICS[book.topic]}
+      </td>
+      <td className="text-r h-14ight whitespace-nowrap px-4 py-3 md:h-16">
         <div className="flex items-center justify-end gap-2">
           {confirmation ? (
             <>
