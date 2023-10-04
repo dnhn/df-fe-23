@@ -7,7 +7,7 @@ import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 
 export default function TablePagination() {
-  const { bookList, page, pageSize, search, setPage, setPageSize } =
+  const { bookList, pageIndex, pageSize, search, setPageIndex, setPageSize } =
     useBooksContext()
   const router = useRouter()
   const pathname = usePathname()
@@ -17,8 +17,8 @@ export default function TablePagination() {
     book.title.toLowerCase().includes(search.toLowerCase()),
   )
   const totalPages = Math.ceil(filtered.length / pageSize)
-  const currentFirstItem = page * pageSize + 1
-  const currentLastItem = page * pageSize + pageSize
+  const currentFirstItem = pageIndex * pageSize + 1
+  const currentLastItem = pageIndex * pageSize + pageSize
 
   useEffect(() => {
     const query = new URLSearchParams()
@@ -30,26 +30,28 @@ export default function TablePagination() {
 
     // Check and correct page value from URL parameter
     // Set new page parameter and state
-    if (page >= 0) {
-      const pageNumber = page + 1 > totalPages ? totalPages : page + 1
+    if (pageIndex >= 0) {
+      const pageNumber = pageIndex + 1 > totalPages ? totalPages : pageIndex + 1
 
-      setPage(pageNumber - 1)
+      setPageIndex(pageNumber - 1)
       query.set('page', pageNumber.toString())
     } else {
-      setPage(0)
+      setPageIndex(0)
     }
 
     // Push to URL
     if (pathname) {
       router.push(`${pathname}?${query}`, {})
     }
-  }, [page]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [pageIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10))
   }
-  const handlePrev = () => setPage(page > 0 ? page - 1 : page)
-  const handleNext = () => setPage(page + 1 < totalPages ? page + 1 : page)
+  const handlePrev = () =>
+    setPageIndex(pageIndex > 0 ? pageIndex - 1 : pageIndex)
+  const handleNext = () =>
+    setPageIndex(pageIndex + 1 < totalPages ? pageIndex + 1 : pageIndex)
 
   return (
     totalPages > 0 && (
@@ -82,7 +84,7 @@ export default function TablePagination() {
             variant="info"
             className="rounded-l-2xl rounded-r-none pl-[.875rem] pr-[.625rem] text-xl leading-none shadow-none"
             aria-label="Previous page"
-            disabled={page <= 0}
+            disabled={pageIndex <= 0}
             onClick={handlePrev}
           >
             ⬅️
@@ -91,7 +93,7 @@ export default function TablePagination() {
             variant="info"
             className="rounded-l-none rounded-r-2xl pl-[.625rem] pr-[.875rem] text-xl leading-none shadow-none"
             aria-label="Next page"
-            disabled={page + 1 >= totalPages}
+            disabled={pageIndex + 1 >= totalPages}
             onClick={handleNext}
           >
             ➡️

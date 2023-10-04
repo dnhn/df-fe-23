@@ -12,17 +12,17 @@ export default function Book({
 }: {
   searchParams: { [key: string]: string }
 }) {
-  const { setPage, setSearch } = useBooksContext()
+  const { setPageIndex, setSearch } = useBooksContext()
   const pageParam = searchParams['page']
   const searchKeywordParam = searchParams['q'] || ''
 
   // Get URL parameters and set state
   useEffect(() => {
     if (!Number.isNaN(parseInt(pageParam, 10))) {
-      setPage((pageParam as unknown as number) - 1)
+      setPageIndex((pageParam as unknown as number) - 1)
       setSearch(searchKeywordParam)
     } else {
-      setPage(0)
+      setPageIndex(0)
       setSearch(searchKeywordParam)
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps

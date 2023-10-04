@@ -17,10 +17,10 @@ import { BOOKS_DATA_KEY, BOOKS_PER_PAGE } from '@/src/lib/constants'
 
 interface IBooksValues {
   bookList: IBook[]
-  search: string
-  page: number
-  pageSize: number
   formOpen: boolean
+  search: string
+  pageIndex: number
+  pageSize: number
 }
 
 interface IBooksContext extends IBooksValues {
@@ -30,16 +30,16 @@ interface IBooksContext extends IBooksValues {
   addBook: (book: IBook) => void
   deleteBook: (id: string) => void
   setSearch: (search: string) => void
-  setPage: (page: number) => void
+  setPageIndex: (pageIndex: number) => void
   setPageSize: (page: number) => void
 }
 
 const initialState = {
   bookList: INITIAL_BOOKS,
-  search: '',
-  page: 0,
-  pageSize: BOOKS_PER_PAGE,
   formOpen: false,
+  search: '',
+  pageIndex: 0,
+  pageSize: BOOKS_PER_PAGE,
 }
 
 const BooksContext = createContext<IBooksContext>({
@@ -51,7 +51,7 @@ const BooksContext = createContext<IBooksContext>({
   addBook: () => {},
   deleteBook: () => {},
   setSearch: () => {},
-  setPage: () => {},
+  setPageIndex: () => {},
   setPageSize: () => {},
 })
 
@@ -119,8 +119,8 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     [setBooks],
   )
 
-  const setPage = useCallback(
-    (page: number) => setBooks((books) => ({ ...books, page })),
+  const setPageIndex = useCallback(
+    (pageIndex: number) => setBooks((books) => ({ ...books, pageIndex })),
     [setBooks],
   )
 
@@ -132,10 +132,10 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
   const memo = useMemo(
     () => ({
       bookList: books.bookList,
-      search: books.search,
-      page: books.page,
-      pageSize: books.pageSize,
       formOpen: books.formOpen,
+      search: books.search,
+      pageIndex: books.pageIndex,
+      pageSize: books.pageSize,
 
       openForm,
       closeForm,
@@ -143,15 +143,15 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
       addBook,
       deleteBook,
       setSearch,
-      setPage,
+      setPageIndex,
       setPageSize,
     }),
     [
       books.bookList,
-      books.search,
-      books.page,
-      books.pageSize,
       books.formOpen,
+      books.search,
+      books.pageIndex,
+      books.pageSize,
 
       openForm,
       closeForm,
@@ -159,7 +159,7 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
       addBook,
       deleteBook,
       setSearch,
-      setPage,
+      setPageIndex,
       setPageSize,
     ],
   )

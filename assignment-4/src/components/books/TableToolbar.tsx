@@ -8,7 +8,8 @@ import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 
 export default function TableToolbar() {
-  const { bookList, page, search, setSearch, toggleForm } = useBooksContext()
+  const { bookList, pageIndex, search, setSearch, toggleForm } =
+    useBooksContext()
   const [keyword, setKeyword] = useState<string>('')
   const router = useRouter()
   const pathname = usePathname()
@@ -36,7 +37,7 @@ export default function TableToolbar() {
     const query = new URLSearchParams()
 
     // Set current page parameter
-    query.set('page', (page + 1).toString())
+    query.set('page', (pageIndex + 1).toString())
 
     // Set search keyword parameter
     if (search.length) {

@@ -9,23 +9,24 @@ import TableRow from './TableRow'
 import TableForm from './TableForm'
 
 export default function Table() {
-  const { bookList, page, pageSize, search, setPage } = useBooksContext()
+  const { bookList, pageIndex, pageSize, search, setPageIndex } =
+    useBooksContext()
   const [filtered, setFiltered] = useState<IBook[]>([])
 
   useEffect(() => {
     const filteredList = bookList
       .filter((book) => book.title.toLowerCase().includes(search.toLowerCase()))
-      .slice(page * pageSize, page * pageSize + pageSize)
+      .slice(pageIndex * pageSize, pageIndex * pageSize + pageSize)
 
     setFiltered(filteredList)
 
     // If the current page is not the first page and the filtered list is empty, navigate back one page.
-    if (page > 0 && filteredList.length === 0) {
-      setPage(page - 1)
+    if (pageIndex > 0 && filteredList.length === 0) {
+      setPageIndex(pageIndex - 1)
     } else {
-      setPage(page)
+      setPageIndex(pageIndex)
     }
-  }, [bookList, page, pageSize, search, setPage])
+  }, [bookList, pageIndex, pageSize, search, setPageIndex])
 
   return (
     <section className="w-full overflow-auto rounded-lg shadow-[0_.25rem_.5rem_-.5rem] shadow-black">
@@ -46,7 +47,7 @@ export default function Table() {
               <TableRow
                 key={book.id}
                 book={book}
-                index={index + page * pageSize}
+                index={index + pageIndex * pageSize}
               />
             ))
           ) : (
