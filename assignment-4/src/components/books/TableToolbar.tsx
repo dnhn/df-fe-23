@@ -36,9 +36,6 @@ export default function TableToolbar() {
   useEffect(() => {
     const query = new URLSearchParams()
 
-    // Set current page parameter
-    query.set('page', (pageIndex + 1).toString())
-
     // Set search keyword parameter
     if (search.length) {
       query.set('q', search)
@@ -46,6 +43,9 @@ export default function TableToolbar() {
     } else {
       query.delete('q')
     }
+
+    // Set current page parameter
+    query.set('page', (pageIndex + 1).toString())
 
     // Push to URL
     if (pathname) {

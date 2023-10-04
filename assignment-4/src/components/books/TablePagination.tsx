@@ -30,11 +30,11 @@ export default function TablePagination() {
 
     // Check and correct page value from URL parameter
     // Set new page parameter and state
-    if (pageIndex >= 0) {
-      const pageNumber = pageIndex + 1 > totalPages ? totalPages : pageIndex + 1
-
-      setPageIndex(pageNumber - 1)
-      query.set('page', pageNumber.toString())
+    if (pageIndex >= 0 && pageIndex + 1 <= totalPages) {
+      setPageIndex(pageIndex)
+      query.set('page', (pageIndex + 1).toString())
+    } else if (pageIndex + 1 > totalPages) {
+      setPageIndex(totalPages - 1)
     } else {
       setPageIndex(0)
     }

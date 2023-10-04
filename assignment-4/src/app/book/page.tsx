@@ -1,11 +1,12 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import Table, {
   TablePagination,
   TableToolbar,
   useBooksContext,
 } from '@/src/components/books'
-import { useEffect } from 'react'
 
 export default function Book({
   searchParams,
@@ -14,17 +15,14 @@ export default function Book({
 }) {
   const { setPageIndex, setSearch } = useBooksContext()
   const pageParam = searchParams['page']
-  const searchKeywordParam = searchParams['q'] || ''
+  const searchKeywordParam = searchParams['q']
 
   // Get URL parameters and set state
   useEffect(() => {
-    if (!Number.isNaN(parseInt(pageParam, 10))) {
-      setPageIndex((pageParam as unknown as number) - 1)
-      setSearch(searchKeywordParam)
-    } else {
-      setPageIndex(0)
-      setSearch(searchKeywordParam)
-    }
+    setSearch(searchKeywordParam || '')
+    setPageIndex(
+      Number.isNaN(parseInt(pageParam, 10)) ? 0 : parseInt(pageParam, 10) - 1,
+    )
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

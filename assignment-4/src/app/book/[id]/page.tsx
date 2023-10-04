@@ -1,12 +1,12 @@
 'use client'
 
+import { useState } from 'react'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext } from '@/src/components/books'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/button'
-import { useState } from 'react'
 
 export default function ViewBook({
   params: { id },
