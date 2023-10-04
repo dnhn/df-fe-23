@@ -1,14 +1,24 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 
 export default function TableToolbar() {
-  const { bookList, setSearch, toggleForm } = useBooksContext()
+  const { bookList, page, search, setSearch, toggleForm } = useBooksContext()
   const [keyword, setKeyword] = useState<string>('')
+  const router = useRouter()
+  const pathname = usePathname()
+
+  // Check for search keyword parameter and set state
+  useEffect(() => {
+    if (search) {
+      setKeyword(trimTrim(search))
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     let typeTimeout
@@ -21,6 +31,26 @@ export default function TableToolbar() {
       clearTimeout(typeTimeout)
     }
   }, [bookList, keyword, setSearch])
+
+  useEffect(() => {
+    const query = new URLSearchParams()
+
+    // Set current page parameter
+    query.set('page', (page + 1).toString())
+
+    // Set search keyword parameter
+    if (search.length) {
+      query.set('q', search)
+      setKeyword(search)
+    } else {
+      query.delete('q')
+    }
+
+    // Push to URL
+    if (pathname) {
+      router.push(`${pathname}?${query}`, {})
+    }
+  }, [search]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">

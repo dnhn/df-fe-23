@@ -22,10 +22,10 @@ export default function Table() {
     // If the current page is not the first page and the filtered list is empty, navigate back one page.
     if (page > 0 && filteredList.length === 0) {
       setPage(page - 1)
+    } else {
+      setPage(page)
     }
   }, [bookList, page, pageSize, search, setPage])
-
-  useEffect(() => setPage(0), [search, setPage])
 
   return (
     <section className="w-full overflow-auto rounded-lg shadow-[0_.25rem_.5rem_-.5rem] shadow-black">
@@ -36,7 +36,7 @@ export default function Table() {
             <th className="min-w-[16rem] px-4 py-3 text-left">Title</th>
             <th className="px-4 py-3 text-left xl:w-80">Author</th>
             <th className="px-4 py-3 text-left xl:w-64">Topic</th>
-            <th className="px-4 py-3 text-right xl:w-64">Actions</th>
+            <th className="px-4 py-3 text-right xl:w-48">Actions</th>
           </tr>
         </thead>
 
