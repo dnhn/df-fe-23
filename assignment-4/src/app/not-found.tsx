@@ -1,28 +1,8 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 export default function NotFound() {
-  const [count, setCount] = useState(3)
-  const router = useRouter()
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (count < 2) {
-        clearInterval(interval)
-        router.push('/')
-      } else {
-        setCount((count) => count - 1)
-      }
-    }, 1000)
-
-    return () => clearInterval(interval)
-  }, [count, setCount, router])
-
   return (
-    <section className="relative mx-auto w-[25rem] max-w-full py-16 text-center md:py-32 xl:py-48">
+    <section className="relative mx-auto flex h-[50lvh] w-[25rem] max-w-full flex-col justify-center text-center md:h-[60vh]">
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-[-1] -translate-x-1/2 -translate-y-1/2 select-none text-[60vw] font-thin leading-none opacity-0 md:opacity-5">
         404
       </div>
@@ -31,7 +11,7 @@ export default function NotFound() {
         The page you are looking for does not exist.
       </p>
       <Link href="/" className="font-medium">
-        Back to home page {count > 0 ? ` in ${count}` : ''}
+        Back to home page
       </Link>
     </section>
   )
