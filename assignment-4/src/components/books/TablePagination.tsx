@@ -7,13 +7,13 @@ import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 
 export default function TablePagination() {
-  const { bookList, pageIndex, pageSize, search, setPageIndex, setPageSize } =
+  const { bookStore, pageIndex, pageSize, search, setPageIndex, setPageSize } =
     useBooksContext()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const searchKeywordParam = searchParams?.get('q')
-  const filtered = bookList.filter((book) =>
+  const filtered = bookStore.filter((book) =>
     book.title.toLowerCase().includes(search.toLowerCase()),
   )
   const totalPages = Math.ceil(filtered.length / pageSize)

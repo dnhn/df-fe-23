@@ -14,7 +14,7 @@ interface IFormSubmit {
 }
 
 export default function TableForm() {
-  const { addBook, bookList, closeForm, formOpen, toggleForm } =
+  const { addBook, bookStore, closeForm, formOpen, toggleForm } =
     useBooksContext()
   const formRef = useRef<HTMLFormElement>(null)
   const inputTitleRef = useRef<HTMLInputElement>(null)
@@ -39,7 +39,7 @@ export default function TableForm() {
       formRef.current.reset()
       closeForm()
     }
-  }, [bookList, closeForm])
+  }, [bookStore, closeForm])
 
   const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault()

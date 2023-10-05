@@ -9,12 +9,12 @@ import TableRow from './TableRow'
 import TableForm from './TableForm'
 
 export default function Table() {
-  const { bookList, pageIndex, pageSize, search, setPageIndex } =
+  const { bookStore, pageIndex, pageSize, search, setPageIndex } =
     useBooksContext()
   const [filtered, setFiltered] = useState<IBook[]>([])
 
   useEffect(() => {
-    const filteredList = bookList
+    const filteredList = bookStore
       .filter((book) => book.title.toLowerCase().includes(search.toLowerCase()))
       .slice(pageIndex * pageSize, pageIndex * pageSize + pageSize)
 
@@ -26,7 +26,7 @@ export default function Table() {
     } else {
       setPageIndex(pageIndex)
     }
-  }, [bookList, pageIndex, pageSize, search, setPageIndex])
+  }, [bookStore, pageIndex, pageSize, search, setPageIndex])
 
   return (
     <section className="w-full overflow-auto rounded-lg shadow-[0_.25rem_.5rem_-.5rem] shadow-black">

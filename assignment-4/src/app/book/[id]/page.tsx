@@ -13,9 +13,9 @@ export default function ViewBook({
 }: {
   params: { id: string }
 }) {
-  const { bookList, deleteBook } = useBooksContext()
+  const { bookStore, deleteBook } = useBooksContext()
   const [confirmation, setConfirmation] = useState<boolean>(false)
-  const result = bookList.filter((book) => book.id === id)
+  const result = bookStore.filter((book) => book.id === id)
 
   if (result.length === 0) {
     redirect('/')

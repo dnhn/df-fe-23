@@ -8,7 +8,7 @@ import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 
 export default function TableToolbar() {
-  const { bookList, pageIndex, search, setSearch, toggleForm } =
+  const { bookStore, pageIndex, search, setSearch, toggleForm } =
     useBooksContext()
   const [keyword, setKeyword] = useState<string>('')
   const router = useRouter()
@@ -24,14 +24,14 @@ export default function TableToolbar() {
   useEffect(() => {
     let typeTimeout
 
-    if (bookList.length) {
+    if (bookStore.length) {
       typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300)
     }
 
     return () => {
       clearTimeout(typeTimeout)
     }
-  }, [bookList, keyword, setSearch])
+  }, [bookStore, keyword, setSearch])
 
   useEffect(() => {
     const query = new URLSearchParams()
