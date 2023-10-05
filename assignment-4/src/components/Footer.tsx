@@ -1,9 +1,11 @@
+import Container from './Container'
+
 export default function Footer() {
   return (
     <footer className="pb-8">
       <hr className="border-t-gray-400 pb-4 dark:border-t-gray-600" />
       <div className="px-4">
-        <div className="container mx-auto">
+        <Container>
           <a
             href="https://github.com/dnhn/df-fe-23/tree/main/assignment-4"
             target="_blank"
@@ -12,7 +14,7 @@ export default function Footer() {
           >
             GitHub
           </a>
-        </div>
+        </Container>
       </div>
     </footer>
   )
