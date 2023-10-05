@@ -66,76 +66,52 @@ export const useBooksContext = () => {
 }
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const [books, setBooks] = useState<IBooksValues>(initialState)
+  const [bookList, setBookList] = useState<IBook[]>(INITIAL_BOOKS)
+  const [formOpen, setFormOpen] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
+  const [pageIndex, setPageIndex] = useState<number>(0)
+  const [pageSize, setPageSize] = useState<number>(BOOKS_PER_PAGE)
 
   useEffect(() => {
     const storedData = getLocalStorageItem(BOOKS_DATA_KEY)
 
     if (storedData) {
-      setBooks((books) => ({
-        ...books,
-        bookList: [...storedData.bookList],
-        pageSize: storedData.pageSize,
-      }))
+      setBookList(storedData.bookList || INITIAL_BOOKS)
+      setPageSize(storedData.pageSize || BOOKS_PER_PAGE)
     }
   }, [])
 
   useEffect(() => {
-    setLocalStorageItem(BOOKS_DATA_KEY, books)
-  }, [books])
+    setLocalStorageItem(BOOKS_DATA_KEY, { bookList, pageSize })
+  }, [bookList, pageSize])
 
-  const openForm = useCallback(
-    () => setBooks((books) => ({ ...books, formOpen: true })),
-    [setBooks],
-  )
+  const openForm = useCallback(() => setFormOpen(true), [setFormOpen])
 
-  const closeForm = useCallback(
-    () => setBooks((books) => ({ ...books, formOpen: false })),
-    [setBooks],
-  )
+  const closeForm = useCallback(() => setFormOpen(false), [setFormOpen])
 
   const toggleForm = useCallback(
-    () => setBooks((books) => ({ ...books, formOpen: !books.formOpen })),
-    [setBooks],
+    () => setFormOpen((state) => !state),
+    [setFormOpen],
   )
 
   const addBook = useCallback(
-    (book: IBook) =>
-      setBooks((books) => ({ ...books, bookList: [...books.bookList, book] })),
-    [setBooks],
+    (book: IBook) => setBookList((books) => [book, ...books]),
+    [setBookList],
   )
 
   const deleteBook = useCallback(
     (id: string) =>
-      setBooks((books) => ({
-        ...books,
-        bookList: [...books.bookList.filter((book) => book.id !== id)],
-      })),
-    [setBooks],
-  )
-
-  const setSearch = useCallback(
-    (search: string) => setBooks((books) => ({ ...books, search })),
-    [setBooks],
-  )
-
-  const setPageIndex = useCallback(
-    (pageIndex: number) => setBooks((books) => ({ ...books, pageIndex })),
-    [setBooks],
-  )
-
-  const setPageSize = useCallback(
-    (pageSize: number) => setBooks((books) => ({ ...books, pageSize })),
-    [setBooks],
+      setBookList((books) => books.filter((book) => book.id !== id)),
+    [setBookList],
   )
 
   const memo = useMemo(
     () => ({
-      bookList: books.bookList,
-      formOpen: books.formOpen,
-      search: books.search,
-      pageIndex: books.pageIndex,
-      pageSize: books.pageSize,
+      bookList,
+      formOpen,
+      search,
+      pageIndex,
+      pageSize,
 
       openForm,
       closeForm,
@@ -147,11 +123,11 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
       setPageSize,
     }),
     [
-      books.bookList,
-      books.formOpen,
-      books.search,
-      books.pageIndex,
-      books.pageSize,
+      bookList,
+      formOpen,
+      search,
+      pageIndex,
+      pageSize,
 
       openForm,
       closeForm,
