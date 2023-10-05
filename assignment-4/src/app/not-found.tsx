@@ -3,6 +3,8 @@ import Link from 'next/link'
 export default function NotFound() {
   return (
     <section className="relative mx-auto flex h-[50lvh] w-[25rem] max-w-full flex-col justify-center text-center md:h-[60vh]">
+      <title>404 Not Found</title>
+
       <div className="pointer-events-none absolute left-1/2 top-1/2 z-[-1] -translate-x-1/2 -translate-y-1/2 select-none text-[60vw] font-thin leading-none opacity-0 md:opacity-5">
         404
       </div>

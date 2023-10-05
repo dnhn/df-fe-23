@@ -27,6 +27,8 @@ export default function Book({
 
   return (
     <>
+      <title>Book List</title>
+
       <TableToolbar />
       <Table />
       <TablePagination />

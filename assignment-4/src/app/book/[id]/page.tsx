@@ -23,6 +23,8 @@ export default function ViewBook({
 
   return (
     <section className="mx-auto w-[60rem] max-w-full">
+      <title>{`${result[0].title} – ${result[0].author}`}</title>
+
       <div className="mb-8 font-medium">
         <Link href="/book">Books</Link>
         <span className="px-4">/</span>
@@ -30,6 +32,7 @@ export default function ViewBook({
           {result[0].title}
         </span>
       </div>
+
       <div className="relative">
         <h2 className="text-3xl font-bold text-gray-700 dark:text-gray-50 md:mr-56 md:text-5xl md:leading-tight">
           {result[0].title}
