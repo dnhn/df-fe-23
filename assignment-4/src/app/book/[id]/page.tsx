@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { redirect } from 'next/navigation'
+import { BaseSyntheticEvent, useState } from 'react'
+import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext } from '@/src/components/books'
@@ -13,9 +13,23 @@ export default function ViewBook({
 }: {
   params: { id: string }
 }) {
+  const router = useRouter()
   const { bookStore, deleteBook } = useBooksContext()
   const [confirmation, setConfirmation] = useState<boolean>(false)
   const result = bookStore.filter((book) => book.id === id)
+
+  const navigateBackward = (
+    event: BaseSyntheticEvent<
+      MouseEvent,
+      EventTarget & HTMLAnchorElement,
+      EventTarget
+    >,
+  ) => {
+    if (window.history.length > 1) {
+      event.preventDefault()
+      router.back()
+    }
+  }
 
   if (result.length === 0) {
     redirect('/')
@@ -26,7 +40,9 @@ export default function ViewBook({
       <title>{`${result[0].title} – ${result[0].author}`}</title>
 
       <div className="mb-8 font-medium">
-        <Link href="/book">Books</Link>
+        <Link href="/book" onClick={navigateBackward}>
+          Books
+        </Link>
         <span className="px-4">/</span>
         <span className="text-gray-500 dark:text-gray-400">
           {result[0].title}
