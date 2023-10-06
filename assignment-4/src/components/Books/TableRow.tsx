@@ -23,7 +23,7 @@ export default function TableRow({ book, index }: ITableRow) {
         <span className="max-md:hidden">{book.title}</span>
         <Link
           href={PATH.BOOK.VIEW(book.id)}
-          className="border-b border-dashed border-b-gray-600 md:hidden"
+          className="border-b border-dashed border-b-gray-600 dark:border-b-gray-400 md:hidden"
         >
           {book.title}
         </Link>
@@ -35,10 +35,10 @@ export default function TableRow({ book, index }: ITableRow) {
         {BOOK_TOPICS[book.topic]}
       </td>
       <td className="text-r h-14 whitespace-nowrap px-4 py-3 md:h-16">
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-4">
           <Link
             href={PATH.BOOK.VIEW(book.id)}
-            className="button button--primary button--small"
+            className="border-b border-dashed border-b-gray-600 text-sm font-medium dark:border-b-gray-400"
           >
             View
           </Link>
