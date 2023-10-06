@@ -1,9 +1,4 @@
-import { ButtonHTMLAttributes } from 'react'
-
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'error' | 'info' | 'primary' | 'warning'
-  size?: 'small' | 'large'
-}
+import { IButton } from '@/src/types/button'
 
 export default function Button({
   children,
