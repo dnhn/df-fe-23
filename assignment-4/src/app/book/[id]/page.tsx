@@ -1,7 +1,6 @@
 'use client'
 
-import { BaseSyntheticEvent } from 'react'
-import { notFound, useRouter } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext, useBooksDialogContext } from '@/src/components/Books'
@@ -14,23 +13,9 @@ interface IViewBook {
 }
 
 export default function ViewBook({ params: { id } }: IViewBook) {
-  const router = useRouter()
   const { bookStore } = useBooksContext()
   const { showDeleteDialog } = useBooksDialogContext()
   const result = bookStore.filter((book) => book.id === id)
-
-  const navigateBackward = (
-    event: BaseSyntheticEvent<
-      MouseEvent,
-      EventTarget & HTMLAnchorElement,
-      EventTarget
-    >,
-  ) => {
-    if (window.history.length > 1) {
-      event.preventDefault()
-      router.back()
-    }
-  }
 
   if (result.length === 0) {
     notFound()
@@ -43,9 +28,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
       <title>{`${result[0].title} – ${result[0].author}`}</title>
 
       <div className="mb-8 font-medium">
-        <Link href={PATH.BOOK.ROOT} onClick={navigateBackward}>
-          Books
-        </Link>
+        <Link href={PATH.BOOK.ROOT}>Books</Link>
         <span className="px-4">/</span>
         <span className="text-gray-500 dark:text-gray-400">
           {result[0].title}
