@@ -58,19 +58,15 @@ export const useBooksContext = () => {
 }
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const [bookStore, setBookStore] = useState<IBook[]>(INITIAL_BOOKS)
+  const storedData = getLocalStorageItem(BOOKS_DATA_KEY)
+  const [bookStore, setBookStore] = useState<IBook[]>(
+    (storedData && storedData.bookStore) ?? INITIAL_BOOKS,
+  )
   const [search, setSearch] = useState<string>('')
   const [pageIndex, setPageIndex] = useState<number>(0)
-  const [pageSize, setPageSize] = useState<number>(BOOKS_PER_PAGE)
-
-  useEffect(() => {
-    const storedData = getLocalStorageItem(BOOKS_DATA_KEY)
-
-    if (storedData) {
-      setBookStore(storedData.bookStore || INITIAL_BOOKS)
-      setPageSize(storedData.pageSize || BOOKS_PER_PAGE)
-    }
-  }, [])
+  const [pageSize, setPageSize] = useState<number>(
+    (storedData && storedData.pageSize) ?? BOOKS_PER_PAGE,
+  )
 
   useEffect(() => {
     setLocalStorageItem(BOOKS_DATA_KEY, { bookStore, pageSize })

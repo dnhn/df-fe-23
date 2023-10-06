@@ -1,12 +1,16 @@
 'use client'
 
 import { useEffect } from 'react'
+import dynamic from 'next/dynamic'
 
-import Table, {
-  TablePagination,
-  TableToolbar,
-  useBooksContext,
-} from '@/src/components/Books'
+import Table, { TableToolbar, useBooksContext } from '@/src/components/Books'
+
+// Disable server-side rendering to avoid hydration error caused by data
+// fetching without `useEffect` in `BooksContext`
+const TablePagination = dynamic(
+  () => import('../../components/Books/TablePagination'),
+  { ssr: false },
+)
 
 interface IBookPage {
   searchParams: { [key: string]: string }
