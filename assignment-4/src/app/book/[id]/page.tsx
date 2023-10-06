@@ -1,21 +1,21 @@
 'use client'
 
-import { BaseSyntheticEvent, useState } from 'react'
+import { BaseSyntheticEvent } from 'react'
 import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-import { useBooksContext } from '@/src/components/books'
+import { useBooksContext, useBooksDialogContext } from '@/src/components/books'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/button'
 
-export default function ViewBook({
-  params: { id },
-}: {
+interface IViewBook {
   params: { id: string }
-}) {
+}
+
+export default function ViewBook({ params: { id } }: IViewBook) {
   const router = useRouter()
-  const { bookStore, deleteBook } = useBooksContext()
-  const [confirmation, setConfirmation] = useState<boolean>(false)
+  const { bookStore } = useBooksContext()
+  const { showDeleteDialog } = useBooksDialogContext()
   const result = bookStore.filter((book) => book.id === id)
 
   const navigateBackward = (
@@ -34,6 +34,8 @@ export default function ViewBook({
   if (result.length === 0) {
     redirect('/')
   }
+
+  const handleDelete = () => showDeleteDialog(result[0])
 
   return (
     <section className="mx-auto w-[60rem] max-w-full">
@@ -60,29 +62,9 @@ export default function ViewBook({
           {BOOK_TOPICS[result[0].topic]}
         </div>
         <div className="right-0 top-0 text-right max-md:mt-8 md:absolute">
-          {confirmation ? (
-            <>
-              <Button size="large" onClick={() => deleteBook(result[0].id)}>
-                Confirm
-              </Button>
-              <Button
-                variant="error"
-                size="large"
-                onClick={() => setConfirmation(false)}
-                className="ml-2"
-              >
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button
-              variant="warning"
-              size="large"
-              onClick={() => setConfirmation(true)}
-            >
-              Delete
-            </Button>
-          )}
+          <Button variant="warning" size="large" onClick={handleDelete}>
+            Delete
+          </Button>
         </div>
       </div>
     </section>

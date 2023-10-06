@@ -6,10 +6,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
+import { useBooksDialogContext } from './BooksDialogContext'
 
 export default function TableToolbar() {
-  const { bookStore, pageIndex, search, setSearch, toggleForm } =
-    useBooksContext()
+  const { bookStore, pageIndex, search, setSearch } = useBooksContext()
+  const { showAddDialog } = useBooksDialogContext()
   const [keyword, setKeyword] = useState<string>('')
   const router = useRouter()
   const pathname = usePathname()
@@ -63,7 +64,7 @@ export default function TableToolbar() {
           onInput={(event) =>
             setKeyword((event.target as HTMLInputElement).value)
           }
-          className="rounded-md border-gray-300 pe-12 text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
+          className="rounded-[.25rem] border-gray-300 pe-12 text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
         />
         <button
           type="button"
@@ -73,7 +74,7 @@ export default function TableToolbar() {
           clear
         </button>
       </div>
-      <Button variant="info" onClick={toggleForm}>
+      <Button variant="info" onClick={showAddDialog}>
         New book
       </Button>
     </div>

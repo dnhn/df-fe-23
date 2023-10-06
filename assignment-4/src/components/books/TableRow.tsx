@@ -1,20 +1,19 @@
-import { useState } from 'react'
 import Link from 'next/link'
 
 import { IBook } from '@/src/types/book'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/button'
-import { useBooksContext } from './BooksContext'
+import { useBooksDialogContext } from './BooksDialogContext'
 
-export default function TableRow({
-  book,
-  index,
-}: {
+interface ITableRow {
   book: IBook
   index: number
-}) {
-  const { deleteBook } = useBooksContext()
-  const [confirmation, setConfirmation] = useState<boolean>(false)
+}
+
+export default function TableRow({ book, index }: ITableRow) {
+  const { showDeleteDialog } = useBooksDialogContext()
+
+  const handleDelete = () => showDeleteDialog(book)
 
   return (
     <tr className="group transition-colors ease-linear even:bg-slate-200 dark:even:bg-slate-600 md:hover:bg-slate-300 dark:md:hover:bg-slate-500">
@@ -34,38 +33,17 @@ export default function TableRow({
       <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
         {BOOK_TOPICS[book.topic]}
       </td>
-      <td className="text-r h-14ight whitespace-nowrap px-4 py-3 md:h-16">
+      <td className="text-r h-14 whitespace-nowrap px-4 py-3 md:h-16">
         <div className="flex items-center justify-end gap-2">
-          {confirmation ? (
-            <>
-              <Button size="small" onClick={() => deleteBook(book.id)}>
-                Confirm
-              </Button>
-              <Button
-                variant="error"
-                size="small"
-                onClick={() => setConfirmation(false)}
-              >
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <>
-              <Link
-                href={`/book/${book.id}`}
-                className="button button--primary button--small"
-              >
-                View
-              </Link>
-              <Button
-                size="small"
-                variant="warning"
-                onClick={() => setConfirmation(true)}
-              >
-                Delete
-              </Button>
-            </>
-          )}
+          <Link
+            href={`/book/${book.id}`}
+            className="button button--primary button--small"
+          >
+            View
+          </Link>
+          <Button size="small" variant="warning" onClick={handleDelete}>
+            Delete
+          </Button>
         </div>
       </td>
     </tr>

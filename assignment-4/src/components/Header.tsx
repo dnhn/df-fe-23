@@ -1,5 +1,5 @@
 import ThemeSwitch from '@/src/components/ThemeSwitch'
-import Container from './Container'
+import Container from '@/src/components/Container'
 
 export default function Header() {
   return (

@@ -1,7 +1,11 @@
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
 
-import { BooksProvider } from '@/src/components/books'
+import {
+  BooksProvider,
+  BooksDialogProvider,
+  DialogRenderer,
+} from '@/src/components/books'
 
 export const metadata: Metadata = {
   title: 'Book List',
@@ -9,5 +13,12 @@ export const metadata: Metadata = {
 }
 
 export default function BookLayout({ children }: { children: ReactNode }) {
-  return <BooksProvider>{children}</BooksProvider>
+  return (
+    <BooksProvider>
+      <BooksDialogProvider>
+        {children}
+        <DialogRenderer />
+      </BooksDialogProvider>
+    </BooksProvider>
+  )
 }

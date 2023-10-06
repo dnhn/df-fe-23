@@ -8,11 +8,11 @@ import Table, {
   useBooksContext,
 } from '@/src/components/books'
 
-export default function Book({
-  searchParams,
-}: {
+interface IBookPage {
   searchParams: { [key: string]: string }
-}) {
+}
+
+export default function Book({ searchParams }: IBookPage) {
   const { setPageIndex, setSearch } = useBooksContext()
   const pageParam = searchParams['page']
   const searchKeywordParam = searchParams['q']
