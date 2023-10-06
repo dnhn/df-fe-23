@@ -5,6 +5,7 @@ import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext, useBooksDialogContext } from '@/src/components/Books'
+import { PATH } from '@/src/lib/constants'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/Button'
 
@@ -42,7 +43,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
       <title>{`${result[0].title} – ${result[0].author}`}</title>
 
       <div className="mb-8 font-medium">
-        <Link href="/book" onClick={navigateBackward}>
+        <Link href={PATH.BOOK.ROOT} onClick={navigateBackward}>
           Books
         </Link>
         <span className="px-4">/</span>

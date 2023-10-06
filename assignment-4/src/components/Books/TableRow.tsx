@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { IBook } from '@/src/types/book'
+import { PATH } from '@/src/lib/constants'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/Button'
 import { useBooksDialogContext } from './BooksDialogContext'
@@ -21,7 +22,7 @@ export default function TableRow({ book, index }: ITableRow) {
       <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
         <span className="max-md:hidden">{book.title}</span>
         <Link
-          href={`/book/${book.id}`}
+          href={PATH.BOOK.VIEW(book.id)}
           className="border-b border-dashed border-b-gray-600 md:hidden"
         >
           {book.title}
@@ -36,7 +37,7 @@ export default function TableRow({ book, index }: ITableRow) {
       <td className="text-r h-14 whitespace-nowrap px-4 py-3 md:h-16">
         <div className="flex items-center justify-end gap-2">
           <Link
-            href={`/book/${book.id}`}
+            href={PATH.BOOK.VIEW(book.id)}
             className="button button--primary button--small"
           >
             View
