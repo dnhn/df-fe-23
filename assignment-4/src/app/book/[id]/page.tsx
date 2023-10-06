@@ -1,7 +1,7 @@
 'use client'
 
 import { BaseSyntheticEvent } from 'react'
-import { redirect, useRouter } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext, useBooksDialogContext } from '@/src/components/books'
@@ -32,7 +32,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
   }
 
   if (result.length === 0) {
-    redirect('/')
+    notFound()
   }
 
   const handleDelete = () => showDeleteDialog(result[0])
