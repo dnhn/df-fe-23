@@ -3,7 +3,7 @@
 import { ChangeEvent, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import Button from '@/src/components/button'
+import Button from '@/src/components/Button'
 import { useBooksContext } from './BooksContext'
 
 export default function TablePagination() {

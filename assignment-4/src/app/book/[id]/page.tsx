@@ -4,9 +4,9 @@ import { BaseSyntheticEvent } from 'react'
 import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-import { useBooksContext, useBooksDialogContext } from '@/src/components/books'
+import { useBooksContext, useBooksDialogContext } from '@/src/components/Books'
 import { BOOK_TOPICS } from '@/src/lib/data'
-import Button from '@/src/components/button'
+import Button from '@/src/components/Button'
 
 interface IViewBook {
   params: { id: string }

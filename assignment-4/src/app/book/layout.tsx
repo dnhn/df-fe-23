@@ -5,7 +5,7 @@ import {
   BooksProvider,
   BooksDialogProvider,
   DialogRenderer,
-} from '@/src/components/books'
+} from '@/src/components/Books'
 
 export const metadata: Metadata = {
   title: 'Book List',

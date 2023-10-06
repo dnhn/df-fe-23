@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
-import Button from '@/src/components/button'
+import Button from '@/src/components/Button'
 import { useBooksContext } from './BooksContext'
 import { useBooksDialogContext } from './BooksDialogContext'
 

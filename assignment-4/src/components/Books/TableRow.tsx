@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { IBook } from '@/src/types/book'
 import { BOOK_TOPICS } from '@/src/lib/data'
-import Button from '@/src/components/button'
+import Button from '@/src/components/Button'
 import { useBooksDialogContext } from './BooksDialogContext'
 
 interface ITableRow {

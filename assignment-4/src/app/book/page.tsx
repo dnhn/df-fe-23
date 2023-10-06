@@ -6,7 +6,7 @@ import Table, {
   TablePagination,
   TableToolbar,
   useBooksContext,
-} from '@/src/components/books'
+} from '@/src/components/Books'
 
 interface IBookPage {
   searchParams: { [key: string]: string }

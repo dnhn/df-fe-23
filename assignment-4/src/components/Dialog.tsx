@@ -7,7 +7,7 @@ import {
 } from 'react'
 
 import { IButton } from '@/src/types/button'
-import Button from '@/src/components/button'
+import Button from '@/src/components/Button'
 
 interface IAction extends IButton {
   ref?: RefObject<HTMLButtonElement>
