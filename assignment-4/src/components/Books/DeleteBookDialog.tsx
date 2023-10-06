@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
+import { PATH } from '@/src/lib/constants'
 import Dialog from '@/src/components/Dialog'
 import { useBooksContext } from './BooksContext'
 import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
 
 export default function DeleteBookDialog() {
+  const router = useRouter()
+  const pathname = usePathname()
   const { deleteBook } = useBooksContext()
   const { dialogType, deleteProps, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -25,8 +29,13 @@ export default function DeleteBookDialog() {
     }
   }, [dialogType])
 
-  const handleDelete = () => {
-    deleteBook(deleteProps?.bookId ?? '')
+  const handleDelete = async () => {
+    await deleteBook(deleteProps?.bookId ?? '')
+
+    if (pathname !== PATH.BOOK.ROOT) {
+      router.replace(PATH.BOOK.ROOT)
+    }
+
     dialogRef?.current?.close()
   }
 

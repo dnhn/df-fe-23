@@ -34,18 +34,16 @@ export default function AddBookDialog() {
     }
   }, [dialogType])
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     const form = event.target as typeof event.target & IFormSubmit
 
-    addBook({
+    await addBook({
       id: Date.now().toString(),
       title: trimTrim(form.title.value),
       author: trimTrim(form.author.value),
       topic: form.topic.value,
     })
-
-    formRef?.current?.reset()
-    dialogRef?.current?.close()
+    handleHide()
   }
 
   const handleShow = () => dialogRef?.current?.showModal()
