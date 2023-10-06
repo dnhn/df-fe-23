@@ -1,6 +1,7 @@
 import Table from './Table'
 
 export * from './BooksContext'
+export * from './BooksDialogContext'
 
 export default Table
 export { default as TablePagination } from './TablePagination'

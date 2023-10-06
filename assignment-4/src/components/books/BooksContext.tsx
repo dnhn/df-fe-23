@@ -17,16 +17,12 @@ import { BOOKS_DATA_KEY, BOOKS_PER_PAGE } from '@/src/lib/constants'
 
 interface IBooksValues {
   bookStore: IBook[]
-  formOpen: boolean
   search: string
   pageIndex: number
   pageSize: number
 }
 
 interface IBooksContext extends IBooksValues {
-  openForm: VoidFunction
-  closeForm: VoidFunction
-  toggleForm: VoidFunction
   addBook: (book: IBook) => void
   deleteBook: (id: string) => void
   setSearch: (search: string) => void
@@ -34,9 +30,8 @@ interface IBooksContext extends IBooksValues {
   setPageSize: (page: number) => void
 }
 
-const initialState = {
+const initialState: IBooksValues = {
   bookStore: INITIAL_BOOKS,
-  formOpen: false,
   search: '',
   pageIndex: 0,
   pageSize: BOOKS_PER_PAGE,
@@ -45,9 +40,6 @@ const initialState = {
 const BooksContext = createContext<IBooksContext>({
   ...initialState,
 
-  openForm: () => {},
-  closeForm: () => {},
-  toggleForm: () => {},
   addBook: () => {},
   deleteBook: () => {},
   setSearch: () => {},
@@ -59,7 +51,7 @@ export const useBooksContext = () => {
   const context = useContext<IBooksContext>(BooksContext)
 
   if (!context) {
-    throw new Error('useBooksContext must be use within BooksProvider')
+    throw new Error('useBooksContext must be used within BooksProvider')
   }
 
   return context
@@ -67,7 +59,6 @@ export const useBooksContext = () => {
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
   const [bookStore, setBookStore] = useState<IBook[]>(INITIAL_BOOKS)
-  const [formOpen, setFormOpen] = useState<boolean>(false)
   const [search, setSearch] = useState<string>('')
   const [pageIndex, setPageIndex] = useState<number>(0)
   const [pageSize, setPageSize] = useState<number>(BOOKS_PER_PAGE)
@@ -85,15 +76,6 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     setLocalStorageItem(BOOKS_DATA_KEY, { bookStore, pageSize })
   }, [bookStore, pageSize])
 
-  const openForm = useCallback(() => setFormOpen(true), [setFormOpen])
-
-  const closeForm = useCallback(() => setFormOpen(false), [setFormOpen])
-
-  const toggleForm = useCallback(
-    () => setFormOpen((state) => !state),
-    [setFormOpen],
-  )
-
   const addBook = useCallback(
     (book: IBook) => setBookStore((books) => [book, ...books]),
     [setBookStore],
@@ -108,14 +90,10 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
   const memo = useMemo(
     () => ({
       bookStore,
-      formOpen,
       search,
       pageIndex,
       pageSize,
 
-      openForm,
-      closeForm,
-      toggleForm,
       addBook,
       deleteBook,
       setSearch,
@@ -124,14 +102,10 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     }),
     [
       bookStore,
-      formOpen,
       search,
       pageIndex,
       pageSize,
 
-      openForm,
-      closeForm,
-      toggleForm,
       addBook,
       deleteBook,
       setSearch,
