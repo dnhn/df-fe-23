@@ -1,4 +1,0 @@
-.Row:not(.RowConfirmMode) input,
-.Row:not(.RowConfirmMode) select {
-  @apply invisible opacity-0;
-}

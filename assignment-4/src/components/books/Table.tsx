@@ -6,7 +6,6 @@ import { IBook } from '@/src/types/book'
 import Button from '@/src/components/button'
 import { useBooksContext } from './BooksContext'
 import TableRow from './TableRow'
-import TableForm from './TableForm'
 
 export default function Table() {
   const { bookStore, pageIndex, pageSize, search, setPageIndex } =
@@ -71,10 +70,6 @@ export default function Table() {
               </tr>
             ))}
         </tbody>
-
-        <tfoot>
-          <TableForm />
-        </tfoot>
       </table>
     </section>
   )
