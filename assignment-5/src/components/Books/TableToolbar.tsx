@@ -5,8 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
-import { useBooksContext } from './BooksContext'
-import { useBooksDialogContext } from './BooksDialogContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
+import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
   const { bookStore, pageIndex, search, setSearch } = useBooksContext()

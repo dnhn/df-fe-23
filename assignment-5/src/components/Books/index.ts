@@ -1,7 +1,7 @@
 import Table from './Table'
 
-export * from './BooksContext'
-export * from './BooksDialogContext'
+export * from '@/src/contexts/BooksContext'
+export * from '@/src/contexts/BooksDialogContext'
 
 export default Table
 export { default as TablePagination } from './TablePagination'

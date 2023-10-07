@@ -4,7 +4,7 @@ import { IBook } from '@/src/types/book'
 import { PATHS } from '@/src/lib/constants'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/Button'
-import { useBooksDialogContext } from './BooksDialogContext'
+import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 interface ITableRow {
   book: IBook

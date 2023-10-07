@@ -3,8 +3,11 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { PATHS } from '@/src/lib/constants'
 import Dialog from '@/src/components/Dialog'
-import { useBooksContext } from './BooksContext'
-import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
+import {
+  DIALOG_TYPE,
+  useBooksDialogContext,
+} from '@/src/contexts/BooksDialogContext'
 
 export default function DeleteBookDialog() {
   const router = useRouter()

@@ -6,8 +6,11 @@ import { z } from 'zod'
 import { trimTrim } from '@/src/lib/utils'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Dialog from '@/src/components/Dialog'
-import { useBooksContext } from './BooksContext'
-import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
+import {
+  DIALOG_TYPE,
+  useBooksDialogContext,
+} from '@/src/contexts/BooksDialogContext'
 
 export default function AddEditBookDialog() {
   const { addBook, editBook } = useBooksContext()
@@ -19,7 +22,7 @@ export default function AddEditBookDialog() {
     title: z
       .string()
       .min(5, { message: 'Title must be at least 5 characters.' }),
-    author: z.string().regex(/^[a-z][a-z\s]*$/, {
+    author: z.string().regex(/^[A-Za-z][A-Za-z\s]*$/, {
       message: 'Name contains letters and spaces only.',
     }),
     topic: z

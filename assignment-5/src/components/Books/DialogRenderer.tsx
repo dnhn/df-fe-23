@@ -1,6 +1,9 @@
 'use client'
 
-import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
+import {
+  DIALOG_TYPE,
+  useBooksDialogContext,
+} from '@/src/contexts/BooksDialogContext'
 import AddEditDialog from './AddEditBookDialog'
 import DeleteDialog from './DeleteBookDialog'
 

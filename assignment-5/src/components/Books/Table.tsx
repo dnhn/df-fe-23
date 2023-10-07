@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { IBook } from '@/src/types/book'
 import Button from '@/src/components/Button'
-import { useBooksContext } from './BooksContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
 import TableRow from './TableRow'
 
 export default function Table() {
