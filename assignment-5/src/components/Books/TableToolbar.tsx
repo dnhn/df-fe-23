@@ -50,7 +50,7 @@ export default function TableToolbar() {
 
     // Push to URL
     if (pathname) {
-      router.push(`${pathname}?${query}`, {})
+      router.replace(`${pathname}?${query}`, {})
     }
   }, [search]) // eslint-disable-line react-hooks/exhaustive-deps
 

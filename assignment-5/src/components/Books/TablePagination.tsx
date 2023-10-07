@@ -41,7 +41,7 @@ export default function TablePagination() {
 
     // Push to URL
     if (pathname) {
-      router.push(`${pathname}?${query}`, {})
+      router.replace(`${pathname}?${query}`, {})
     }
   }, [pageIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 
