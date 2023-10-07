@@ -12,8 +12,9 @@ interface ITableRow {
 }
 
 export default function TableRow({ book, index }: ITableRow) {
-  const { showDeleteDialog } = useBooksDialogContext()
+  const { showDeleteDialog, showEditDialog } = useBooksDialogContext()
 
+  const handleEdit = () => showEditDialog(book)
   const handleDelete = () => showDeleteDialog(book)
 
   return (
@@ -35,13 +36,16 @@ export default function TableRow({ book, index }: ITableRow) {
         {BOOK_TOPICS[book.topic]}
       </td>
       <td className="text-r h-14 whitespace-nowrap px-4 py-3 md:h-16">
-        <div className="flex items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-3">
           <Link
             href={PATH.BOOK.VIEW(book.id)}
             className="border-b border-dashed border-b-gray-600 text-sm font-medium dark:border-b-gray-400"
           >
             View
           </Link>
+          <Button size="small" variant="info" onClick={handleEdit}>
+            Edit
+          </Button>
           <Button size="small" variant="warning" onClick={handleDelete}>
             Delete
           </Button>

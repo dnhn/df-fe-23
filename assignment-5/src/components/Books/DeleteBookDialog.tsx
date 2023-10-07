@@ -10,7 +10,7 @@ export default function DeleteBookDialog() {
   const router = useRouter()
   const pathname = usePathname()
   const { deleteBook } = useBooksContext()
-  const { dialogType, dialogProps, hideDialogs } = useBooksDialogContext()
+  const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function DeleteBookDialog() {
   }, [dialogType])
 
   const handleDelete = async () => {
-    await deleteBook(dialogProps?.bookId ?? '')
+    await deleteBook(dialogProps?.book.id ?? '')
 
     if (pathname !== PATH.BOOK.ROOT) {
       router.replace(PATH.BOOK.ROOT)
@@ -64,7 +64,7 @@ export default function DeleteBookDialog() {
       <p>
         Do you want to delete the book{' '}
         <span className="font-medium italic">
-          {dialogProps?.bookTitle ?? ''}
+          {dialogProps?.book.title ?? ''}
         </span>
         ?
       </p>

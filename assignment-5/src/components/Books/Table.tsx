@@ -36,7 +36,7 @@ export default function Table() {
             <th className="min-w-[16rem] px-4 py-3 text-left">Title</th>
             <th className="px-4 py-3 text-left xl:w-80">Author</th>
             <th className="px-4 py-3 text-left xl:w-64">Topic</th>
-            <th className="px-4 py-3 text-right xl:w-48">Actions</th>
+            <th className="px-4 py-3 text-right xl:w-52">Actions</th>
           </tr>
         </thead>
 
