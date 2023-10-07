@@ -18,7 +18,7 @@ export enum DIALOG_TYPE {
 
 interface IDialogValues {
   dialogType?: string | 'add' | 'delete'
-  deleteProps?: {
+  dialogProps?: {
     bookId: string
     bookTitle: string
   }
@@ -58,7 +58,7 @@ export const BooksDialogProvider = ({ children }: { children: ReactNode }) => {
     (book: IBook) =>
       setState({
         dialogType: DIALOG_TYPE.DELETE,
-        deleteProps: { bookId: book.id, bookTitle: book.title },
+        dialogProps: { bookId: book.id, bookTitle: book.title },
       }),
     [setState],
   )
@@ -68,7 +68,7 @@ export const BooksDialogProvider = ({ children }: { children: ReactNode }) => {
   const memo = useMemo(
     () => ({
       dialogType: state.dialogType,
-      deleteProps: state.deleteProps,
+      dialogProps: state.dialogProps,
 
       showAddDialog,
       showDeleteDialog,
@@ -76,7 +76,7 @@ export const BooksDialogProvider = ({ children }: { children: ReactNode }) => {
     }),
     [
       state.dialogType,
-      state.deleteProps,
+      state.dialogProps,
 
       showAddDialog,
       showDeleteDialog,
