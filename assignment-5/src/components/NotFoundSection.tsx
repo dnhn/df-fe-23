@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { PATH } from '@/src/lib/constants'
+import { PATHS } from '@/src/lib/constants'
 
 interface INotFound {
   title?: string
@@ -13,7 +13,7 @@ export default function NotFoundSection({
   title = '404 Not Found',
   message = 'The page you are looking for does not exist.',
   linkLabel = 'Back to home page',
-  linkHref = PATH.ROOT,
+  linkHref = PATHS.ROOT,
 }: INotFound) {
   return (
     <section className="relative mx-auto flex h-[50lvh] w-[25rem] max-w-full flex-col justify-center text-center md:h-[60vh]">

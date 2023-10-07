@@ -1,4 +1,4 @@
-import { PATH } from '@/src/lib/constants'
+import { PATHS } from '@/src/lib/constants'
 import NotFoundSection from '@/src/components/NotFoundSection'
 
 export default function NotFound() {
@@ -6,7 +6,7 @@ export default function NotFound() {
     <NotFoundSection
       title="404 Book Not Found"
       message="The book you are looking for does not exist."
-      linkHref={PATH.BOOK.ROOT}
+      linkHref={PATHS.BOOK.ROOT}
       linkLabel="Back to book list"
     />
   )
