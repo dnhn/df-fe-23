@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import { trimTrim } from '@/src/lib/utils'
 import { BOOK_TOPICS } from '@/src/lib/data'
@@ -7,23 +9,32 @@ import Dialog from '@/src/components/Dialog'
 import { useBooksContext } from './BooksContext'
 import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
 
-interface IFormValues {
-  id: string
-  title: string
-  author: string
-  topic: string
-}
-
 export default function AddEditBookDialog() {
   const { addBook, editBook } = useBooksContext()
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
-  const formRef = useRef<HTMLFormElement>(null)
+
+  const schema = z.object({
+    id: z.string(),
+    title: z
+      .string()
+      .min(5, { message: 'Title must be at least 5 characters.' }),
+    author: z.string().regex(/^[a-z][a-z\s]*$/, {
+      message: 'Name contains letters and spaces only.',
+    }),
+    topic: z
+      .string()
+      .refine((value) => Object.keys(BOOK_TOPICS).includes(value), {
+        message: 'Topic is required.',
+      }),
+  })
+  type Schema = z.infer<typeof schema>
   const {
-    formState: { isSubmitting },
+    formState: { errors, isDirty, isSubmitting },
     handleSubmit,
     register,
-  } = useForm<IFormValues>({
+  } = useForm<Schema>({
+    resolver: zodResolver(schema),
     defaultValues: {
       id: dialogProps?.book.id ?? '',
       title: dialogProps?.book.title ?? '',
@@ -48,21 +59,22 @@ export default function AddEditBookDialog() {
     }
   }, [dialogType])
 
-  const formSubmit: SubmitHandler<IFormValues> = async (data) => {
+  const formSubmit: SubmitHandler<Schema> = async (data) => {
     if (dialogType === DIALOG_TYPE.EDIT) {
-      // Simulate latency
-      await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
-
-      await editBook({
-        id: data.id,
-        title: trimTrim(data.title),
-        author: trimTrim(data.author),
-        topic: data.topic,
-      })
+      // Dirty to prevent submission of unchanged data
+      if (isDirty) {
+        // Simulate latency
+        await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
+        await editBook({
+          id: data.id,
+          title: trimTrim(data.title),
+          author: trimTrim(data.author),
+          topic: data.topic,
+        })
+      }
     } else {
       // Simulate latency
       await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
-
       await addBook({
         id: Date.now().toString(),
         title: trimTrim(data.title),
@@ -106,46 +118,64 @@ export default function AddEditBookDialog() {
       ]}
     >
       <form
-        ref={formRef}
         id="add-book-form"
         method="dialog"
         onSubmit={handleSubmit(formSubmit)}
       >
         <div className="flex flex-col gap-4">
-          <label htmlFor="form-title">
+          <label htmlFor="form-title" className="relative">
             <div className="mb-2 text-sm">Title</div>
             <input
               {...register('title')}
               type="text"
               id="form-title"
               placeholder="Title"
-              required
               disabled={isSubmitting}
               autoCapitalize="words"
-              className="w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
+              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+                errors.title
+                  ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
+                  : ''
+              }`}
             />
+            {errors.title && (
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+                {errors.title?.message}
+              </p>
+            )}
           </label>
-          <label htmlFor="form-author">
+          <label htmlFor="form-author" className="relative">
             <div className="mb-2 text-sm">Author</div>
             <input
               {...register('author')}
               type="text"
               id="form-author"
               placeholder="Author"
-              required
               disabled={isSubmitting}
               autoCapitalize="words"
-              className="w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
+              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+                errors.author
+                  ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
+                  : ''
+              }`}
             />
+            {errors.author && (
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+                {errors.author?.message}
+              </p>
+            )}
           </label>
-          <label htmlFor="form-topic">
+          <label htmlFor="form-topic" className="relative">
             <div className="mb-2 text-sm">Topic</div>
             <select
               {...register('topic')}
               id="form-topic"
-              required
               disabled={isSubmitting}
-              className="w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0"
+              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+                errors.topic
+                  ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
+                  : ''
+              }`}
             >
               <option value="">Select a topic</option>
               {Object.entries(BOOK_TOPICS).map((topic, index) => (
@@ -154,6 +184,11 @@ export default function AddEditBookDialog() {
                 </option>
               ))}
             </select>
+            {errors.topic && (
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+                {errors.topic?.message}
+              </p>
+            )}
           </label>
         </div>
       </form>
