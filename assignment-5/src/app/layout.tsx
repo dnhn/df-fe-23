@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <html lang="en" className={(themeMode && themeMode.value) || ''}>
-      <body className="bg-slate-200 transition-[background-color] duration-500 dark:bg-slate-800 dark:text-gray-50">
+      <body className="bg-slate-200 !transition-none transition-[background-color] duration-500 dark:bg-slate-800 dark:text-gray-50">
         <Header />
 
         {children}

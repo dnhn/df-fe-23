@@ -15,6 +15,12 @@ export default function ThemeSwitch() {
   const [themeMode, setThemeMode] = useState<IThemeMode>(storedTheme)
 
   useEffect(() => {
+    setTimeout(() => {
+      document.body.classList.remove('!transition-none')
+    }, 100)
+  }, [])
+
+  useEffect(() => {
     setLocalStorageItem('themeMode', themeMode)
 
     if (themeMode === THEME_MODE.DARK) {
