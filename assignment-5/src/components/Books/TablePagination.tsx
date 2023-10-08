@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Button from '@/src/components/Button'
-import { useBooksContext } from './BooksContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
 
 export default function TablePagination() {
   const { bookStore, pageIndex, pageSize, search, setPageIndex, setPageSize } =
@@ -41,7 +41,7 @@ export default function TablePagination() {
 
     // Push to URL
     if (pathname) {
-      router.push(`${pathname}?${query}`, {})
+      router.replace(`${pathname}?${query}`, {})
     }
   }, [pageIndex]) // eslint-disable-line react-hooks/exhaustive-deps
 

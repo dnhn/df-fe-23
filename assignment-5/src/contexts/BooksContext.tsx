@@ -24,6 +24,7 @@ interface IBooksValues {
 
 interface IBooksContext extends IBooksValues {
   addBook: (book: IBook) => void
+  editBook: (book: IBook) => void
   deleteBook: (id: string) => void
   setSearch: (search: string) => void
   setPageIndex: (pageIndex: number) => void
@@ -41,6 +42,7 @@ const BooksContext = createContext<IBooksContext>({
   ...initialState,
 
   addBook: () => {},
+  editBook: () => {},
   deleteBook: () => {},
   setSearch: () => {},
   setPageIndex: () => {},
@@ -77,6 +79,16 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     [setBookStore],
   )
 
+  const editBook = useCallback(
+    (book: IBook) =>
+      setBookStore((books) =>
+        books.map((existingBook) =>
+          existingBook.id === book.id ? book : existingBook,
+        ),
+      ),
+    [setBookStore],
+  )
+
   const deleteBook = useCallback(
     (id: string) =>
       setBookStore((books) => books.filter((book) => book.id !== id)),
@@ -91,6 +103,7 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
       pageSize,
 
       addBook,
+      editBook,
       deleteBook,
       setSearch,
       setPageIndex,
@@ -103,6 +116,7 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
       pageSize,
 
       addBook,
+      editBook,
       deleteBook,
       setSearch,
       setPageIndex,

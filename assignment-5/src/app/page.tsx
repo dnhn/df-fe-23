@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
-import { PATH } from '@/src/lib/constants'
+import { PATHS } from '@/src/lib/constants'
 
 export default function Home() {
-  redirect(PATH.BOOK.ROOT)
+  redirect(PATHS.AUTH.LOGIN)
 }

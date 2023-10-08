@@ -5,8 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
-import { useBooksContext } from './BooksContext'
-import { useBooksDialogContext } from './BooksDialogContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
+import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
   const { bookStore, pageIndex, search, setSearch } = useBooksContext()
@@ -23,7 +23,7 @@ export default function TableToolbar() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    let typeTimeout
+    let typeTimeout: string | number | NodeJS.Timeout | undefined
 
     if (bookStore.length) {
       typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300)
@@ -50,7 +50,7 @@ export default function TableToolbar() {
 
     // Push to URL
     if (pathname) {
-      router.push(`${pathname}?${query}`, {})
+      router.replace(`${pathname}?${query}`, {})
     }
   }, [search]) // eslint-disable-line react-hooks/exhaustive-deps
 

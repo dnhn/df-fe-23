@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
 import { useBooksContext, useBooksDialogContext } from '@/src/components/Books'
-import { PATH } from '@/src/lib/constants'
+import { PATHS } from '@/src/lib/constants'
 import { BOOK_TOPICS } from '@/src/lib/data'
 import Button from '@/src/components/Button'
 
@@ -28,7 +28,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
       <title>{`${result[0].title} – ${result[0].author}`}</title>
 
       <div className="mb-8 font-medium">
-        <Link href={PATH.BOOK.ROOT}>Books</Link>
+        <Link href={PATHS.BOOK.ROOT}>Books</Link>
         <span className="px-4">/</span>
         <span className="text-gray-500 dark:text-gray-400">
           {result[0].title}

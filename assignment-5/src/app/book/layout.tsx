@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Metadata } from 'next'
 
+import Container from '@/src/components/Container'
 import {
   BooksProvider,
   BooksDialogProvider,
@@ -14,11 +15,15 @@ export const metadata: Metadata = {
 
 export default function BookLayout({ children }: { children: ReactNode }) {
   return (
-    <BooksProvider>
-      <BooksDialogProvider>
-        {children}
-        <DialogRenderer />
-      </BooksDialogProvider>
-    </BooksProvider>
+    <main className="overflow-hidden px-4 pb-32 pt-16">
+      <Container>
+        <BooksProvider>
+          <BooksDialogProvider>
+            {children}
+            <DialogRenderer />
+          </BooksDialogProvider>
+        </BooksProvider>
+      </Container>
+    </main>
   )
 }

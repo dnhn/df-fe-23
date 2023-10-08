@@ -1,16 +1,19 @@
 import { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { PATH } from '@/src/lib/constants'
+import { PATHS } from '@/src/lib/constants'
 import Dialog from '@/src/components/Dialog'
-import { useBooksContext } from './BooksContext'
-import { DIALOG_TYPE, useBooksDialogContext } from './BooksDialogContext'
+import { useBooksContext } from '@/src/contexts/BooksContext'
+import {
+  DIALOG_TYPE,
+  useBooksDialogContext,
+} from '@/src/contexts/BooksDialogContext'
 
 export default function DeleteBookDialog() {
   const router = useRouter()
   const pathname = usePathname()
   const { deleteBook } = useBooksContext()
-  const { dialogType, deleteProps, hideDialogs } = useBooksDialogContext()
+  const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -30,10 +33,10 @@ export default function DeleteBookDialog() {
   }, [dialogType])
 
   const handleDelete = async () => {
-    await deleteBook(deleteProps?.bookId ?? '')
+    await deleteBook(dialogProps?.book.id ?? '')
 
-    if (pathname !== PATH.BOOK.ROOT) {
-      router.replace(PATH.BOOK.ROOT)
+    if (pathname !== PATHS.BOOK.ROOT) {
+      router.replace(PATHS.BOOK.ROOT)
     }
 
     dialogRef?.current?.close()
@@ -64,7 +67,7 @@ export default function DeleteBookDialog() {
       <p>
         Do you want to delete the book{' '}
         <span className="font-medium italic">
-          {deleteProps?.bookTitle ?? ''}
+          {dialogProps?.book.title ?? ''}
         </span>
         ?
       </p>
