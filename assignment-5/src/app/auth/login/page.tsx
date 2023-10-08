@@ -62,7 +62,6 @@ export default function Login() {
         src={BooksImage}
         alt="Bookstore"
         priority
-        loading="eager"
         fill
         placeholder="blur"
         className="object-cover"

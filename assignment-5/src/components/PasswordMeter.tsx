@@ -18,7 +18,7 @@ export default function PasswordMeter({ text, ...other }: IPasswordMeter) {
   return (
     <div
       {...other}
-      aria-label={`Password strength: ${score} out of 4`}
+      title={`Password strength: ${score} out of 4`}
       className={`password-meter ${COLOUR_MAP[score]} ${
         other.className ? other.className : ''
       }`}
