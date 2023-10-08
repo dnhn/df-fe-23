@@ -6,7 +6,6 @@ import { cookies } from 'next/headers'
 
 import Header from '@/src/components/Header'
 import Footer from '@/src/components/Footer'
-import Container from '@/src/components/Container'
 
 export const metadata: Metadata = {
   title: 'Bookstore',
@@ -22,9 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="bg-slate-200 transition-[background-color] duration-500 dark:bg-slate-800 dark:text-gray-50">
         <Header />
 
-        <main className="overflow-hidden px-4 pb-32 pt-16">
-          <Container>{children}</Container>
-        </main>
+        {children}
 
         <Footer />
       </body>
