@@ -23,7 +23,7 @@ export default function TableToolbar() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    let typeTimeout
+    let typeTimeout: string | number | NodeJS.Timeout | undefined
 
     if (bookStore.length) {
       typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300)

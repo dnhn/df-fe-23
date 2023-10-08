@@ -31,7 +31,9 @@ export default function AddEditBookDialog() {
         message: 'Topic is required.',
       }),
   })
+
   type Schema = z.infer<typeof schema>
+
   const {
     formState: { errors, isDirty, isSubmitting },
     handleSubmit,
@@ -90,7 +92,6 @@ export default function AddEditBookDialog() {
   }
 
   const handleShow = () => dialogRef?.current?.showModal()
-
   const handleHide = () => dialogRef?.current?.close()
 
   return (
@@ -123,6 +124,7 @@ export default function AddEditBookDialog() {
       <form
         id="add-book-form"
         method="dialog"
+        noValidate
         onSubmit={handleSubmit(formSubmit)}
       >
         <div className="flex flex-col gap-4">
@@ -135,14 +137,14 @@ export default function AddEditBookDialog() {
               placeholder="Title"
               disabled={isSubmitting}
               autoCapitalize="words"
-              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+              className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
                 errors.title
                   ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
-                  : ''
+                  : 'border-transparent focus:border-gray-500'
               }`}
             />
             {errors.title && (
-              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
                 {errors.title?.message}
               </p>
             )}
@@ -156,14 +158,14 @@ export default function AddEditBookDialog() {
               placeholder="Author"
               disabled={isSubmitting}
               autoCapitalize="words"
-              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+              className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
                 errors.author
                   ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
-                  : ''
+                  : 'border-transparent focus:border-gray-500'
               }`}
             />
             {errors.author && (
-              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
                 {errors.author?.message}
               </p>
             )}
@@ -174,10 +176,10 @@ export default function AddEditBookDialog() {
               {...register('topic')}
               id="form-topic"
               disabled={isSubmitting}
-              className={`peer w-full rounded-[.25rem] border-transparent bg-gray-100 text-black focus:border-gray-500 focus:bg-white focus:ring-0 ${
+              className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
                 errors.topic
                   ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
-                  : ''
+                  : 'border-transparent focus:border-gray-500'
               }`}
             >
               <option value="">Select a topic</option>
@@ -188,7 +190,7 @@ export default function AddEditBookDialog() {
               ))}
             </select>
             {errors.topic && (
-              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-orange-600 dark:text-white">
+              <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
                 {errors.topic?.message}
               </p>
             )}
