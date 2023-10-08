@@ -67,7 +67,7 @@ export default function Login() {
         placeholder="blur"
         className="object-cover"
       />
-      <div className="absolute left-0 top-0 h-full w-full dark:bg-black/30" />
+      <div className="absolute left-0 top-0 h-full w-full transition-colors dark:bg-black/30" />
       <form
         noValidate
         onSubmit={handleSubmit(formSubmit)}
