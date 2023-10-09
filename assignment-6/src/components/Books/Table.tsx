@@ -64,8 +64,11 @@ export default function Table() {
             filtered.length < pageSize &&
             Array.from(Array(pageSize - filtered.length).keys()).map((key) => (
               <tr key={key} className="invisible opacity-0">
-                <td colSpan={5} className="px-4 py-3">
-                  <Button>button</Button>
+                <td
+                  colSpan={5}
+                  className="h-14 whitespace-nowrap px-4 py-3 md:h-16"
+                >
+                  <Button size="small">button</Button>
                 </td>
               </tr>
             ))}

@@ -56,14 +56,17 @@ export default function TablePagination() {
   return (
     totalPages > 0 && (
       <div className="mt-8 flex items-center justify-between gap-4 xs:justify-end xs:gap-6">
-        <label htmlFor="page-size" className="flex items-center gap-1">
+        <label
+          htmlFor="page-size"
+          className="flex items-center gap-1 max-xs:text-xs"
+        >
           <span>Page size:</span>
           <select
             name="page-size"
             id="page-size"
             value={pageSize}
             onChange={handlePageSizeChange}
-            className="w-auto border-0 border-b-2 border-gray-400 bg-transparent pr-8 text-current focus:border-black focus:ring-0"
+            className="w-auto border-0 border-b-2 border-gray-400 bg-transparent pr-8 text-current focus:border-black focus:ring-0 max-xs:text-sm"
           >
             <option value="4">4</option>
             <option value="5">5</option>
@@ -71,7 +74,7 @@ export default function TablePagination() {
           </select>
         </label>
         {totalPages > 0 && (
-          <span>
+          <span className="max-xs:text-xs">
             {currentFirstItem}–
             {currentLastItem > filtered.length
               ? filtered.length
