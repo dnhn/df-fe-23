@@ -13,3 +13,5 @@ export const PATHS = {
     VIEW: (id: string) => `/book/${id}`,
   },
 }
+
+export const API_TOKEN_KEY: string = 'apiToken'
