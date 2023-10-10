@@ -1,8 +1,14 @@
+'use client'
+
+import { useAuthContext } from '@/src/auth/AuthContext'
 import { PATHS } from '@/src/lib/constants'
 import ThemeSwitch from '@/src/components/ThemeSwitch'
 import Container from '@/src/components/Container'
+import Button from './Button'
 
 export default function Header() {
+  const { auth, logout } = useAuthContext()
+
   return (
     <header className="bg-slate-100 px-4 py-3 shadow shadow-black/30 transition-colors ease-linear dark:bg-slate-700">
       <Container className="flex items-center justify-between">
@@ -11,6 +17,7 @@ export default function Header() {
         </a>
         <div className="flex items-center gap-4">
           <ThemeSwitch />
+          {auth && <Button onClick={logout}>Log out</Button>}
         </div>
       </Container>
     </header>

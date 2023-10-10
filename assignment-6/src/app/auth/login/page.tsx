@@ -1,18 +1,18 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import Button from '@/src/components/Button'
-import { PATHS, SPECIAL_CHARS } from '@/src/lib/constants'
+import { SPECIAL_CHARS } from '@/src/lib/constants'
 import PasswordMeter from '@/src/components/PasswordMeter'
+import { useAuthContext } from '@/src/auth/AuthContext'
 import BooksImage from './freddie-marriage-w8JiSVyjy-8-unsplash.jpeg'
 
 export default function Login() {
-  const router = useRouter()
+  const { login } = useAuthContext()
   const schema = z
     .object({
       email: z.string().email({ message: 'Email is not valid.' }),
@@ -34,26 +34,29 @@ export default function Login() {
     .required()
   type Schema = z.infer<typeof schema>
   const {
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     getValues,
     handleSubmit,
     register,
+    setError,
     watch,
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: 'email@example.com',
-      password: 'This15n0taP@ssw0rd',
+      email: 'book@sto.re',
+      password: 'Dis15@B00kStor',
     },
   })
 
   watch('password')
   const passwordValue = getValues('password')
 
-  const formSubmit: SubmitHandler<Schema> = async () => {
-    // Simulate latency
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
-    router.replace(PATHS.BOOK.ROOT)
+  const formSubmit: SubmitHandler<Schema> = async (data) => {
+    try {
+      await login(data.email, data.password)
+    } catch (error) {
+      setError('root', { message: error.message })
+    }
   }
 
   return (
@@ -73,6 +76,11 @@ export default function Login() {
         className="relative w-[22.5rem] max-w-[calc(100%-2rem)] rounded-xl bg-white/10 p-8 text-white shadow-xl backdrop-blur-md"
       >
         <div className="mb-4 text-center text-2xl font-bold">Bookstore</div>
+        {errors.root && (
+          <div className="mb-4 rounded bg-amber-500 p-2 text-sm text-black">
+            {errors.root?.message}
+          </div>
+        )}
         <div className="flex flex-col gap-4">
           <label htmlFor="email" className="relative">
             <div className="text-sm">Email</div>
@@ -82,7 +90,7 @@ export default function Login() {
               inputMode="email"
               id="email"
               autoFocus
-              disabled={isSubmitting}
+              disabled={isSubmitting || isSubmitSuccessful}
               className={`peer block w-full border-0 border-b-2 bg-transparent px-0 py-1 focus:ring-0 ${
                 errors.email
                   ? 'border-red-500 focus:border-red-500'
@@ -102,7 +110,7 @@ export default function Login() {
                 {...register('password')}
                 type="password"
                 id="password"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isSubmitSuccessful}
                 className="peer block w-full border-0 bg-transparent px-0 py-1 focus:ring-0"
               />
               {errors.password && (
@@ -113,8 +121,8 @@ export default function Login() {
             </div>
             <PasswordMeter text={passwordValue} />
           </label>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Logging in…' : 'Login'}
+          <Button type="submit" disabled={isSubmitting || isSubmitSuccessful}>
+            {isSubmitting || isSubmitSuccessful ? 'Logging in…' : 'Login'}
           </Button>
         </div>
       </form>
