@@ -1,8 +1,13 @@
 import {
   Book,
+  CreateUpdateBookRequest,
+  BookResponse,
   ListResponse,
   LoginRequest,
   LoginResponse,
+  Topic,
+  DeleteBookResponse,
+  UserResponse,
 } from '@/src/types/schema'
 import { API_TOKEN_KEY } from './constants'
 import { getLocalStorageItem } from './utils'
@@ -19,7 +24,7 @@ const API_PATHS = {
   },
   BOOKS: {
     ROOT: `${API_HOST}/books`,
-    BY_ID: (id: string) => `${API_HOST}/books/${id}`,
+    BY_ID: (id: number) => `${API_HOST}/books/${id}`,
   },
   TOPICS: `${API_HOST}/topics`,
 }
@@ -27,13 +32,14 @@ const API_PATHS = {
 const headers: HeadersInit = {
   'Content-Type': 'application/json',
 }
-const accessToken = getLocalStorageItem(API_TOKEN_KEY)
-const privateHeaders = {
+const privateHeaders = () => ({
   ...headers,
-  Authorization: accessToken ? `Bearer ${accessToken}` : '',
-}
+  Authorization: getLocalStorageItem(API_TOKEN_KEY)
+    ? `Bearer ${getLocalStorageItem(API_TOKEN_KEY)}`
+    : '',
+})
 
-async function apiFetcher<T>(
+async function fetcher<T>(
   input: RequestInfo | URL,
   init?: RequestInit | undefined,
 ): Promise<T> {
@@ -48,14 +54,59 @@ async function apiFetcher<T>(
 }
 
 export function login(params: LoginRequest) {
-  return apiFetcher<LoginResponse>(API_PATHS.LOGIN, {
+  return fetcher<LoginResponse>(API_PATHS.LOGIN, {
     method: 'POST',
     body: JSON.stringify(params),
   })
 }
 
-export function getBooks() {
-  return apiFetcher<ListResponse<Book>>(API_PATHS.BOOKS.ROOT, {
-    headers: privateHeaders,
+export function getMe() {
+  return fetcher<UserResponse>(API_PATHS.USER.ME, {
+    headers: privateHeaders(),
+  })
+}
+
+export function getTopics() {
+  return fetcher<Topic[]>(API_PATHS.TOPICS, {
+    headers: privateHeaders(),
+  })
+}
+
+export function createBook(params: CreateUpdateBookRequest) {
+  return fetcher<BookResponse>(API_PATHS.BOOKS.ROOT, {
+    headers: privateHeaders(),
+    method: 'POST',
+    body: JSON.stringify(params),
+  })
+}
+
+export function getBooks(params?: string[][]) {
+  const searchParams = new URLSearchParams(params).toString()
+  return fetcher<ListResponse<Book>>(
+    `${API_PATHS.BOOKS.ROOT}?${searchParams}`,
+    {
+      headers: privateHeaders(),
+    },
+  )
+}
+
+export function getBook(id: number) {
+  return fetcher<BookResponse>(API_PATHS.BOOKS.BY_ID(id), {
+    headers: privateHeaders(),
+  })
+}
+
+export function updateBook(id: number, params: CreateUpdateBookRequest) {
+  return fetcher<BookResponse>(API_PATHS.BOOKS.BY_ID(id), {
+    headers: privateHeaders(),
+    method: 'UPDATE',
+    body: JSON.stringify(params),
+  })
+}
+
+export function deleteBook(id: number) {
+  return fetcher<DeleteBookResponse>(API_PATHS.BOOKS.BY_ID(id), {
+    headers: privateHeaders(),
+    method: 'DELETE',
   })
 }
