@@ -5,9 +5,9 @@ import {
   ListResponse,
   LoginRequest,
   LoginResponse,
-  Topic,
   DeleteBookResponse,
   UserResponse,
+  ListTopic,
 } from '@/src/types/schema'
 import { API_TOKEN_KEY } from './constants'
 import { getLocalStorageItem } from './utils'
@@ -67,7 +67,7 @@ export function getMe() {
 }
 
 export function getTopics() {
-  return fetcher<Topic[]>(API_PATHS.TOPICS, {
+  return fetcher<ListTopic>(API_PATHS.TOPICS, {
     headers: privateHeaders(),
   })
 }
@@ -99,7 +99,7 @@ export function getBook(id: number) {
 export function updateBook(id: number, params: CreateUpdateBookRequest) {
   return fetcher<BookResponse>(API_PATHS.BOOKS.BY_ID(id), {
     headers: privateHeaders(),
-    method: 'UPDATE',
+    method: 'PUT',
     body: JSON.stringify(params),
   })
 }

@@ -1,35 +1,45 @@
 import { useEffect, useRef } from 'react'
+import useSWR, { useSWRConfig } from 'swr'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 import { trimTrim } from '@/src/lib/utils'
-import { BOOK_TOPICS } from '@/src/lib/data'
 import Dialog from '@/src/components/Dialog'
-import { useBooksContext } from '@/src/contexts/BooksContext'
 import {
   DIALOG_TYPE,
   useBooksDialogContext,
 } from '@/src/contexts/BooksDialogContext'
+import { createBook, getTopics, updateBook } from '@/src/lib/api'
 
 export default function AddEditBookDialog() {
-  const { addBook, editBook } = useBooksContext()
+  const { mutate } = useSWRConfig()
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
+  const {
+    data: topics,
+    error,
+    isLoading,
+  } = useSWR('topics', () => getTopics(), {
+    revalidateOnFocus: false,
+  })
 
   const schema = z.object({
-    id: z.string(),
-    title: z
+    name: z
       .string()
       .min(5, { message: 'Title must be at least 5 characters.' }),
     author: z.string().regex(/^[A-Za-z][A-Za-z\s]*$/, {
       message: 'Name contains letters and spaces only.',
     }),
-    topic: z
+    topicId: z
       .string()
-      .refine((value) => Object.keys(BOOK_TOPICS).includes(value), {
-        message: 'Topic is required.',
-      }),
+      .refine(
+        (value) =>
+          topics?.data.find((topic) => topic.id === parseInt(value, 10)),
+        {
+          message: 'Topic is required.',
+        },
+      ),
   })
 
   type Schema = z.infer<typeof schema>
@@ -38,13 +48,13 @@ export default function AddEditBookDialog() {
     formState: { errors, isDirty, isSubmitting },
     handleSubmit,
     register,
+    setError,
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: {
-      id: dialogProps?.book.id ?? '',
-      title: dialogProps?.book.title ?? '',
+      name: dialogProps?.book.name ?? '',
       author: dialogProps?.book?.author ?? '',
-      topic: dialogProps?.book?.topic ?? '',
+      topicId: dialogProps?.book?.topic.id.toString() ?? '',
     },
   })
 
@@ -65,30 +75,30 @@ export default function AddEditBookDialog() {
   }, [dialogType])
 
   const formSubmit: SubmitHandler<Schema> = async (data) => {
-    if (dialogType === DIALOG_TYPE.EDIT) {
-      // Dirty to prevent submission of unchanged data
-      if (isDirty) {
-        // Simulate latency
-        await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
-        await editBook({
-          id: data.id,
-          title: trimTrim(data.title),
+    try {
+      if (dialogType === DIALOG_TYPE.EDIT && dialogProps) {
+        // Dirty to prevent submission of unchanged data
+        if (isDirty) {
+          await updateBook(dialogProps.book.id, {
+            name: trimTrim(data.name),
+            author: trimTrim(data.author),
+            topicId: parseInt(data.topicId, 10),
+          })
+          mutate('books')
+        }
+      } else {
+        await createBook({
+          name: trimTrim(data.name),
           author: trimTrim(data.author),
-          topic: data.topic,
+          topicId: parseInt(data.topicId, 10),
         })
+        mutate('books')
       }
-    } else {
-      // Simulate latency
-      await new Promise((resolve) => setTimeout(resolve, 1000)) // eslint-disable-line no-promise-executor-return
-      await addBook({
-        id: Date.now().toString(),
-        title: trimTrim(data.title),
-        author: trimTrim(data.author),
-        topic: data.topic,
-      })
-    }
 
-    handleHide()
+      handleHide()
+    } catch (error) {
+      setError('root', { message: error.message })
+    }
   }
 
   const handleShow = () => dialogRef?.current?.showModal()
@@ -128,24 +138,29 @@ export default function AddEditBookDialog() {
         onSubmit={handleSubmit(formSubmit)}
       >
         <div className="flex flex-col gap-4">
-          <label htmlFor="form-title" className="relative">
-            <div className="mb-2 text-sm">Title</div>
+          {errors.root && (
+            <div className="rounded bg-amber-500 p-2 text-sm text-black">
+              {errors.root.message}
+            </div>
+          )}
+          <label htmlFor="form-name" className="relative">
+            <div className="mb-2 text-sm">Name</div>
             <input
-              {...register('title')}
+              {...register('name')}
               type="text"
-              id="form-title"
-              placeholder="Title"
+              id="form-name"
+              placeholder="Book name"
               disabled={isSubmitting}
               autoCapitalize="words"
               className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
-                errors.title
+                errors.name
                   ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
                   : 'border-transparent focus:border-gray-500'
               }`}
             />
-            {errors.title && (
+            {errors.name && (
               <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
-                {errors.title?.message}
+                {errors.name.message}
               </p>
             )}
           </label>
@@ -155,7 +170,7 @@ export default function AddEditBookDialog() {
               {...register('author')}
               type="text"
               id="form-author"
-              placeholder="Author"
+              placeholder="Author name"
               disabled={isSubmitting}
               autoCapitalize="words"
               className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
@@ -166,32 +181,35 @@ export default function AddEditBookDialog() {
             />
             {errors.author && (
               <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
-                {errors.author?.message}
+                {errors.author.message}
               </p>
             )}
           </label>
           <label htmlFor="form-topic" className="relative">
             <div className="mb-2 text-sm">Topic</div>
             <select
-              {...register('topic')}
+              {...register('topicId')}
               id="form-topic"
               disabled={isSubmitting}
               className={`peer w-full rounded-[.25rem] bg-gray-100 text-black focus:bg-white focus:ring-0 ${
-                errors.topic
+                errors.topicId
                   ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 dark:border-orange-400 dark:focus:ring-orange-400'
                   : 'border-transparent focus:border-gray-500'
               }`}
             >
               <option value="">Select a topic</option>
-              {Object.entries(BOOK_TOPICS).map((topic, index) => (
-                <option key={index} value={topic[0]}>
-                  {topic[1]}
-                </option>
-              ))}
+              {!isLoading &&
+                !error &&
+                topics &&
+                topics.data.map((topic, index) => (
+                  <option key={index} value={topic.id}>
+                    {topic.name}
+                  </option>
+                ))}
             </select>
-            {errors.topic && (
+            {errors.topicId && (
               <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-orange-600 p-1 text-xs font-medium text-white opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100 dark:bg-amber-100 dark:text-red-600">
-                {errors.topic?.message}
+                {errors.topicId.message}
               </p>
             )}
           </label>
