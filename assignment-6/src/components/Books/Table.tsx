@@ -19,13 +19,17 @@ export default function Table() {
     error,
     isLoading,
     mutate,
-  } = useSWR('books', () =>
-    getBooks([
-      ['query', query],
-      ['page', page.toString()],
-      ['pageSize', pageSize.toString()],
-      ['sort', 'id'],
-    ]),
+  } = useSWR(
+    'books',
+    () =>
+      getBooks([
+        ['query', query],
+        ['page', page.toString()],
+        ['pageSize', pageSize.toString()],
+      ]),
+    {
+      revalidateOnFocus: false,
+    },
   )
 
   useEffect(() => {

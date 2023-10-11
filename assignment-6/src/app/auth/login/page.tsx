@@ -9,7 +9,6 @@ import Button from '@/src/components/Button'
 import { SPECIAL_CHARS } from '@/src/lib/constants'
 import PasswordMeter from '@/src/components/PasswordMeter'
 import { useAuthContext } from '@/src/auth/AuthContext'
-import BooksImage from './freddie-marriage-w8JiSVyjy-8-unsplash.jpeg'
 
 export default function Login() {
   const { login } = useAuthContext()
@@ -62,11 +61,9 @@ export default function Login() {
   return (
     <section className="relative flex h-[75lvh] items-center justify-center overflow-hidden xs:h-[85vh]">
       <Image
-        src={BooksImage}
+        src="/freddie-marriage-w8JiSVyjy-8-unsplash.jpeg"
         alt="Bookstore"
-        priority
         fill
-        placeholder="blur"
         className="object-cover"
       />
       <div className="absolute left-0 top-0 h-full w-full transition-colors dark:bg-black/30" />
@@ -78,7 +75,7 @@ export default function Login() {
         <div className="mb-4 text-center text-2xl font-bold">Bookstore</div>
         {errors.root && (
           <div className="mb-4 rounded bg-amber-500 p-2 text-sm text-black">
-            {errors.root?.message}
+            {errors.root.message}
           </div>
         )}
         <div className="flex flex-col gap-4">
@@ -99,7 +96,7 @@ export default function Login() {
             />
             {errors.email && (
               <p className="pointer-events-none absolute left-0 top-[95%] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.125rem)] peer-focus:opacity-100">
-                {errors.email?.message}
+                {errors.email.message}
               </p>
             )}
           </label>
@@ -115,7 +112,7 @@ export default function Login() {
               />
               {errors.password && (
                 <p className="pointer-events-none absolute left-0 top-[calc(100%+.75rem)] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.875rem)] peer-focus:opacity-100">
-                  {errors.password?.message}
+                  {errors.password.message}
                 </p>
               )}
             </div>

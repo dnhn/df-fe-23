@@ -6,7 +6,7 @@ interface IPasswordMeter extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function PasswordMeter({ text, ...other }: IPasswordMeter) {
-  const score = zxcvbn(text).score
+  const { score } = zxcvbn(text)
   const COLOUR_MAP: { [key: number]: string } = {
     0: '',
     1: 'text-red-600',
