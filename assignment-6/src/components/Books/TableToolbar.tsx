@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
@@ -9,50 +8,17 @@ import { useBooksContext } from '@/src/contexts/BooksContext'
 import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
-  const { bookStore, pageIndex, search, setSearch } = useBooksContext()
+  const { setQuery } = useBooksContext()
   const { showAddDialog } = useBooksDialogContext()
   const [keyword, setKeyword] = useState<string>('')
-  const router = useRouter()
-  const pathname = usePathname()
-
-  // Check for search keyword parameter and set state
-  useEffect(() => {
-    if (search) {
-      setKeyword(trimTrim(search))
-    }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    let typeTimeout: string | number | NodeJS.Timeout | undefined
-
-    if (bookStore.length) {
-      typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300)
-    }
+    const typeTimeout = setTimeout(() => setQuery(trimTrim(keyword)), 300)
 
     return () => {
       clearTimeout(typeTimeout)
     }
-  }, [bookStore, keyword, setSearch])
-
-  useEffect(() => {
-    const query = new URLSearchParams()
-
-    // Set search keyword parameter
-    if (search.length) {
-      query.set('q', search)
-      setKeyword(search)
-    } else {
-      query.delete('q')
-    }
-
-    // Set current page parameter
-    query.set('page', (pageIndex + 1).toString())
-
-    // Push to URL
-    if (pathname) {
-      router.replace(`${pathname}?${query}`, {})
-    }
-  }, [search]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [keyword, setQuery])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">

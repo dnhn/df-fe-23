@@ -114,7 +114,7 @@ export default function Login() {
                 className="peer block w-full border-0 bg-transparent px-0 py-1 focus:ring-0"
               />
               {errors.password && (
-                <p className="pointer-events-none absolute left-0 top-[calc(100%+.5rem)] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.625rem)] peer-focus:opacity-100">
+                <p className="pointer-events-none absolute left-0 top-[calc(100%+.75rem)] z-[1] select-none rounded bg-amber-100 p-1 text-xs font-medium text-red-600 opacity-0 transition-all peer-focus:top-[calc(100%+.875rem)] peer-focus:opacity-100">
                   {errors.password?.message}
                 </p>
               )}

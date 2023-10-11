@@ -1,57 +1,32 @@
 'use client'
 
 import { ChangeEvent, useEffect } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 
 export default function TablePagination() {
-  const { bookStore, pageIndex, pageSize, search, setPageIndex, setPageSize } =
-    useBooksContext()
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const searchKeywordParam = searchParams?.get('q')
-  const filtered = bookStore.filter((book) =>
-    book.title.toLowerCase().includes(search.toLowerCase()),
-  )
-  const totalPages = Math.ceil(filtered.length / pageSize)
-  const currentFirstItem = pageIndex * pageSize + 1
-  const currentLastItem = pageIndex * pageSize + pageSize
+  const {
+    metadata: { page, pageSize, totalPages, totalRecords },
+    setPage,
+    setPageSize,
+  } = useBooksContext()
+  const currentFirstItem = (page - 1) * pageSize + 1
+  let currentLastItem = (page - 1) * pageSize + pageSize
+  currentLastItem =
+    currentLastItem > totalRecords ? totalRecords : currentLastItem
 
   useEffect(() => {
-    const query = new URLSearchParams()
-
-    // Set search keyword parameter with current URL parameter or state
-    if ((searchKeywordParam && searchKeywordParam?.length) || search) {
-      query.set('q', searchKeywordParam || search)
+    if (page > totalPages) {
+      setPage(totalPages)
     }
-
-    // Check and correct page value from URL parameter
-    // Set new page parameter and state
-    if (pageIndex >= 0 && pageIndex + 1 <= totalPages) {
-      setPageIndex(pageIndex)
-      query.set('page', (pageIndex + 1).toString())
-    } else if (pageIndex + 1 > totalPages) {
-      setPageIndex(totalPages - 1)
-    } else {
-      setPageIndex(0)
-    }
-
-    // Push to URL
-    if (pathname) {
-      router.replace(`${pathname}?${query}`, {})
-    }
-  }, [pageIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [page, setPage, totalPages])
 
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10))
   }
-  const handlePrev = () =>
-    setPageIndex(pageIndex > 0 ? pageIndex - 1 : pageIndex)
-  const handleNext = () =>
-    setPageIndex(pageIndex + 1 < totalPages ? pageIndex + 1 : pageIndex)
+  const handlePrev = () => setPage(page > 1 ? page - 1 : page)
+  const handleNext = () => setPage(page < totalPages ? page + 1 : page)
 
   return (
     totalPages > 0 && (
@@ -75,11 +50,7 @@ export default function TablePagination() {
         </label>
         {totalPages > 0 && (
           <span className="max-xs:text-xs">
-            {currentFirstItem}–
-            {currentLastItem > filtered.length
-              ? filtered.length
-              : currentLastItem}{' '}
-            of {filtered.length}
+            {currentFirstItem}–{currentLastItem} of {totalRecords}
           </span>
         )}
         <div>
@@ -87,7 +58,7 @@ export default function TablePagination() {
             variant="info"
             className="rounded-l-2xl rounded-r-none pl-[.875rem] pr-[.625rem] text-xl leading-none shadow-none"
             aria-label="Previous page"
-            disabled={pageIndex <= 0}
+            disabled={page <= 1}
             onClick={handlePrev}
           >
             ⬅️
@@ -96,7 +67,7 @@ export default function TablePagination() {
             variant="info"
             className="rounded-l-none rounded-r-2xl pl-[.625rem] pr-[.875rem] text-xl leading-none shadow-none"
             aria-label="Next page"
-            disabled={pageIndex + 1 >= totalPages}
+            disabled={page >= totalPages}
             onClick={handleNext}
           >
             ➡️
