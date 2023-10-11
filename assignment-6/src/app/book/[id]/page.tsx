@@ -1,10 +1,11 @@
 'use client'
 
 import useSWR from 'swr'
-import { notFound } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 import { Book } from '@/src/types/schema'
+import { useAuthContext } from '@/src/auth/AuthContext'
 import { useBooksDialogContext } from '@/src/components/Books'
 import { getBook } from '@/src/lib/api'
 import { PATHS } from '@/src/lib/constants'
@@ -15,6 +16,8 @@ interface IViewBook {
 }
 
 export default function ViewBook({ params: { id } }: IViewBook) {
+  const router = useRouter()
+  const { auth } = useAuthContext()
   const { showDeleteDialog } = useBooksDialogContext()
   const {
     data: book,
@@ -22,7 +25,9 @@ export default function ViewBook({ params: { id } }: IViewBook) {
     isLoading,
   } = useSWR('view-book', () => getBook(id))
 
-  if (error) {
+  if (!auth) {
+    router.replace(PATHS.AUTH.LOGIN)
+  } else if (error) {
     notFound()
   }
 
