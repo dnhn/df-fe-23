@@ -58,6 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (response.data.accessToken) {
           setLocalStorageItem(API_TOKEN_KEY, response.data.accessToken)
           setAuth(response.data.accessToken)
+          document.cookie = `apiToken=${response.data.accessToken};path=/;`
         }
       } catch (error) {
         return Promise.reject(error)
@@ -67,8 +68,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   )
 
   const logout = useCallback(() => {
-    setAuth(null)
     localStorage.removeItem(API_TOKEN_KEY)
+    setAuth(null)
+    document.cookie = `apiToken=;path=/;expires=${new Date(0)};`
   }, [setAuth])
 
   useEffect(() => {
