@@ -11,7 +11,7 @@ import {
 } from 'react'
 
 import { Metadata } from '@/src/types/schema'
-import { useAuthContext } from '@/src/auth/AuthContext'
+import { isAuth } from '@/src/lib/utils'
 
 const BOOKS_PER_PAGE: number = 5
 
@@ -59,7 +59,7 @@ export const useBooksContext = () => {
 }
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const { auth } = useAuthContext()
+  const auth = isAuth()
   const [query, setQuery] = useState<string>('')
   const [metadata, setMetadata] = useState<Metadata>(initialMetadata)
 

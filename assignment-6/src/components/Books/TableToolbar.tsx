@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-import { useAuthContext } from '@/src/auth/AuthContext'
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
@@ -13,7 +12,6 @@ export default function TableToolbar() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { auth } = useAuthContext()
   const {
     metadata: { page },
     query,
@@ -36,24 +34,22 @@ export default function TableToolbar() {
   }, [keyword, setQuery])
 
   useEffect(() => {
-    if (auth) {
-      const urlSearchParams = new URLSearchParams()
+    const urlSearchParams = new URLSearchParams()
 
-      if (query.length) {
-        urlSearchParams.set('q', query)
-      } else {
-        urlSearchParams.delete('q')
-      }
-
-      if (page > 0) {
-        urlSearchParams.set('page', page.toString())
-      } else {
-        urlSearchParams.delete('page')
-      }
-
-      router.replace(`${pathname}?${urlSearchParams}`)
+    if (query.length) {
+      urlSearchParams.set('q', query)
+    } else {
+      urlSearchParams.delete('q')
     }
-  }, [auth, page, query])
+
+    if (page > 0) {
+      urlSearchParams.set('page', page.toString())
+    } else {
+      urlSearchParams.delete('page')
+    }
+
+    router.replace(`${pathname}?${urlSearchParams}`)
+  }, [page, query])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">

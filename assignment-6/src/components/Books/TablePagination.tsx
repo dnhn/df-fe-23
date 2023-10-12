@@ -3,14 +3,12 @@
 import { ChangeEvent, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useAuthContext } from '@/src/auth/AuthContext'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 
 export default function TablePagination() {
   const router = useRouter()
   const pathname = usePathname()
-  const { auth } = useAuthContext()
   const {
     metadata: { page, pageSize, totalPages, totalRecords },
     query,
@@ -29,24 +27,22 @@ export default function TablePagination() {
   }, [page, setPage, totalPages])
 
   useEffect(() => {
-    if (auth) {
-      const urlSearchParams = new URLSearchParams()
+    const urlSearchParams = new URLSearchParams()
 
-      if (query.length) {
-        urlSearchParams.set('q', query)
-      } else {
-        urlSearchParams.delete('q')
-      }
-
-      if (page > 0) {
-        urlSearchParams.set('page', page.toString())
-      } else {
-        urlSearchParams.delete('page')
-      }
-
-      router.replace(`${pathname}?${urlSearchParams}`)
+    if (query.length) {
+      urlSearchParams.set('q', query)
+    } else {
+      urlSearchParams.delete('q')
     }
-  }, [auth, page, query])
+
+    if (page > 0) {
+      urlSearchParams.set('page', page.toString())
+    } else {
+      urlSearchParams.delete('page')
+    }
+
+    router.replace(`${pathname}?${urlSearchParams}`)
+  }, [page, query])
 
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10))

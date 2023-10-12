@@ -4,14 +4,15 @@ import useSWR from 'swr'
 import Image from 'next/image'
 
 import { useAuthContext } from '@/src/auth/AuthContext'
+import { isAuth } from '@/src/lib/utils'
 import { getMe } from '@/src/lib/api'
 
 export default function UserMenu() {
-  const { auth, logout } = useAuthContext()
-  const { data: me, isLoading } = useSWR(auth ? 'me' : null, getMe)
+  const { logout } = useAuthContext()
+  const { data: me, isLoading } = useSWR(isAuth() ? 'me' : null, getMe)
 
   return (
-    auth &&
+    isAuth() &&
     !isLoading && (
       <div className="group relative">
         <button className="flex items-center gap-2">
@@ -28,7 +29,7 @@ export default function UserMenu() {
             {me ? me.data.fullName : 'User'}
           </span>
         </button>
-        <div className="pointer-events-none absolute right-0 top-[80%] z-[1] w-48 select-none overflow-hidden rounded bg-white text-sm opacity-0 shadow-md transition-[opacity,top] group-hover:pointer-events-auto group-hover:top-full group-hover:select-all group-hover:opacity-100 dark:bg-slate-500">
+        <div className="pointer-events-none absolute right-0 top-[80%] z-[1] w-48 select-none overflow-hidden rounded bg-white text-sm opacity-0 shadow-md transition-[opacity,top] group-hover:pointer-events-auto group-hover:top-full group-hover:select-auto group-hover:opacity-100 dark:bg-slate-500">
           {me && (
             <>
               <div className="px-3 py-2">
