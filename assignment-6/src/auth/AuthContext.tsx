@@ -12,7 +12,12 @@ import {
 import { usePathname, useRouter } from 'next/navigation'
 
 import { getLocalStorageItem, setLocalStorageItem } from '@/src/lib/utils'
-import { API_TOKEN_KEY, EVENTS, PATHS } from '@/src/lib/constants'
+import {
+  ACCESS_TOKEN_KEY,
+  COOKIE_ACCESS_TOKEN,
+  EVENTS,
+  PATHS,
+} from '@/src/lib/constants'
 import * as api from '@/src/lib/api'
 
 interface IAuthContext {
@@ -37,7 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
   const pathname = usePathname()
   const [auth, setAuth] = useState<string | null>(
-    getLocalStorageItem(API_TOKEN_KEY),
+    getLocalStorageItem(ACCESS_TOKEN_KEY),
   )
 
   const routeCheck = useCallback(() => {
@@ -56,9 +61,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const response = await api.login({ email, password })
 
         if (response.data.accessToken) {
-          setLocalStorageItem(API_TOKEN_KEY, response.data.accessToken)
+          setLocalStorageItem(ACCESS_TOKEN_KEY, response.data.accessToken)
           setAuth(response.data.accessToken)
-          document.cookie = `apiToken=${response.data.accessToken};path=/;`
+          document.cookie = `${COOKIE_ACCESS_TOKEN}=${response.data.accessToken};path=/;`
         }
       } catch (error) {
         return Promise.reject(error)
@@ -68,9 +73,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   )
 
   const logout = useCallback(() => {
-    localStorage.removeItem(API_TOKEN_KEY)
+    localStorage.removeItem(ACCESS_TOKEN_KEY)
     setAuth(null)
-    document.cookie = `apiToken=;path=/;expires=${new Date(0)};`
+    document.cookie = `${COOKIE_ACCESS_TOKEN}=;path=/;expires=${new Date(0)};`
   }, [setAuth])
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
   UserResponse,
   ListTopic,
 } from '@/src/types/schema'
-import { API_TOKEN_KEY, EVENTS } from './constants'
+import { ACCESS_TOKEN_KEY, EVENTS } from './constants'
 import { getLocalStorageItem } from './utils'
 
 const API_HOSTNAME = 'https://develop-api.bookstore.dwarvesf.com'
@@ -19,8 +19,6 @@ const API_PATHS = {
   LOGIN: `${API_HOST}/auth/login`,
   USER: {
     ME: `${API_HOST}/me`,
-    UPDATE: `${API_HOST}/users`,
-    UPDATE_PASSWORD: `${API_HOST}/users/password`,
   },
   BOOKS: {
     ROOT: `${API_HOST}/books`,
@@ -34,8 +32,8 @@ const headers: HeadersInit = {
 }
 const privateHeaders = () => ({
   ...headers,
-  Authorization: getLocalStorageItem(API_TOKEN_KEY)
-    ? `Bearer ${getLocalStorageItem(API_TOKEN_KEY)}`
+  Authorization: getLocalStorageItem(ACCESS_TOKEN_KEY)
+    ? `Bearer ${getLocalStorageItem(ACCESS_TOKEN_KEY)}`
     : '',
 })
 

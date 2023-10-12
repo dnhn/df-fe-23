@@ -6,7 +6,7 @@ import { getMe } from '@/src/lib/api'
 
 export default function UserMenu() {
   const { auth, logout } = useAuthContext()
-  const { data: me, isLoading } = useSWR('me', getMe)
+  const { data: me, isLoading } = useSWR(auth ? 'me' : null, getMe)
 
   return (
     auth &&

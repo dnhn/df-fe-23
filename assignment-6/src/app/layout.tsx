@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 
 import { AuthProvider } from '@/src/auth/AuthContext'
+import { COOKIE_THEME } from '@/src/lib/constants'
 import Header from '@/src/components/Header'
 import Footer from '@/src/components/Footer'
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   // Server side theme detection to prevent flashing
-  const themeMode = cookies().get('themeMode')
+  const themeMode = cookies().get(COOKIE_THEME)
 
   return (
     <html lang="en" className={(themeMode && themeMode.value) || ''}>
