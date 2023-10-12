@@ -23,7 +23,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
     data: book,
     error,
     isLoading,
-  } = useSWR('view-book', () => getBook(id))
+  } = useSWR(auth ? 'view-book' : null, () => getBook(id))
 
   if (!auth) {
     router.replace(PATHS.AUTH.LOGIN)

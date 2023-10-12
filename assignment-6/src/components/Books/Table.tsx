@@ -3,12 +3,14 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
 
+import { useAuthContext } from '@/src/auth/AuthContext'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 import { getBooks } from '@/src/lib/api'
 import TableRow from './TableRow'
 
 export default function Table() {
+  const { auth } = useAuthContext()
   const {
     metadata: { page, pageSize },
     query,
@@ -20,7 +22,7 @@ export default function Table() {
     isLoading,
     mutate,
   } = useSWR(
-    'books',
+    auth ? 'books' : null,
     () =>
       getBooks([
         ['query', query],
@@ -69,6 +71,7 @@ export default function Table() {
             </tr>
           )}
           {!isLoading &&
+            !error &&
             !!books?.data?.length &&
             books?.data?.map((book, index) => (
               <TableRow
