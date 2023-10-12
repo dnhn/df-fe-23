@@ -5,22 +5,22 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
 
-import { Book, Metadata } from '@/src/types/schema'
+import { Metadata } from '@/src/types/schema'
+import { useAuthContext } from '@/src/auth/AuthContext'
 
 const BOOKS_PER_PAGE: number = 5
 
 interface IBooksValues {
-  bookStore: Book[]
   query: string
   metadata: Metadata
 }
 
 interface IBooksContext extends IBooksValues {
-  setBookStore: (books: Book[]) => void
   setQuery: (query: string) => void
   setMetadata: (metadata: Metadata) => void
   setPage: (page: number) => void
@@ -35,7 +35,6 @@ const initialMetadata = {
 }
 
 const initialState: IBooksValues = {
-  bookStore: [],
   query: '',
   metadata: initialMetadata,
 }
@@ -43,7 +42,6 @@ const initialState: IBooksValues = {
 const BooksContext = createContext<IBooksContext>({
   ...initialState,
 
-  setBookStore: () => {},
   setQuery: () => {},
   setMetadata: () => {},
   setPage: () => {},
@@ -61,7 +59,7 @@ export const useBooksContext = () => {
 }
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const [bookStore, setBookStore] = useState<Book[]>([])
+  const { auth } = useAuthContext()
   const [query, setQuery] = useState<string>('')
   const [metadata, setMetadata] = useState<Metadata>(initialMetadata)
 
@@ -75,28 +73,22 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
     [setMetadata],
   )
 
+  useEffect(() => {
+    setPageSize(BOOKS_PER_PAGE)
+    setPage(1)
+  }, [auth])
+
   const memo = useMemo(
     () => ({
-      bookStore,
       query,
       metadata,
 
-      setBookStore,
       setQuery,
       setMetadata,
       setPage,
       setPageSize,
     }),
-    [
-      bookStore,
-      query,
-      metadata,
-      setBookStore,
-      setQuery,
-      setMetadata,
-      setPage,
-      setPageSize,
-    ],
+    [query, metadata, setQuery, setMetadata, setPage, setPageSize],
   )
 
   return <BooksContext.Provider value={memo}>{children}</BooksContext.Provider>
