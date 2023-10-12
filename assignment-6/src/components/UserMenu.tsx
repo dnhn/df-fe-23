@@ -4,15 +4,14 @@ import useSWR from 'swr'
 import Image from 'next/image'
 
 import { useAuthContext } from '@/src/auth/AuthContext'
-import { isAuth } from '@/src/lib/utils'
 import { getMe } from '@/src/lib/api'
 
 export default function UserMenu() {
-  const { logout } = useAuthContext()
-  const { data: me, isLoading } = useSWR(isAuth() ? 'me' : null, getMe)
+  const { auth, logout } = useAuthContext()
+  const { data: me, isLoading } = useSWR(auth ? 'me' : null, getMe)
 
   return (
-    isAuth() &&
+    auth &&
     !isLoading && (
       <div className="group relative">
         <button className="flex items-center gap-2">

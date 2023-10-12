@@ -11,7 +11,7 @@ import {
 } from 'react'
 
 import { Metadata } from '@/src/types/schema'
-import { isAuth } from '@/src/lib/utils'
+import { useAuthContext } from '@/src/auth/AuthContext'
 
 const BOOKS_PER_PAGE = 5
 
@@ -59,7 +59,7 @@ export const useBooksContext = () => {
 }
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
-  const auth = isAuth()
+  const { auth } = useAuthContext()
   const [query, setQuery] = useState('')
   const [metadata, setMetadata] = useState<Metadata>(initialMetadata)
 
@@ -76,7 +76,7 @@ export const BooksProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setPageSize(BOOKS_PER_PAGE)
     setPage(1)
-  }, [auth])
+  }, [auth, setPage, setPageSize])
 
   const memo = useMemo(
     () => ({
