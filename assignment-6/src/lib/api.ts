@@ -51,7 +51,9 @@ async function fetcher<T>(
   }
 
   if (json.Status === 401 || json.status === 401) {
-    document.dispatchEvent(new Event(EVENTS.LOGOUT))
+    if (document !== undefined) {
+      document.dispatchEvent(new Event(EVENTS.LOGOUT))
+    }
   }
 
   return Promise.reject(new Error(json.message))

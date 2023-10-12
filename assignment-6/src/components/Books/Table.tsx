@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import useSWR from 'swr'
 
 import Button from '@/src/components/Button'
@@ -9,6 +10,8 @@ import { getBooks } from '@/src/lib/api'
 import TableRow from './TableRow'
 
 export default function Table() {
+  const searchParams = useSearchParams()
+  const queryParam = searchParams.get('q')
   const {
     metadata: { page, pageSize },
     query,
@@ -19,17 +22,12 @@ export default function Table() {
     error,
     isLoading,
     mutate,
-  } = useSWR(
-    'books',
-    () =>
-      getBooks([
-        ['query', query],
-        ['page', page.toString()],
-        ['pageSize', pageSize.toString()],
-      ]),
-    {
-      revalidateOnFocus: false,
-    },
+  } = useSWR('books', () =>
+    getBooks([
+      ['query', queryParam ?? query ?? ''],
+      ['page', page.toString()],
+      ['pageSize', pageSize.toString()],
+    ]),
   )
 
   useEffect(() => {
@@ -40,7 +38,7 @@ export default function Table() {
 
   useEffect(() => {
     mutate()
-  }, [mutate, page, pageSize, query])
+  }, [mutate, page, pageSize, query, queryParam])
 
   return (
     <section className="w-full overflow-auto rounded-lg shadow-[0_.25rem_.5rem_-.5rem] shadow-black">

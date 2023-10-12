@@ -16,13 +16,7 @@ export default function AddEditBookDialog() {
   const { mutate } = useSWRConfig()
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
-  const {
-    data: topics,
-    error,
-    isLoading,
-  } = useSWR('topics', () => getTopics(), {
-    revalidateOnFocus: false,
-  })
+  const { data: topics, error, isLoading } = useSWR('topics', () => getTopics())
 
   const schema = z.object({
     name: z

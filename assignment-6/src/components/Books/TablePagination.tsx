@@ -1,13 +1,19 @@
 'use client'
 
 import { ChangeEvent, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
+import { useAuthContext } from '@/src/auth/AuthContext'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 
 export default function TablePagination() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const { auth } = useAuthContext()
   const {
     metadata: { page, pageSize, totalPages, totalRecords },
+    query,
     setPage,
     setPageSize,
   } = useBooksContext()
@@ -21,6 +27,26 @@ export default function TablePagination() {
       setPage(totalPages)
     }
   }, [page, setPage, totalPages])
+
+  useEffect(() => {
+    if (auth) {
+      const urlSearchParams = new URLSearchParams()
+
+      if (query.length) {
+        urlSearchParams.set('q', query)
+      } else {
+        urlSearchParams.delete('q')
+      }
+
+      if (page > 0) {
+        urlSearchParams.set('page', page.toString())
+      } else {
+        urlSearchParams.delete('page')
+      }
+
+      router.replace(`${pathname}?${urlSearchParams}`)
+    }
+  }, [auth, page, query])
 
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10))

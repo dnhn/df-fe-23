@@ -1,16 +1,31 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
+import { useAuthContext } from '@/src/auth/AuthContext'
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
-  const { setQuery } = useBooksContext()
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const { auth } = useAuthContext()
+  const {
+    metadata: { page },
+    query,
+    setQuery,
+  } = useBooksContext()
   const { showAddDialog } = useBooksDialogContext()
   const [keyword, setKeyword] = useState<string>('')
+
+  useEffect(() => {
+    setQuery(searchParams.get('q') || '')
+    setKeyword(searchParams.get('q') || '')
+  }, [])
 
   useEffect(() => {
     const typeTimeout = setTimeout(() => setQuery(trimTrim(keyword)), 300)
@@ -19,6 +34,26 @@ export default function TableToolbar() {
       clearTimeout(typeTimeout)
     }
   }, [keyword, setQuery])
+
+  useEffect(() => {
+    if (auth) {
+      const urlSearchParams = new URLSearchParams()
+
+      if (query.length) {
+        urlSearchParams.set('q', query)
+      } else {
+        urlSearchParams.delete('q')
+      }
+
+      if (page > 0) {
+        urlSearchParams.set('page', page.toString())
+      } else {
+        urlSearchParams.delete('page')
+      }
+
+      router.replace(`${pathname}?${urlSearchParams}`)
+    }
+  }, [auth, page, query])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
