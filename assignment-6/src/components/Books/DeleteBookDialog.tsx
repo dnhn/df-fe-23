@@ -17,7 +17,7 @@ export default function DeleteBookDialog() {
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [error, setError] = useState<string | null>('')
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const dialog = dialogRef.current

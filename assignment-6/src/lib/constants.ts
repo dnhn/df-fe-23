@@ -1,4 +1,4 @@
-export const SPECIAL_CHARS: RegExp = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/
+export const SPECIAL_CHARS = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/
 
 export const PATHS = {
   ROOT: '/',
@@ -11,7 +11,7 @@ export const PATHS = {
   },
 }
 
-export const ACCESS_TOKEN_KEY: string = 'access_token'
+export const ACCESS_TOKEN_KEY = 'access_token'
 export const COOKIE_THEME = 'theme_mode'
 export const COOKIE_ACCESS_TOKEN = 'access_token'
 

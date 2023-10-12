@@ -13,7 +13,7 @@ import {
 import { Metadata } from '@/src/types/schema'
 import { isAuth } from '@/src/lib/utils'
 
-const BOOKS_PER_PAGE: number = 5
+const BOOKS_PER_PAGE = 5
 
 interface IBooksValues {
   query: string
@@ -60,7 +60,7 @@ export const useBooksContext = () => {
 
 export const BooksProvider = ({ children }: { children: ReactNode }) => {
   const auth = isAuth()
-  const [query, setQuery] = useState<string>('')
+  const [query, setQuery] = useState('')
   const [metadata, setMetadata] = useState<Metadata>(initialMetadata)
 
   const setPageSize = useCallback(

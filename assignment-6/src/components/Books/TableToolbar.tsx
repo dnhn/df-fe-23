@@ -18,7 +18,7 @@ export default function TableToolbar() {
     setQuery,
   } = useBooksContext()
   const { showAddDialog } = useBooksDialogContext()
-  const [keyword, setKeyword] = useState<string>('')
+  const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
     setQuery(searchParams.get('q') || '')
