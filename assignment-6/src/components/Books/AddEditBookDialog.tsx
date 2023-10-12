@@ -64,7 +64,7 @@ export default function AddEditBookDialog() {
     dialog?.addEventListener('close', hideDialogs)
 
     return () => dialog?.removeEventListener('close', hideDialogs)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [hideDialogs])
 
   useEffect(() => {
     if (dialogType === DIALOG_TYPE.ADD || dialogType === DIALOG_TYPE.EDIT) {

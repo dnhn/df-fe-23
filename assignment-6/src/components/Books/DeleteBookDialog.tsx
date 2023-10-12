@@ -25,7 +25,7 @@ export default function DeleteBookDialog() {
     dialog?.addEventListener('close', hideDialogs)
 
     return () => dialog?.removeEventListener('close', hideDialogs)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [hideDialogs])
 
   useEffect(() => {
     if (dialogType === DIALOG_TYPE.DELETE) {

@@ -63,6 +63,7 @@ export default function Login() {
       <Image
         src="/freddie-marriage-w8JiSVyjy-8-unsplash.jpeg"
         alt="Bookstore"
+        priority
         fill
         className="object-cover"
       />
