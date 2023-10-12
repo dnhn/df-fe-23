@@ -3,14 +3,12 @@
 import { useEffect } from 'react'
 import useSWR from 'swr'
 
-import { useAuthContext } from '@/src/auth/AuthContext'
 import Button from '@/src/components/Button'
 import { useBooksContext } from '@/src/contexts/BooksContext'
 import { getBooks } from '@/src/lib/api'
 import TableRow from './TableRow'
 
 export default function Table() {
-  const { auth } = useAuthContext()
   const {
     metadata: { page, pageSize },
     query,
@@ -22,7 +20,7 @@ export default function Table() {
     isLoading,
     mutate,
   } = useSWR(
-    auth ? 'books' : null,
+    'books',
     () =>
       getBooks([
         ['query', query],
@@ -58,7 +56,7 @@ export default function Table() {
         </thead>
 
         <tbody>
-          {(isLoading || error || books?.data.length === 0) && (
+          {isLoading || error || books?.data.length === 0 ? (
             <tr className="pointer-events-none select-none bg-white dark:bg-slate-700">
               <td
                 colSpan={5}
@@ -69,35 +67,37 @@ export default function Table() {
                 {books?.data.length === 0 && 'No books'}
               </td>
             </tr>
+          ) : (
+            books && (
+              <>
+                {books.data.map((book, index) => (
+                  <TableRow
+                    key={book.id}
+                    book={book}
+                    index={
+                      index +
+                      (books.metadata.page - 1) * books.metadata.pageSize
+                    }
+                  />
+                ))}
+                {/* Add more rows when the list contains fewer items than the specified page size */}
+                {books.data.length > 0 &&
+                  books.data.length < pageSize &&
+                  Array.from(
+                    Array(books.metadata.pageSize - books.data.length).keys(),
+                  ).map((key) => (
+                    <tr key={key} className="invisible opacity-0">
+                      <td
+                        colSpan={5}
+                        className="h-14 whitespace-nowrap px-4 py-3 md:h-16"
+                      >
+                        <Button size="small">button</Button>
+                      </td>
+                    </tr>
+                  ))}
+              </>
+            )
           )}
-          {!isLoading &&
-            !error &&
-            !!books?.data?.length &&
-            books?.data?.map((book, index) => (
-              <TableRow
-                key={book.id}
-                book={book}
-                index={
-                  index + (books.metadata.page - 1) * books.metadata.pageSize
-                }
-              />
-            ))}
-          {/* Add more rows when the list contains fewer items than the specified page size */}
-          {!!books?.data.length &&
-            books.data.length > 0 &&
-            books.data.length < pageSize &&
-            Array.from(
-              Array(books.metadata.pageSize - books.data.length).keys(),
-            ).map((key) => (
-              <tr key={key} className="invisible opacity-0">
-                <td
-                  colSpan={5}
-                  className="h-14 whitespace-nowrap px-4 py-3 md:h-16"
-                >
-                  <Button size="small">button</Button>
-                </td>
-              </tr>
-            ))}
         </tbody>
       </table>
     </section>

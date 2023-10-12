@@ -24,7 +24,7 @@ export default function ViewBook({ params: { id } }: IViewBook) {
     data: book,
     error,
     isLoading,
-  } = useSWR(auth ? 'view-book' : null, () => getBook(id))
+  } = useSWR('view-book', () => getBook(id))
 
   useEffect(() => {
     if (!auth) {
