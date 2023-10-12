@@ -1,12 +1,7 @@
-'use client'
-
-import dynamic from 'next/dynamic'
-
 import { PATHS } from '@/src/lib/constants'
 import ThemeSwitch from '@/src/components/ThemeSwitch'
 import Container from '@/src/components/Container'
-
-const User = dynamic(() => import('./UserMenu'), { ssr: false })
+import UserMenu from './UserMenu'
 
 export default function Header() {
   return (
@@ -17,7 +12,7 @@ export default function Header() {
         </a>
         <div className="flex items-center gap-4">
           <ThemeSwitch />
-          <User />
+          <UserMenu />
         </div>
       </Container>
     </header>

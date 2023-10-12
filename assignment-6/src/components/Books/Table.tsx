@@ -60,9 +60,9 @@ export default function Table() {
                 colSpan={5}
                 className={`px-4 py-3 text-center text-2xl font-medium leading-none empty-row--${pageSize}`}
               >
-                {isLoading && 'Loading books…'}
-                {error && 'Error loading books'}
-                {books?.data.length === 0 && 'No books'}
+                {(isLoading && 'Loading books…') ||
+                  (error && 'Error loading books') ||
+                  (books?.data.length === 0 && 'No books')}
               </td>
             </tr>
           ) : (
