@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import useSWR from 'swr'
 import { notFound, useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -25,11 +26,13 @@ export default function ViewBook({ params: { id } }: IViewBook) {
     isLoading,
   } = useSWR(auth ? 'view-book' : null, () => getBook(id))
 
-  if (!auth) {
-    router.replace(PATHS.AUTH.LOGIN)
-  } else if (error) {
-    notFound()
-  }
+  useEffect(() => {
+    if (!auth) {
+      router.replace(PATHS.AUTH.LOGIN)
+    } else if (error) {
+      notFound()
+    }
+  }, [auth, error, router])
 
   const handleDelete = (book: Book) => {
     showDeleteDialog(book)

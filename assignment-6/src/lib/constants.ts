@@ -12,3 +12,7 @@ export const PATHS = {
 }
 
 export const API_TOKEN_KEY: string = 'apiToken'
+
+export const EVENTS = {
+  LOGOUT: 'logout',
+}

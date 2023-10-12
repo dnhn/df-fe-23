@@ -9,7 +9,7 @@ import {
   UserResponse,
   ListTopic,
 } from '@/src/types/schema'
-import { API_TOKEN_KEY } from './constants'
+import { API_TOKEN_KEY, EVENTS } from './constants'
 import { getLocalStorageItem } from './utils'
 
 const API_HOSTNAME = 'https://develop-api.bookstore.dwarvesf.com'
@@ -48,6 +48,10 @@ async function fetcher<T>(
 
   if (res.ok) {
     return Promise.resolve<T>(json)
+  }
+
+  if (json.Status === 401 || json.status === 401) {
+    document.dispatchEvent(new Event(EVENTS.LOGOUT))
   }
 
   return Promise.reject(new Error(json.message))

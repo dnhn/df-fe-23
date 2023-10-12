@@ -12,7 +12,7 @@ import {
 import { usePathname, useRouter } from 'next/navigation'
 
 import { getLocalStorageItem, setLocalStorageItem } from '@/src/lib/utils'
-import { API_TOKEN_KEY, PATHS } from '@/src/lib/constants'
+import { API_TOKEN_KEY, EVENTS, PATHS } from '@/src/lib/constants'
 import * as api from '@/src/lib/api'
 
 interface IAuthContext {
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     getLocalStorageItem(API_TOKEN_KEY),
   )
 
-  const routeCheck = () => {
+  const routeCheck = useCallback(() => {
     if (!auth && pathname !== PATHS.AUTH.LOGIN) {
       router.replace(PATHS.AUTH.LOGIN)
     }
@@ -48,29 +48,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (auth && pathname === PATHS.AUTH.LOGIN) {
       router.replace(PATHS.BOOK.ROOT)
     }
-  }
+  }, [auth, pathname, router])
 
-  useEffect(routeCheck, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const login = useCallback(
+    async (email: string, password: string) => {
+      try {
+        const response = await api.login({ email, password })
 
-  useEffect(routeCheck, [auth, pathname, router])
-
-  const login = useCallback(async (email: string, password: string) => {
-    try {
-      const response = await api.login({ email, password })
-
-      if (response.data.accessToken) {
-        setLocalStorageItem(API_TOKEN_KEY, response.data.accessToken)
-        setAuth(response.data.accessToken)
+        if (response.data.accessToken) {
+          setLocalStorageItem(API_TOKEN_KEY, response.data.accessToken)
+          setAuth(response.data.accessToken)
+        }
+      } catch (error) {
+        return Promise.reject(error)
       }
-    } catch (error) {
-      return Promise.reject(error)
-    }
-  }, [])
+    },
+    [setAuth],
+  )
 
   const logout = useCallback(() => {
     setAuth(null)
     localStorage.removeItem(API_TOKEN_KEY)
-  }, [])
+  }, [setAuth])
+
+  useEffect(() => {
+    routeCheck()
+
+    document.addEventListener(EVENTS.LOGOUT, logout)
+
+    return () => document.removeEventListener(EVENTS.LOGOUT, logout)
+  }, [logout, routeCheck])
+
+  useEffect(routeCheck, [auth, pathname, routeCheck, router])
 
   const memo = useMemo(
     () => ({
