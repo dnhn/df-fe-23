@@ -15,8 +15,10 @@ import { getLocalStorageItem } from './utils'
 const API_HOSTNAME = 'https://develop-api.bookstore.dwarvesf.com'
 const API_BASE = '/api/v1'
 const API_HOST = `${API_HOSTNAME}${API_BASE}`
-const API_PATHS = {
+export const API_PATHS = {
   LOGIN: `${API_HOST}/auth/login`,
+  LOGIN_NEXT: `/api/auth/login`,
+  LOGOUT_NEXT: `/api/auth/logout`,
   USER: {
     ME: `${API_HOST}/me`,
   },
@@ -62,6 +64,17 @@ export function login(params: LoginRequest) {
     method: 'POST',
     body: JSON.stringify(params),
   })
+}
+
+export function loginNext(params: LoginRequest) {
+  return fetcher<LoginResponse>(API_PATHS.LOGIN_NEXT, {
+    method: 'POST',
+    body: JSON.stringify(params),
+  })
+}
+
+export function logout() {
+  return fetcher<LoginResponse>(API_PATHS.LOGOUT_NEXT)
 }
 
 export function getMe() {
