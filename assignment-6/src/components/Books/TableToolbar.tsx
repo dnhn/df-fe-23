@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
@@ -9,50 +9,23 @@ import { useBooksContext } from '@/src/contexts/BooksContext'
 import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
-  const { bookStore, pageIndex, search, setSearch } = useBooksContext()
+  const searchParams = useSearchParams()
+  const { setQuery } = useBooksContext()
   const { showAddDialog } = useBooksDialogContext()
-  const [keyword, setKeyword] = useState<string>('')
-  const router = useRouter()
-  const pathname = usePathname()
+  const [keyword, setKeyword] = useState('')
 
-  // Check for search keyword parameter and set state
   useEffect(() => {
-    if (search) {
-      setKeyword(trimTrim(search))
-    }
+    setQuery(searchParams.get('q') || '')
+    setKeyword(searchParams.get('q') || '')
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    let typeTimeout: string | number | NodeJS.Timeout | undefined
-
-    if (bookStore.length) {
-      typeTimeout = setTimeout(() => setSearch(trimTrim(keyword)), 300)
-    }
+    const typeTimeout = setTimeout(() => setQuery(trimTrim(keyword)), 300)
 
     return () => {
       clearTimeout(typeTimeout)
     }
-  }, [bookStore, keyword, setSearch])
-
-  useEffect(() => {
-    const query = new URLSearchParams()
-
-    // Set search keyword parameter
-    if (search.length) {
-      query.set('q', search)
-      setKeyword(search)
-    } else {
-      query.delete('q')
-    }
-
-    // Set current page parameter
-    query.set('page', (pageIndex + 1).toString())
-
-    // Push to URL
-    if (pathname) {
-      router.replace(`${pathname}?${query}`, {})
-    }
-  }, [search]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [keyword, setQuery])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
@@ -64,7 +37,7 @@ export default function TableToolbar() {
           onInput={(event) =>
             setKeyword((event.target as HTMLInputElement).value)
           }
-          className="rounded-[.25rem] border-gray-300 pe-12 text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
+          className="w-full rounded-[.25rem] border-gray-300 pe-12 text-black shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 sm:w-64"
         />
         <button
           type="button"

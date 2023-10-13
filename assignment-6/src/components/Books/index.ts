@@ -1,9 +1,7 @@
-import Table from './Table'
+import BookStore from './BookStore'
 
 export * from '@/src/contexts/BooksContext'
 export * from '@/src/contexts/BooksDialogContext'
 
-export default Table
-export { default as TablePagination } from './TablePagination'
-export { default as TableToolbar } from './TableToolbar'
+export default BookStore
 export { default as DialogRenderer } from './DialogRenderer'

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { getLocalStorageItem, setLocalStorageItem } from '@/src/lib/utils'
+import { COOKIE_THEME } from '@/src/lib/constants'
 
 type IThemeMode = string | 'dark' | 'light'
 enum THEME_MODE {
@@ -24,10 +25,10 @@ export default function ThemeSwitch() {
     setLocalStorageItem('themeMode', themeMode)
 
     if (themeMode === THEME_MODE.DARK) {
-      document.cookie = `themeMode=${THEME_MODE.DARK};path=/;`
+      document.cookie = `${COOKIE_THEME}=${THEME_MODE.DARK};path=/;`
       document.documentElement.classList.add(THEME_MODE.DARK)
     } else {
-      document.cookie = `themeMode=${THEME_MODE.LIGHT};path=/;`
+      document.cookie = `${COOKIE_THEME}=${THEME_MODE.LIGHT};path=/;`
       document.documentElement.classList.remove(THEME_MODE.DARK)
     }
   }, [themeMode])

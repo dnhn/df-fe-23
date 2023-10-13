@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react'
 
-import { IBook } from '@/src/types/book'
+import { Book } from '@/src/types/schema'
 
 export enum DIALOG_TYPE {
   ADD = 'add',
@@ -19,13 +19,13 @@ export enum DIALOG_TYPE {
 
 interface IDialogValues {
   dialogType?: string | 'add' | 'delete' | 'edit'
-  dialogProps?: { book: IBook }
+  dialogProps?: { book: Book }
 }
 
 interface IDialogContext extends IDialogValues {
   showAddDialog: () => void
-  showEditDialog: (book: IBook) => void
-  showDeleteDialog: (book: IBook) => void
+  showEditDialog: (book: Book) => void
+  showDeleteDialog: (book: Book) => void
   hideDialogs: () => void
 }
 
@@ -55,7 +55,7 @@ export const BooksDialogProvider = ({ children }: { children: ReactNode }) => {
   )
 
   const showEditDialog = useCallback(
-    (book: IBook) =>
+    (book: Book) =>
       setState({
         dialogType: DIALOG_TYPE.EDIT,
         dialogProps: { book },
@@ -64,7 +64,7 @@ export const BooksDialogProvider = ({ children }: { children: ReactNode }) => {
   )
 
   const showDeleteDialog = useCallback(
-    (book: IBook) =>
+    (book: Book) =>
       setState({
         dialogType: DIALOG_TYPE.DELETE,
         dialogProps: { book },

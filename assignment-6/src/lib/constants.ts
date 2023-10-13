@@ -1,7 +1,4 @@
-export const BOOKS_DATA_KEY: string = 'booksStore'
-export const BOOKS_PER_PAGE: number = 5
-
-export const SPECIAL_CHARS: RegExp = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/
+export const SPECIAL_CHARS = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/
 
 export const PATHS = {
   ROOT: '/',
@@ -10,6 +7,14 @@ export const PATHS = {
   },
   BOOK: {
     ROOT: '/book',
-    VIEW: (id: string) => `/book/${id}`,
+    VIEW: (id: number) => `/book/${id}`,
   },
+}
+
+export const ACCESS_TOKEN_KEY = 'access_token'
+export const COOKIE_THEME = 'theme_mode'
+export const COOKIE_ACCESS_TOKEN = 'access_token'
+
+export const EVENTS = {
+  LOGOUT: 'logout',
 }

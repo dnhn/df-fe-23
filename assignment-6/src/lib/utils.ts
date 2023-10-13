@@ -6,10 +6,7 @@ export function getLocalStorageItem(key: string) {
   }
 }
 
-export function setLocalStorageItem(key: string, data: unknown) {
+export const setLocalStorageItem = (key: string, data: unknown) =>
   localStorage.setItem(key, JSON.stringify(data))
-}
 
-export function trimTrim(text: string) {
-  return text.replace(/\s+/g, ' ').trim()
-}
+export const trimTrim = (text: string) => text.replace(/\s+/g, ' ').trim()
