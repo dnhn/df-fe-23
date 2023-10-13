@@ -42,7 +42,7 @@ export default function TablePagination() {
     }
 
     router.replace(`${pathname}?${urlSearchParams}`)
-  }, [page, query])
+  }, [page, pathname, query, router])
 
   const handlePageSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPageSize(parseInt(event.target.value, 10))

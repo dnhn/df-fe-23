@@ -23,7 +23,7 @@ export default function TableToolbar() {
   useEffect(() => {
     setQuery(searchParams.get('q') || '')
     setKeyword(searchParams.get('q') || '')
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const typeTimeout = setTimeout(() => setQuery(trimTrim(keyword)), 300)
@@ -49,7 +49,7 @@ export default function TableToolbar() {
     }
 
     router.replace(`${pathname}?${urlSearchParams}`)
-  }, [page, query])
+  }, [page, pathname, query, router])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
