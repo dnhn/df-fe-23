@@ -44,8 +44,8 @@ export default function LoginForm() {
     progressive: true,
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: process.env.NEXT_PUBLIC_EMAIL ?? '',
+      password: process.env.NEXT_PUBLIC_PASSWORD ?? '',
     },
   })
 
