@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic'
+
 import { PATHS } from '@/src/lib/constants'
 import ThemeSwitch from '@/src/components/ThemeSwitch'
 import Container from '@/src/components/Container'
-import UserMenu from './UserMenu'
+
+const UserMenu = dynamic(() => import('./UserMenu'), { ssr: false })
 
 export default function Header() {
   return (
