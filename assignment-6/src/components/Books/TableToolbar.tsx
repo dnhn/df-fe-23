@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 import { trimTrim } from '@/src/lib/utils'
 import Button from '@/src/components/Button'
@@ -9,14 +9,8 @@ import { useBooksContext } from '@/src/contexts/BooksContext'
 import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
 
 export default function TableToolbar() {
-  const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
-  const {
-    metadata: { page },
-    query,
-    setQuery,
-  } = useBooksContext()
+  const { setQuery } = useBooksContext()
   const { showAddDialog } = useBooksDialogContext()
   const [keyword, setKeyword] = useState('')
 
@@ -32,24 +26,6 @@ export default function TableToolbar() {
       clearTimeout(typeTimeout)
     }
   }, [keyword, setQuery])
-
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams()
-
-    if (query.length) {
-      urlSearchParams.set('q', query)
-    } else {
-      urlSearchParams.delete('q')
-    }
-
-    if (page > 0) {
-      urlSearchParams.set('page', page.toString())
-    } else {
-      urlSearchParams.delete('page')
-    }
-
-    router.replace(`${pathname}?${urlSearchParams}`)
-  }, [page, pathname, query, router])
 
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
