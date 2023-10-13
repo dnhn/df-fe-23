@@ -17,7 +17,7 @@ export default function UserMenu() {
               alt={user.fullName}
               width={360}
               height={240}
-              className="h-8 w-8 rounded-full border-2 border-gray-400 object-cover"
+              className="h-9 w-9 rounded-full border-2 border-gray-400 object-cover"
             />
           )}
           <span className="max-w-[5rem] overflow-hidden text-ellipsis whitespace-nowrap font-medium xs:max-w-[8rem] md:max-w-[12rem]">

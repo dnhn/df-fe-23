@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { useSWRConfig } from 'swr'
+import { mutate } from 'swr'
 
 import { PATHS } from '@/src/lib/constants'
 import Dialog from '@/src/components/Dialog'
@@ -8,10 +8,9 @@ import {
   DIALOG_TYPE,
   useBooksDialogContext,
 } from '@/src/contexts/BooksDialogContext'
-import { deleteBook } from '@/src/lib/api'
+import { deleteBook } from '@/src/api'
 
 export default function DeleteBookDialog() {
-  const { mutate } = useSWRConfig()
   const router = useRouter()
   const pathname = usePathname()
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
@@ -42,7 +41,7 @@ export default function DeleteBookDialog() {
     try {
       if (dialogProps) {
         await deleteBook(dialogProps.book.id)
-        mutate('books')
+        mutate((key: string[]) => key[0].startsWith('/books'))
 
         if (pathname === PATHS.BOOK.VIEW(dialogProps.book.id)) {
           router.replace(PATHS.BOOK.ROOT)

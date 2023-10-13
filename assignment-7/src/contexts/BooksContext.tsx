@@ -10,7 +10,7 @@ import {
   useState,
 } from 'react'
 
-import { Metadata } from '@/src/types/schema'
+import { Metadata } from '@/src/api'
 import { useAuthContext } from '@/src/auth/AuthContext'
 
 const BOOKS_PER_PAGE = 5

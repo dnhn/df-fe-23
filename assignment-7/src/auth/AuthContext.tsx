@@ -45,24 +45,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   )
   const [user, setUser] = useState<Me>()
 
-  const login = useCallback(
-    async (email: string, password: string) => {
-      try {
-        const response = await oldApi.loginNext({ email, password })
-
-        if (response.data.accessToken) {
-          setLocalStorageItem(KEY_ACCESS_TOKEN, response.data.accessToken)
-          setAuth(response.data.accessToken)
-          getUserInfo()
-          router.replace(PATHS.BOOK.ROOT)
-        }
-      } catch (error) {
-        return Promise.reject(error)
-      }
-    },
-    [router, setAuth],
-  )
-
   const logout = useCallback(async () => {
     try {
       await oldApi.logout()
@@ -87,6 +69,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [logout])
 
+  const login = useCallback(
+    async (email: string, password: string) => {
+      try {
+        const response = await oldApi.loginNext({ email, password })
+
+        if (response.data?.accessToken) {
+          setLocalStorageItem(KEY_ACCESS_TOKEN, response.data.accessToken)
+          setAuth(response.data.accessToken)
+          getUserInfo()
+          router.replace(PATHS.BOOK.ROOT)
+        }
+      } catch (error) {
+        return Promise.reject(error)
+      }
+    },
+    [getUserInfo, router, setAuth],
+  )
+
   useEffect(() => {
     const bootstrapAsync = async () => {
       if (auth) {
@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     emitter.on(EVENTS.LOGOUT, logout)
 
     return () => emitter.off(EVENTS.LOGOUT, logout)
-  }, [logout])
+  }, [auth, getUserInfo, logout])
 
   const memo = useMemo(
     () => ({
