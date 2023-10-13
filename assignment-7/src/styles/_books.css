@@ -1,0 +1,11 @@
+.empty-row--4 {
+  @apply md:h-[16rem];
+}
+
+.empty-row--5 {
+  @apply md:h-[20rem];
+}
+
+.empty-row--6 {
+  @apply md:h-[24rem];
+}
