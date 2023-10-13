@@ -45,11 +45,19 @@ export default function Table() {
       <table className="w-full border-collapse border-spacing-0 bg-white transition-colors ease-linear dark:bg-slate-700">
         <thead className="bg-slate-400 transition-colors ease-linear dark:bg-slate-600">
           <tr>
-            <th className="px-4 py-3 text-left xl:w-[4.5rem]">No.</th>
-            <th className="min-w-[16rem] px-4 py-3 text-left">Title</th>
-            <th className="px-4 py-3 text-left xl:w-80">Author</th>
-            <th className="px-4 py-3 text-left xl:w-64">Topic</th>
-            <th className="px-4 py-3 text-right xl:w-52">Actions</th>
+            <th className="px-4 py-3 text-left max-md:hidden max-md:text-sm xl:w-[4.5rem]">
+              No.
+            </th>
+            <th className="px-4 py-2 text-left max-md:text-sm md:min-w-[16rem] md:py-3">
+              Title
+            </th>
+            <th className="px-4 py-3 text-left max-md:hidden xl:w-80">
+              Author
+            </th>
+            <th className="px-4 py-3 text-left max-md:hidden xl:w-64">Topic</th>
+            <th className="px-4 py-2 text-right max-md:text-sm md:py-3 xl:w-52">
+              Actions
+            </th>
           </tr>
         </thead>
 
@@ -85,10 +93,16 @@ export default function Table() {
                     Array(books.metadata.pageSize - books.data.length).keys(),
                   ).map((key) => (
                     <tr key={key} className="invisible opacity-0">
-                      <td
-                        colSpan={5}
-                        className="h-14 whitespace-nowrap px-4 py-3 md:h-16"
-                      >
+                      <td className="h-14 px-4 py-2 md:h-16 md:py-3">
+                        <span className="border-b border-dashed border-b-gray-600 dark:border-b-gray-400 max-md:text-sm md:hidden">
+                          Name
+                        </span>
+                        <div className="mt-1 text-xs md:hidden">
+                          <div className="font-medium italic">Author</div>
+                          <div className="mt-2">Topic</div>
+                        </div>
+                      </td>
+                      <td className="h-14 px-4 py-2 md:h-16 md:py-3">
                         <Button size="small">button</Button>
                       </td>
                     </tr>

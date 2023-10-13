@@ -18,27 +18,31 @@ export default function TableRow({ book, index }: ITableRow) {
 
   return (
     <tr className="group transition-colors ease-linear even:bg-slate-200 dark:even:bg-slate-600 md:hover:bg-slate-300 dark:md:hover:bg-slate-500">
-      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">{index + 1}</td>
-      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
+      <td className="h-14 px-4 py-3 max-md:hidden md:h-16">{index + 1}</td>
+      <td className="h-14 px-4 py-2 md:h-16 md:whitespace-nowrap md:py-3">
         <span className="max-md:hidden">{book.name}</span>
         <Link
           href={PATHS.BOOK.VIEW(book.id)}
-          className="border-b border-dashed border-b-gray-600 dark:border-b-gray-400 md:hidden"
+          className="border-b border-dashed border-b-gray-600 dark:border-b-gray-400 max-md:text-sm md:hidden"
         >
           {book.name}
         </Link>
+        <div className="mt-1 text-xs md:hidden">
+          <div className="font-medium italic">{book.author}</div>
+          <div className="mt-2">{book.topic.name}</div>
+        </div>
       </td>
-      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
+      <td className="h-14 whitespace-nowrap px-4 py-3 max-md:hidden md:h-16">
         {book.author}
       </td>
-      <td className="h-14 whitespace-nowrap px-4 py-3 md:h-16">
+      <td className="h-14 whitespace-nowrap px-4 py-3 max-md:hidden md:h-16">
         {book.topic.name}
       </td>
-      <td className="text-r h-14 whitespace-nowrap px-4 py-3 md:h-16">
+      <td className="text-r h-14 px-4 py-2 md:h-16 md:py-3">
         <div className="flex items-center justify-end gap-3">
           <Link
             href={PATHS.BOOK.VIEW(book.id)}
-            className="border-b border-dashed border-b-gray-600 text-sm font-medium dark:border-b-gray-400"
+            className="border-b border-dashed border-b-gray-600 text-sm font-medium dark:border-b-gray-400 max-md:hidden"
           >
             View
           </Link>
