@@ -16,7 +16,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "preinstall": "npx only-allow pnpm",
     "prepare": "cd .. && husky install assignment-7/.husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "generate:api": "orval --config ./orval.config.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
