@@ -16,7 +16,7 @@ export default function BookDetail({ id }: { id: number }) {
     data: book,
     error,
     isLoading,
-  } = useSWR('view-book', () => getBook(id))
+  } = useSWR(`view-book-${id}`, () => getBook(id))
 
   if (error) {
     notFound()
