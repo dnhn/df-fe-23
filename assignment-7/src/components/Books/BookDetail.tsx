@@ -1,37 +1,29 @@
 'use client'
 
-import useSWR from 'swr'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-import { Book } from '@/src/types/schema'
+import { Book, useGetBook } from '@/src/api'
 import { useBooksDialogContext } from '@/src/components/Books'
-import { getBook } from '@/src/lib/api'
 import { PATHS } from '@/src/lib/constants'
 import Button from '@/src/components/Button'
 
 export default function BookDetail({ id }: { id: number }) {
   const { showDeleteDialog } = useBooksDialogContext()
-  const {
-    data: book,
-    error,
-    isLoading,
-  } = useSWR(`view-book-${id}`, () => getBook(id))
+  const { data: book, error, isLoading } = useGetBook(id)
 
   if (error) {
     notFound()
   }
 
-  const handleDelete = (book: Book) => {
-    showDeleteDialog(book)
-  }
+  const handleDelete = (book: Book) => showDeleteDialog(book)
 
   return isLoading ? (
     <div className="h-[20vh]">
       <h2 className="text-3xl">Loading book…</h2>
     </div>
   ) : (
-    book && (
+    book && book.data && (
       <>
         <title>{`${book.data.name} – ${book.data.author}`}</title>
         <div className="mb-8 font-medium">
@@ -50,13 +42,13 @@ export default function BookDetail({ id }: { id: number }) {
             by {book.data.author}
           </div>
           <div className="mt-8 inline-block rounded-2xl bg-stone-300 px-3 py-1 text-black">
-            {book.data.topic.name}
+            {book.data.topic?.name}
           </div>
           <div className="right-0 top-0 text-right max-md:mt-8 md:absolute">
             <Button
               variant="warning"
               size="large"
-              onClick={() => handleDelete(book.data)}
+              onClick={() => book.data && handleDelete(book.data)}
             >
               Delete
             </Button>

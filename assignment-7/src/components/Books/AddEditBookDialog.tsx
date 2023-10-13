@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import useSWR, { useSWRConfig } from 'swr'
+import { mutate } from 'swr'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -10,13 +10,12 @@ import {
   DIALOG_TYPE,
   useBooksDialogContext,
 } from '@/src/contexts/BooksDialogContext'
-import { createBook, getTopics, updateBook } from '@/src/lib/api'
+import { createBook, updateBook, useGetTopics } from '@/src/api'
 
 export default function AddEditBookDialog() {
-  const { mutate } = useSWRConfig()
   const { dialogProps, dialogType, hideDialogs } = useBooksDialogContext()
   const dialogRef = useRef<HTMLDialogElement>(null)
-  const { data: topics, error, isLoading } = useSWR('topics', getTopics)
+  const { data: topics, error, isLoading } = useGetTopics()
 
   const schema = z.object({
     name: z
@@ -29,7 +28,7 @@ export default function AddEditBookDialog() {
       .string()
       .refine(
         (value) =>
-          topics?.data.find((topic) => topic.id === parseInt(value, 10)),
+          topics?.data?.find((topic) => topic.id === parseInt(value, 10)),
         {
           message: 'Topic is required.',
         },
@@ -47,8 +46,8 @@ export default function AddEditBookDialog() {
     resolver: zodResolver(schema),
     defaultValues: {
       name: dialogProps?.book.name ?? '',
-      author: dialogProps?.book?.author ?? '',
-      topicId: dialogProps?.book?.topic.id.toString() ?? '',
+      author: dialogProps?.book.author ?? '',
+      topicId: dialogProps?.book.topic?.id?.toString() ?? '',
     },
   })
 
@@ -78,7 +77,7 @@ export default function AddEditBookDialog() {
             author: trimTrim(data.author),
             topicId: parseInt(data.topicId, 10),
           })
-          mutate('books')
+          mutate((key: string[]) => key[0].startsWith('/books'))
         }
       } else {
         await createBook({
@@ -86,7 +85,7 @@ export default function AddEditBookDialog() {
           author: trimTrim(data.author),
           topicId: parseInt(data.topicId, 10),
         })
-        mutate('books')
+        mutate((key: string[]) => key[0].startsWith('/books'))
       }
 
       handleHide()
@@ -194,8 +193,7 @@ export default function AddEditBookDialog() {
               <option value="">Select a topic</option>
               {!isLoading &&
                 !error &&
-                topics &&
-                topics.data.map((topic, index) => (
+                topics?.data?.map((topic, index) => (
                   <option key={index} value={topic.id}>
                     {topic.name}
                   </option>

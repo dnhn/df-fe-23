@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Book } from '@/src/types/schema'
+import { Book } from '@/src/api'
 import { PATHS } from '@/src/lib/constants'
 import Button from '@/src/components/Button'
 import { useBooksDialogContext } from '@/src/contexts/BooksDialogContext'
@@ -29,14 +29,14 @@ export default function TableRow({ book, index }: ITableRow) {
         </Link>
         <div className="mt-1 text-xs md:hidden">
           <div className="font-medium italic">{book.author}</div>
-          <div className="mt-2">{book.topic.name}</div>
+          <div className="mt-2">{book.topic?.name}</div>
         </div>
       </td>
       <td className="h-14 whitespace-nowrap px-4 py-3 max-md:hidden md:h-16">
         {book.author}
       </td>
       <td className="h-14 whitespace-nowrap px-4 py-3 max-md:hidden md:h-16">
-        {book.topic.name}
+        {book.topic?.name}
       </td>
       <td className="text-r h-14 px-4 py-2 md:h-16 md:py-3">
         <div className="flex items-center justify-end gap-3">

@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react'
 
-import { Book } from '@/src/types/schema'
+import { Book } from '@/src/api'
 
 export enum DIALOG_TYPE {
   ADD = 'add',

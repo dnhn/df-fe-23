@@ -11,7 +11,7 @@ export const PATHS = {
   },
 }
 
-export const ACCESS_TOKEN_KEY = 'access_token'
+export const KEY_ACCESS_TOKEN = 'access_token'
 export const COOKIE_THEME = 'theme_mode'
 export const COOKIE_ACCESS_TOKEN = 'access_token'
 
