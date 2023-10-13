@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -10,6 +11,7 @@ import PasswordMeter from '@/src/components/PasswordMeter'
 import { useAuthContext } from '@/src/auth/AuthContext'
 
 export default function LoginForm() {
+  const [formInit, setFormInit] = useState(false)
   const { login } = useAuthContext()
   const schema = z
     .object({
@@ -42,10 +44,14 @@ export default function LoginForm() {
     progressive: true,
     resolver: zodResolver(schema),
     defaultValues: {
-      email: 'book@sto.re',
-      password: 'Dis15@B00kStor',
+      email: '',
+      password: '',
     },
   })
+
+  useEffect(() => {
+    setFormInit(true)
+  }, [])
 
   watch('password')
   const passwordValue = getValues('password')
@@ -60,7 +66,7 @@ export default function LoginForm() {
 
   return (
     <form
-      noValidate
+      noValidate={formInit}
       onSubmit={handleSubmit(formSubmit)}
       className="relative w-[22.5rem] max-w-[calc(100%-2rem)] rounded-xl bg-white/10 p-8 text-white shadow-xl backdrop-blur-md"
     >
@@ -79,6 +85,7 @@ export default function LoginForm() {
             inputMode="email"
             id="email"
             autoFocus
+            required
             disabled={isSubmitting || isSubmitSuccessful}
             className={`peer block w-full border-0 border-b-2 bg-transparent px-0 py-1 focus:ring-0 ${
               errors.email
@@ -99,6 +106,7 @@ export default function LoginForm() {
               {...register('password')}
               type="password"
               id="password"
+              required
               disabled={isSubmitting || isSubmitSuccessful}
               className="peer block w-full border-0 bg-transparent px-0 py-1 focus:ring-0"
             />
