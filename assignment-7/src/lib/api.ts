@@ -9,7 +9,7 @@ import {
   UserResponse,
   ListTopic,
 } from '@/src/types/schema'
-import { ACCESS_TOKEN_KEY, EVENTS } from './constants'
+import { EVENTS, KEY_ACCESS_TOKEN } from './constants'
 import { getLocalStorageItem } from './utils'
 import * as emitter from './emitter'
 
@@ -35,8 +35,8 @@ const headers: HeadersInit = {
 }
 const privateHeaders = () => ({
   ...headers,
-  Authorization: getLocalStorageItem(ACCESS_TOKEN_KEY)
-    ? `Bearer ${getLocalStorageItem(ACCESS_TOKEN_KEY)}`
+  Authorization: getLocalStorageItem(KEY_ACCESS_TOKEN)
+    ? `Bearer ${getLocalStorageItem(KEY_ACCESS_TOKEN)}`
     : '',
 })
 

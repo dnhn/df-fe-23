@@ -2,7 +2,7 @@ import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { getLocalStorageItem, isSSR } from '@/src/lib/utils'
 import * as emitter from '@/src/lib/emitter'
-import { ACCESS_TOKEN_KEY, EVENTS } from '@/src/lib/constants'
+import { EVENTS, KEY_ACCESS_TOKEN } from '@/src/lib/constants'
 
 // eslint-disable-next-line prefer-destructuring
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
@@ -23,7 +23,7 @@ const handleResponseFail = async (error: any) => {
 export const requester = <T>(config: AxiosRequestConfig): Promise<T> => {
   const source = Axios.CancelToken.source()
   // Add token to request header
-  const accessToken = isSSR() ? '' : getLocalStorageItem(ACCESS_TOKEN_KEY)
+  const accessToken = isSSR() ? '' : getLocalStorageItem(KEY_ACCESS_TOKEN)
   if (accessToken) {
     config.headers = {
       ...config.headers,
