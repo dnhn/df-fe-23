@@ -9,11 +9,12 @@ import {
   useMemo,
   useState,
 } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { getLocalStorageItem, setLocalStorageItem } from '@/src/lib/utils'
 import { ACCESS_TOKEN_KEY, EVENTS, PATHS } from '@/src/lib/constants'
 import * as api from '@/src/lib/api'
-import { useRouter } from 'next/navigation'
+import * as emitter from '@/src/lib/emitter'
 
 interface IAuthContext {
   auth: string | null
@@ -68,9 +69,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, [router, setAuth])
 
   useEffect(() => {
-    document.addEventListener(EVENTS.LOGOUT, logout)
+    emitter.on(EVENTS.LOGOUT, logout)
 
-    return () => document.removeEventListener(EVENTS.LOGOUT, logout)
+    return () => emitter.off(EVENTS.LOGOUT, logout)
   }, [logout])
 
   const memo = useMemo(

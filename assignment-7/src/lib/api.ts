@@ -11,6 +11,7 @@ import {
 } from '@/src/types/schema'
 import { ACCESS_TOKEN_KEY, EVENTS } from './constants'
 import { getLocalStorageItem } from './utils'
+import * as emitter from './emitter'
 
 const API_HOSTNAME = 'https://develop-api.bookstore.dwarvesf.com'
 const API_BASE = '/api/v1'
@@ -52,7 +53,7 @@ async function fetcher<T>(
 
   if (json.Status === 401 || json.status === 401) {
     if (document !== undefined) {
-      document.dispatchEvent(new Event(EVENTS.LOGOUT))
+      emitter.emit(EVENTS.LOGOUT)
     }
   }
 
