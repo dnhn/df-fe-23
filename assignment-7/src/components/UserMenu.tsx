@@ -11,6 +11,10 @@ export default function UserMenu() {
 
   const handleFocus = () => setShow(true)
   const handleBlur = () => setShow(false)
+  const handleLogout = () => {
+    setShow(false)
+    logout()
+  }
 
   const eventHandlers = {
     onFocus: handleFocus,
@@ -52,7 +56,7 @@ export default function UserMenu() {
           )}
           <button
             type="button"
-            onClick={logout}
+            onClick={handleLogout}
             {...eventHandlers}
             tabIndex={show ? 0 : -1}
             className="w-full px-3 py-2 text-left font-bold hover:bg-slate-100 dark:hover:bg-slate-400"
