@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await oldApi.logout()
       setUser(undefined)
       localStorage.removeItem(KEY_ACCESS_TOKEN)
+      localStorage.removeItem(KEY_USER_INFO)
       setAuth(null)
       router.replace(PATHS.AUTH.LOGIN)
     } catch (error) {
